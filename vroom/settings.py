@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +120,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR  / 'static'
 STATICFILES_DIRS = [
     'vroom/static',
+    'accounts/static',
 ]
 
 # Default primary key field type
