@@ -14,10 +14,9 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            messages.success(request, 'Account created successfully. You may now Login.')
+            return redirect('login')
         else:
-            print(form.errors)
-            messages.error(request, form.errors)
             messages.get_messages(request).used = True
     context = {"form": form}
     return render(request, 'signup.html', context)
@@ -34,10 +33,12 @@ def login_view(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.error(request, 'Invalid username or password.')
+                pass
+            #     messages.error(request, 'Invalid username or password.')
         else:
-            messages.error(request, form.errors)
+            messages.error(request, 'Invalid username or password.')
             messages.get_messages(request).used = True
+
     context = {"form": form}
     return render(request, 'login.html', context)
 

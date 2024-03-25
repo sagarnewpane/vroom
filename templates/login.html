@@ -12,11 +12,12 @@
   <div class="container">
     {% if messages %}
         {% for message in messages %}
-           {% if message.tags %}
-           {{ message|cut:"__all__" }}
-           {% endif %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
         {% endfor %}
     {% endif %}
+
     <form id="loginForm" class="form" method="POST" action="{% url 'login' %}">
       {% csrf_token %}
       <h2> Login</h2>
