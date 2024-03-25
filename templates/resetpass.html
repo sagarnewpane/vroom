@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vroom - Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'ls.css' %}">
+</head>
+<body>
+  <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form id="restForm" class="form" method="POST" action="{% url 'password_reset' %}">
+      {% csrf_token %}
+      <h2> Reset Password</h2>
+      
+      <div class="form-control">
+          <label for="{{ form.email.id_for_label }}"><i class="fas fa-envelope"></i> Email:</label>
+          <input type="email" name="{{ form.email.name }}" class="form-control" />
+          <span class="text-danger">{{ form.email.errors }}</span>
+      </div>
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> Reset Password</button>
+  </form>
+    <!-- <p>Don't have an account? <a href="{% url 'signup' %}"> Sign up</a></p> -->
+  </div>
+  <!-- <script src="ls.js"></script> -->
+</body>
+</html>
