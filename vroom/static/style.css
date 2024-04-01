@@ -151,6 +151,51 @@
   box-sizing: border-box; 
 }
 
+.input-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.date-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.location-dropdown {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.input-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+
+/* Style for Firefox's default styling of datetime-local input */
+input[type=datetime-local]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Style for Chrome's default styling of datetime-local input */
+input[type=datetime-local]::-webkit-inner-spin-button,
+input[type=datetime-local]::-webkit-clear-button {
+  display: none;
+}
+
+
 .vertical-container button {
   width: calc(100% -20px); 
   padding: 10px; 

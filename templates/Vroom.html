@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="{% static 'style.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Vroom Car Rental</title>
 
@@ -25,10 +26,15 @@
 </div>
 </div>
 
+<!-- 
+{% if request.user.is_authenticated %}
+  <h2>Hello,{{ request.user.email }}</h2>
+  <a href="{% url 'logout' %}">Logout</a>
+{% else %} 
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'signup' %}">Create an account</a>
+{% endif %} -->
 
-  <!-- <div class="bg-text">
-    <h1>Easy-Fast-Reliable</h1>
-  </div> -->
 
  <!-- Container for Content -->
  <div class="container">
@@ -53,12 +59,20 @@
 
 <div class="vertical-container">
   <h3>Book a Car</h3>
-  <p>Pick Up Location</p>
-  <input type="text" placeholder="Enter Pick Up Location">
-  <p>Pick Date</p>
-  <input type="text" placeholder="Select Pick Up Date">
-  <p>Drop Off Date</p>
-  <input type="text" placeholder="Select Drop Off Date">
+
+<p class="input-label" >Pick Up Location</p>
+<select class="location-dropdown">
+  <option value="Kathmandu" class="location-input" >Kathmandu</option>
+  <option value="Pokhara" class="location-input" >Pokhara</option>
+
+</select>
+
+
+  <p class="input-label">Pick Up Date</p>
+  <input type="datetime-local" class="date-input" placeholder="Select Pick Up Date">
+  <p class="input-label">Drop Off Date</p>
+  <input type="datetime-local" class="date-input" placeholder="Select Drop Off Date">
+
   <button>Rent a Car now</button>
 </div>
 
