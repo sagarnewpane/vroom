@@ -209,34 +209,34 @@
 .popular-rentals {
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
-  margin-top: 20px; /* Add margin to create space between containers */
-  position: relative; /* Ensure the section is positioned relative to its parent */
-  z-index: 2; /* Ensure the section appears above other content */
+  margin-top: 20px; /*  to create space between containers */
+  position: relative; /*  section is positioned relative to its parent */
+  z-index: 2; /*  section appears above other content */
 }
 
 .popular-rentals h2 {
   text-align: center;
 }
 
-/* Ensure the containers are positioned relative to their parent */
+
 .container {
   position: relative;
  
 }
 
-/* Ensure the navigation bar appears above other content */
+
 .navbar {
   position: fixed; /* Fix the navigation bar */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 3; /* Ensure the navigation bar is above other content */
+  z-index: 3; 
 }
 
 .blogs {
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
-  margin-top: 20px; /* Add margin to create space between sections */
+  margin-top: 20px; /* to create space between sections */
 }
 
 .blogs h2 {
@@ -246,7 +246,7 @@
 .customer-blogs {
   padding: 20px;
   background-color: #f9f9f9;
-  margin-top: 20px; /* Add margin to create space between sections */
+  margin-top: 20px; /*  to create space between sections */
 }
 
 .customer-blogs h2 {
