@@ -1,0 +1,308 @@
+  body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow-y: auto;
+   
+  }
+  .navbar {
+    background-color: #007bff; 
+    overflow: hidden;
+    z-index: 1;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3; /* Ensure the navigation bar is above other content */
+  }
+  
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 24px;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    background-color: #0056b3; 
+  }
+  
+  .navbar .logo {
+    float: left;
+    padding: 19px 24px;
+    font-size: 20px;
+  }
+  
+  .navbar .search {
+    float: right;
+    padding: 14px 20px;
+    border: none;
+    /* background-color: #007bff; */
+    
+    /* color: white; */
+    margin-right: auto;
+  }
+
+    .navbar .search input[type="text"] {
+        flex: 1;
+        width: 550px;
+        height: 30px;
+        border-radius: 20px;
+        padding: 0 10px;
+        border: 3px solid #7caaef;
+        /* color: #e2d9d9; */
+        background-color: transparent;
+        outline: none;
+        /* background-color: #007bff; */
+    }
+
+    .content {
+      margin-top: 56px;
+    }
+    
+    /* body {
+      position: relative;
+      top: 0;
+      right: 0;
+     background-image: url('https://i.pinimg.com/564x/ad/0a/0f/ad0a0f75aa16861685e2dd64f1a82895.jpg');
+      
+      background-repeat: no-repeat;
+      
+      
+    }
+
+ .bg-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+  } */
+
+  .container {
+    width: 600px; 
+    height: 300px;
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-radius: 10px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.container h2{
+  text-align: center;
+}
+
+.icon-container {
+  margin-top: 70px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.icon-container > div {
+  margin: 0 45px; /* Add space between icons */
+  text-align: center;
+}
+
+.icon-container img {
+  width: 55px; 
+  vertical-align: middle; /* Align icon vertically */
+}
+
+.icon-container p {
+  margin-top: 10px; /* Add space between icon and text */
+}
+
+.vertical-container {
+  width: 300px; 
+  height: 400px;
+  padding: 20px; 
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 10px; 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+  position: absolute-innit;
+  top: 50%;
+  left: calc(50% -500px); /* Position slightly to the left */
+  transform: translate(-50%, -50%);
+  text-align: center; /* Center the content horizontally */
+  z-index: 2; /* Ensure this container is above the other container */
+}
+
+.vertical-container p {
+  margin: 10px 0; /* Add space between paragraphs */
+  text-align: left; /* Align text to the left */
+}
+
+.vertical-container input[type="text"] {
+  width: 100%; 
+  padding: 8px; 
+  margin-top: 10px; /* Add space between inputs */
+  border-radius: 5px; 
+  border: 1px solid #ccc; 
+  box-sizing: border-box; 
+}
+
+.input-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.date-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.location-dropdown {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.input-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+
+/* Style for Firefox's default styling of datetime-local input */
+input[type=datetime-local]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Style for Chrome's default styling of datetime-local input */
+input[type=datetime-local]::-webkit-inner-spin-button,
+input[type=datetime-local]::-webkit-clear-button {
+  display: none;
+}
+
+
+.vertical-container button {
+  width: calc(100% -20px); 
+  padding: 10px; 
+  margin-top: 30px; /* Add space above button */
+  border: none; 
+  border-radius: 5px; 
+  background-color: #007bff; 
+  color: white; 
+  cursor: pointer; 
+}
+/* Featured Cars Section */
+.featured-cars {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 20px; /* Add margin to create space between containers */
+  position: relative; /* Ensure the section is positioned relative to its parent */
+  z-index: 2; /* Ensure the section appears above other content */
+}
+
+.featured-cars h2 {
+  text-align: center;
+}
+
+.car-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.car {
+  width: 250px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.car img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.car h3 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.car p {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Popular Rentals Section */
+.popular-rentals {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 20px; /* Add margin to create space between containers */
+  position: relative; /* Ensure the section is positioned relative to its parent */
+  z-index: 2; /* Ensure the section appears above other content */
+}
+
+.popular-rentals h2 {
+  text-align: center;
+}
+
+/* Ensure the containers are positioned relative to their parent */
+.container {
+  position: relative;
+ 
+}
+
+/* Ensure the navigation bar appears above other content */
+.navbar {
+  position: fixed; /* Fix the navigation bar */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3; /* Ensure the navigation bar is above other content */
+}
+
+.blogs {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 20px; /* Add margin to create space between sections */
+}
+
+.blogs h2 {
+  text-align: center;
+}
+
+.customer-blogs {
+  padding: 20px;
+  background-color: #f9f9f9;
+  margin-top: 20px; /* Add margin to create space between sections */
+}
+
+.customer-blogs h2 {
+  text-align: center;
+}
+
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+
