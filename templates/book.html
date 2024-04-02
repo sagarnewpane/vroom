@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Booking</title>
+    <link rel="stylesheet" href="b.css">
+</head>
+<body>
+    <h1>Booking</h1>
+    <div class="content-container">
+        <div class="car-container">
+            <div class="car">
+                <img src="https://source.unsplash.com/random/200x150" alt="Car Image">
+                <div class="specifications">
+                    <h3>Specifications</h3>
+                    <ul>
+                        <li>Transmission: Automatic</li>
+                        <li>Doors: 4</li>
+                        <li>Air Conditioning: Yes</li>
+                        <li>Seating Capacity: 5</li>
+                        <li>Cost: XX /hr, XXX/day, XXXX /week</li> <!-- Cost added here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="booking-info-container">
+            <h2>Booking Info</h2>
+            <div class="booking-info">
+                <div class="pick-up">
+                    <label for="pickUpLocation">Pick-Up Location:</label>
+                    <input type="text" id="pickUpLocation" name="pickUpLocation" placeholder="Enter Pick-Up Location">
+                </div>
+                <div class="date-time">
+                    <label for="pickUpDateTime">Pick-Up Date & Time:</label>
+                    <input type="datetime-local" id="pickUpDateTime" name="pickUpDateTime">
+                    <label for="dropOffDateTime">Drop-Off Date & Time:</label>
+                    <input type="datetime-local" id="dropOffDateTime" name="dropOffDateTime">
+                </div>
+                <div class="book-now">
+                    <button type="submit">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

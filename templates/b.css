@@ -1,0 +1,98 @@
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.car-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.car {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.car img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.specifications {
+    margin-top: 10px;
+}
+
+.specifications h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.specifications ul {
+    list-style-type: none;
+}
+
+.specifications ul li {
+    margin-bottom: 5px;
+}
+
+.booking-info-container {
+    flex: 1;
+}
+
+.booking-info {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.booking-info h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.booking-info label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.booking-info input[type="text"],
+.booking-info input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.booking-info button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.booking-info button:hover {
+    background-color: #0056b3;
+}
