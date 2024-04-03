@@ -33,7 +33,7 @@ def available_cars(request):
     else:
         form = CarSearchForm()
     
-    return render(request, 'search_cars.html', {'form': form})
+    return render(request, 'Vroom.html', {'form': form})
 
 
 
