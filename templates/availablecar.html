@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Cars</title>
-    <link rel="stylesheet" href="a.css">
+    <link rel="stylesheet" href="{% static 'a.css' %}">
 </head>
 <body>
   <header>
@@ -18,38 +19,20 @@
 </div>
 <h1>for you</h1>
 </header>
-
     <h1>Available Cars</h1>
-    <div class="car-container">
-        <div class="car-card">
-          <img src="https://source.unsplash.com/random/200x150" alt="Car Image" />
-            <h2>Car Model 1</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p>Cost per hour: Rs.10</p>
-            <button class="book-button">Book this car</button>
-        </div>
-        <div class="car-card">
-          <img src="https://source.unsplash.com/random/200x150" alt="Car Image" />
-            <h2>Car Model 2</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p>Cost per hour: Rs.10</p>
-            <button class="book-button">Book this car</button>
-        </div>
-        <div class="car-card">
-          <img src="https://source.unsplash.com/random/200x150" alt="Car Image" />
-            <h2>Car Model 3</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p>Cost per hour: Rs.10</p>
-            <button class="book-button">Book this car</button>
-        </div>
-        <div class="car-card">
-          <img src="https://source.unsplash.com/random/200x150" alt="Car Image" />
-            <h2>Car Model 4</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p>Cost per hour: Rs.10</p>
-            <button class="book-button">Book this car</button>
-        </div>
-    </div>
+    {% if cars %}
+      <div class="car-container">
+        {% for car in cars %}
+          <div class="car-card">
+            <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
+              <h2>{{ car.model }}</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>Cost per hour: Rs.{{ car.hourly_rate }}</p>
+              <a href="{% url 'bookings' car.id %}"><button type="button">Book</button></a>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
     <script src="a.js"></script>
 </body>
 </html>

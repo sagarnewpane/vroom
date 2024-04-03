@@ -28,7 +28,7 @@ def home(request):
             for car in available_cars:
                 car.total_price = round(duration_hours * car.hourly_rate, 2)
                 
-            return render(request, 'available_cars.html', {'cars': available_cars})
+            return render(request, 'availablecar.html', {'cars': available_cars})
     else:
         form = CarSearchForm()
 
