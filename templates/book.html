@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="b.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+<div class="navbar">
+    <div class="logo"> Vroom </div>
+    <a href="#">Home</a>
+    <a href="#">Cars</a>
+    <a href="#">Pricing</a>
+    <a href="#">About</a>
+    <a href="#">Blogs</a>
+    <a href="#">Contact</a>
+    
+    <div class="search"> 
+      <input type="text" placeholder="Search.."> 
+  </div>
     <h1>Booking</h1>
     <div class="content-container">
         <div class="car-container">
@@ -24,24 +37,50 @@
                 </div>
             </div>
         </div>
-        <div class="booking-info-container">
-            <h2>Booking Info</h2>
-            <div class="booking-info">
-                <div class="pick-up">
-                    <label for="pickUpLocation">Pick-Up Location:</label>
-                    <input type="text" id="pickUpLocation" name="pickUpLocation" placeholder="Enter Pick-Up Location">
-                </div>
-                <div class="date-time">
-                    <label for="pickUpDateTime">Pick-Up Date & Time:</label>
-                    <input type="datetime-local" id="pickUpDateTime" name="pickUpDateTime">
-                    <label for="dropOffDateTime">Drop-Off Date & Time:</label>
-                    <input type="datetime-local" id="dropOffDateTime" name="dropOffDateTime">
-                </div>
-                <div class="book-now">
-                    <button type="submit">Book Now</button>
-                </div>
-            </div>
-        </div>
+        <div class="vertical-container">
+            <h2>Book a Car</h2>
+          <p class="input-label" >Pick Up Location</p>
+          <select class="location-dropdown">
+            <option value="Kathmandu" class="location-input" >Kathmandu</option>
+            <option value="Pokhara" class="location-input" >Pokhara</option>
+          </select>
+          
+            <p class="input-label">Pick Up Date</p>
+            <input type="datetime-local" class="date-input" placeholder="Select Pick Up Date">
+            <p class="input-label">Drop Off Date</p>
+            <input type="datetime-local" class="date-input" placeholder="Select Drop Off Date">
+          
+            <button>Book a Car</button>
+          </div>
     </div>
+    <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>VROOM</h3>
+            <p>"Welcome to Vroom Car Rental, where every journey begins with convenience, comfort, and confidence. With our wide selection of vehicles and seamless booking experience, we're here to make your travel dreams a reality. Drive with us and experience the thrill of the open road, wherever it may take you."</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Term and Conditions</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>Email: info@example.com</li>
+              <li>Phone: +1234567890</li>
+              <li>Address: 123 Street, City, Country</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2024 Vroom Car Rental | All Rights Reserved
+        </div>
+      </footer>
+      
 </body>
 </html>

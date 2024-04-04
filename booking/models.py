@@ -6,6 +6,7 @@ class Car(models.Model):
         ('available', 'Available'),
         ('unavailable', 'Unavailable'),
         ('maintenance', 'Maintenance'),
+        name = models.CharField(max_length=255)
     ]
 
     LOCATION_CHOICES = [('Kathmandu','Kathmandu'),('Pokhara','Pokhara')]
