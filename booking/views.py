@@ -46,7 +46,7 @@ def book_car(request, car_id):
     # Check if the user has already booked this car
     if Booking.objects.filter(user=request.user, car=car).exists():
         # If the user has already booked this car, display a message on the same page
-        return render(request, 'book_car.html', {'car': car, 'message': 'You have already booked this car.'})
+        return render(request, 'book.html', {'car': car, 'message': 'You have already booked this car.'})
     
     if request.method == 'POST':
         form = CarSearchForm(request.POST)
@@ -59,7 +59,7 @@ def book_car(request, car_id):
         
     else:
         form = CarSearchForm()
-    return render(request, 'book_car.html', {'car': car,'form':form})
+    return render(request, 'book.html', {'car': car,'form':form})
 
 @login_required
 def view_bookings(request):

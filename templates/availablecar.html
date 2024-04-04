@@ -28,6 +28,7 @@
               <h2>{{ car.model }}</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               <p>Cost per hour: Rs.{{ car.hourly_rate }}</p>
+              <p>{{ car.total_price }}</p>
               <a href="{% url 'bookings' car.id %}"><button type="button">Book</button></a>
           </div>
         {% endfor %}
