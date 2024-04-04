@@ -1,48 +1,18 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<title>Vroom Car Rental</title>
 
-</head>
-<body>
 
-<!-- Navigation Bar -->
-<div class="navbar">
-  <div class="logo"> Vroom </div>
-  <a href="#">Home</a>
-  <a href="#">Cars</a>
-  <a href="#">Pricing</a>
-  <a href="#">About</a>
-  <a href="#">Blogs</a>
-  <a href="#">Contact</a>
-  
-  <div class="search"> 
-    <input type="text" placeholder="Search.."> 
-</div>
-<div class="user-dropdown">
-  <button class="dropbtn"><img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User"></button>
-  <div class="dropdown-content">
-    <a href="#">Profile</a>
-    <a href="#">Logout</a>
-  </div>
-</div>
-</div>
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <title>Vroom Car Rental</title>
+{% endblock %}
 
-<!-- 
-{% if request.user.is_authenticated %}
-  <h2>Hello,{{ request.user.email }}</h2>
-  <a href="{% url 'logout' %}">Logout</a>
-{% else %} 
-  <a href="{% url 'login' %}">Login</a>
-  <a href="{% url 'signup' %}">Create an account</a>
-{% endif %} -->
+{% block content %}
 
  <div class="container">
   <h2  >Better way to rent your car</h2>
@@ -167,34 +137,4 @@
   </div>
 </div>
 
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3>VROOM</h3>
-      <p>"Welcome to Vroom Car Rental, where every journey begins with convenience, comfort, and confidence. With our wide selection of vehicles and seamless booking experience, we're here to make your travel dreams a reality. Drive with us and experience the thrill of the open road, wherever it may take you."</p>
-    </div>
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Term and Conditions</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Contact Us</h3>
-      <ul>
-        <li>Email: info@example.com</li>
-        <li>Phone: +1234567890</li>
-        <li>Address: 123 Street, City, Country</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    &copy; 2024 Vroom Car Rental | All Rights Reserved
-  </div>
-</footer>
-
-</body>
-</html>
+{% endblock %}
