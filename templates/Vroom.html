@@ -24,6 +24,13 @@
   <div class="search"> 
     <input type="text" placeholder="Search.."> 
 </div>
+<div class="user-dropdown">
+  <button class="dropbtn"><img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User"></button>
+  <div class="dropdown-content">
+    <a href="#">Profile</a>
+    <a href="#">Logout</a>
+  </div>
+</div>
 </div>
 
 <!-- 
@@ -35,8 +42,6 @@
   <a href="{% url 'signup' %}">Create an account</a>
 {% endif %} -->
 
-
- <!-- Container for Content -->
  <div class="container">
   <h2  >Better way to rent your car</h2>
 
@@ -59,14 +64,11 @@
 
 <div class="vertical-container">
   <h3>Book a Car</h3>
-
 <p class="input-label" >Pick Up Location</p>
 <select class="location-dropdown">
   <option value="Kathmandu" class="location-input" >Kathmandu</option>
   <option value="Pokhara" class="location-input" >Pokhara</option>
-
 </select>
-
 
   <p class="input-label">Pick Up Date</p>
   <input type="datetime-local" class="date-input" placeholder="Select Pick Up Date">
@@ -81,48 +83,105 @@
   <h2>Featured Cars</h2>
   <div class="car-list">
     <div class="car">
-      <img src="car1.jpg" alt="Car 1">
-      <h3>Car Model 1</h3>
-      <p>KJLSHDIJHASIDFJ</p>
+      <img src="https://i.pinimg.com/564x/61/bd/54/61bd54db8650e8483583444b32abf6c0.jpg" alt="Car 1">
+      <h3>Mercedes AMG</h3>
+      <p>Sports</p>
+      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
+      <div style="display: flex; justify-content: space-between;">
+        <button style="background-color: #007bff; border-radius: 8px; padding: 8px;color: white">Book Now</button>
+        <button style="background-color: #007bff; border-radius: 8px; padding: 12px;color: white">Details</button>
+      </div>
     </div>
     <div class="car">
-      <img src="car2.jpg" alt="Car 2">
-      <h3>Car Model 2</h3>
-      <p>jhDGVIJHDIJVH</p>
+      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
+      <h3>Ford Raptor</h3>
+      <p>SUV</p>
+      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
+      <div style="display: flex; justify-content: space-between;">
+        <button style="background-color: #7d58ee; border-radius: 8px; padding: 8px; color: white;">Book Now</button>
+        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
+      </div>
     </div>
     <!-- Add more featured cars as needed -->
   </div>
 </div>
 
-
 <div class="popular-rentals">
   <h2>Popular Rentals</h2>
   <div class="car-list">
     <div class="car">
-      <img src="car3.jpg" alt="Car 3">
-      <h3>Car Model 3</h3>
-      <p>sdjohgouiasdgv</p>
+      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
+      <h3>Ford Raptor</h3>
+      <p>SUV</p>
+      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
+      <div style="display: flex; justify-content: space-between;">
+        <button style="background-color: #7d58ee; border-radius: 8px; padding: 8px; color: white;">Book Now</button>
+        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
+      </div>
     </div>
     <div class="car">
-      <img src="car4.jpg" alt="Car 4">
-      <h3>Car Model 4</h3>
-      <p>saDIUOGHOIJSDHG</p>
-    </div>
-   
+      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
+      <h3>Ford Raptor</h3>
+      <p>SUV</p>
+      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
+      <div style="display: flex; justify-content: space-between;">
+        <button style="background-color: #7d58ee; border-radius: 8px; padding: 8px; color: white;">Book Now</button>
+        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
+      </div>
+    </div>  
   </div>
-</div>
-
-<div class="blogs">
-  <h2>Happy Clients</h2>
-  <!-- Add blog posts here -->
 </div>
 
 <div class="customer-blogs">
-  <h2>Customer Blogs</h2>
+  <h2>Blogs</h2>
   <div class="blog-container">
-    <!-- Add customer blog posts here -->
+    <!-- First customer blog -->
+    <div class="blog">
+      <div class="customer-info">
+        <img src="customer1.jpg" alt="Customer 1">
+        <h3>Customer 1</h3>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus condimentum justo vitae leo pretium, in mattis tortor accumsan.</p>
+    </div>
+    <!-- Second customer blog -->
+    <div class="blog">
+      <div class="customer-info">
+        <img src="customer2.jpg" alt="Customer 2">
+        <h3>Customer 2</h3>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus condimentum justo vitae leo pretium, in mattis tortor accumsan.</p>
+    </div>
   </div>
 </div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>VROOM</h3>
+      <p>"Welcome to Vroom Car Rental, where every journey begins with convenience, comfort, and confidence. With our wide selection of vehicles and seamless booking experience, we're here to make your travel dreams a reality. Drive with us and experience the thrill of the open road, wherever it may take you."</p>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Term and Conditions</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <ul>
+        <li>Email: info@example.com</li>
+        <li>Phone: +1234567890</li>
+        <li>Address: 123 Street, City, Country</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2024 Vroom Car Rental | All Rights Reserved
+  </div>
+</footer>
 
 </body>
 </html>
