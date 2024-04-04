@@ -1,28 +1,29 @@
-/* Global Styles */
+/* availablecar.css */
+
+/* Body Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4; /* Set your desired background color */
 }
 
-h1 {
-    text-align: center;
-}
-
+/* Container Styles */
 .car-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: 20px;
 }
 
+/* Card Styles */
 .car-card {
-    width: 200px;
-    margin: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .car-card img {
@@ -31,33 +32,26 @@ h1 {
     margin-bottom: 10px;
 }
 
-.book-button {
-    background-color: #007bff;
+.car-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.car-card p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.car-card button {
+    background-color: #007bff; /* Set your desired button color */
     color: #fff;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.book-button:hover {
-    background-color: #0056b3;
-}
-
-/* Header Styles */
-header {
-    background-color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
-}
-
-.slider {
- 
-}
-
-.carousel-inner img {
-    width: 100%;
-    height: auto;
     border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.car-card button:hover {
+    background-color: #0056b3; /* Set your desired hover color */
 }
