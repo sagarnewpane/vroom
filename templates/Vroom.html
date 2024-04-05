@@ -37,7 +37,7 @@
 <div class="vertical-container">
   <h3>Book a Car</h3>
 
-  <form method="post">
+  <form method="post" id="carForm">
     {% csrf_token %}
     <p class="input-label" >Pick Up Location</p>
     <select name="{{ form.location.name }}" id="id_location" class="location-dropdown">
@@ -59,6 +59,23 @@
 
     <button type="submit">Rent a Car now</button>
   </form>
+
+  <script>
+    document.getElementById('carForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var location = document.getElementById('id_location').value;
+        var pickup_datetime = document.getElementById('id_pickup_datetime').value;
+        var dropoff_datetime = document.getElementById('id_dropoff_datetime').value;
+
+        localStorage.setItem('location', location);
+        localStorage.setItem('pickup_datetime', pickup_datetime);
+        localStorage.setItem('dropoff_datetime', dropoff_datetime);
+
+        this.submit();
+      });
+  </script>
+
 </div>
 
 <!-- Featured Cars Section -->

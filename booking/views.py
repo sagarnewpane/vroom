@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages framework
 from django.shortcuts import redirect
 from .models import Booking, Car
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def search_cars(request):
     if request.method == 'POST':
@@ -58,9 +60,13 @@ def book_car(request, car_id):
         form = CarSearchForm(request.POST)
         if form.is_valid():
             pickup_datetime = form.cleaned_data['pickup_datetime']
-            # dropoff_datetime = form.cleaned_data['dropoff_datetime']
+            dropoff_datetime = form.cleaned_data['dropoff_datetime']
+
+            duration_hours = Decimal((dropoff_datetime - pickup_datetime).total_seconds()) / Decimal(3600)
+            total_price = round(duration_hours * car.hourly_rate, 2)
+
             # location = form.cleaned_data['location'] # No need for location as it is used only for searching
-            Booking.objects.create(user=request.user, car=car, status='pending',booking_date=pickup_datetime)
+            Booking.objects.create(user=request.user, car=car, status='pending',estimated_price=total_price,drop_off_date=dropoff_datetime,pick_up_date=pickup_datetime)
             return redirect('view_bookings')
         
     else:
@@ -70,5 +76,13 @@ def book_car(request, car_id):
 @login_required(login_url='login')
 def view_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'view_bookings.html', {'bookings': bookings})
+    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user})
 
+@csrf_exempt
+def cancel_booking(request):
+    if request.method == 'POST':
+        booking_id = request.POST.get('booking_id')
+        Booking.objects.filter(id=booking_id).delete()
+        return JsonResponse({'status':'ok'})
+    else:
+        return JsonResponse({'status':'error'})
