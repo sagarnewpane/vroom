@@ -45,7 +45,7 @@ def available_cars(request):
 
 
 
-@login_required
+@login_required(login_url='login')
 def book_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)
     
@@ -67,7 +67,7 @@ def book_car(request, car_id):
         form = CarSearchForm()
     return render(request, 'booking.html', {'car': car,'form':form})
 
-@login_required
+@login_required(login_url='login')
 def view_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'view_bookings.html', {'bookings': bookings})
