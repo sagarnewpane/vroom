@@ -20,13 +20,15 @@ from django.urls import path,include
 from accounts import views as auth_view
 from . import views
 from django.contrib.auth import views as pass_view
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('signup', auth_view.signup, name='signup'),
-    path('login', auth_view.login_view, name='login'),
-    path('logout', auth_view.logout_view, name='logout'),
+    path('signup/', auth_view.signup, name='signup'),
+    path('login/', auth_view.login_view, name='login'),
+    path('logout/', auth_view.logout_view, name='logout'),
     path('password-reset/', 
          pass_view.PasswordResetView.as_view(template_name = 'resetpass.html'), 
          name='password_reset'),
@@ -39,5 +41,7 @@ urlpatterns = [
     path('password-reset-complete/', 
          pass_view.PasswordResetCompleteView.as_view(template_name = 'resetpass_done_complete.html'), 
          name='password_reset_complete'),
+
+    path('cars/', include('booking.urls'))
     
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

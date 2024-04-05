@@ -1,0 +1,5 @@
+{% for booking in bookings %}
+    <p>Car: {{ booking.car.model }} | Status: {{ booking.get_status_display }}</p>
+{% empty %}
+    <p>You have no bookings.</p>
+{% endfor %}

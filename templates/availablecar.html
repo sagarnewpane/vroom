@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Cars</title>
+    <link rel="stylesheet" href="{% static 'availablecar.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}
+
+{% block content %}
+<h1>for you</h1>
+image
+
+
+    <h1>Available Cars</h1>
+    {% if cars %}
+      <div class="car-container">
+        {% for car in cars %}
+          <div class="car-card">
+            <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
+              <h2>{{ car.model }}</h2>
+              <p>Cost per hour: Rs.{{ car.hourly_rate }}</p>
+              <p>{{ car.total_price }}</p>
+              <a href="{% url 'bookings' car.id %}"><button type="button">Book</button></a>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+{% endblock %}
