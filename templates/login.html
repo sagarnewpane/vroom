@@ -31,9 +31,9 @@
         <input type="password" name="{{ form.password.name }}" class="form-control" />
         <span class="text-danger">{{ form.password.errors }}</span>
       </div>
-      <button type="submit"></i> Login</button>
+      <button type="submit">Login</button>
     </form>
-    <p>Forgotten Password ? <a href="{% url 'password_reset' %}">Reset Password</a></p>
+    <p>Forgotten your Password? <a href="{% url 'password_reset' %}">Reset password</a></p>
     <p>Don't have an account? <a href="{% url 'signup' %}"> Sign up</a></p>
   </div>
   <!-- <script src="ls.js"></script> -->
