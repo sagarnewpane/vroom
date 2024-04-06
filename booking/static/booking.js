@@ -36,6 +36,7 @@ window.onload = function() {
      document.getElementById('id_pickup_datetime').addEventListener('change', calculateTotalCost);
      document.getElementById('id_dropoff_datetime').addEventListener('change', calculateTotalCost);
 
+     
     document.querySelector('#carForm').addEventListener('submit', function(e) {
         e.preventDefault();
         document.querySelector('#termsModal').style.display = 'block';

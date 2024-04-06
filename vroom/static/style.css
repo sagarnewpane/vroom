@@ -176,7 +176,7 @@ top: 50%;
 left: calc(50% -500px); /* Position slightly to the left */
 transform: translate(-50%, -50%);
 text-align: center; /* Center the content horizontally */
-z-index: 2; /* Ensure this container is above the other container */
+/* z-index: 2; Ensure this container is above the other container */
 }
 
 .vertical-container p {
@@ -237,7 +237,7 @@ input[type=datetime-local]::-webkit-clear-button {
   display: none;
 }
 
-.vertical-container button {
+button {
 width: calc(100% -20px); 
 padding: 10px; 
 margin-top: 30px; /* Add space above button */
