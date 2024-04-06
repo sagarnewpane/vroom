@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Rental Booking</title>
-    <link rel="stylesheet" href="{static 'booking.css'}">
+    <link rel="stylesheet" href="{% static 'booking.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="{static 'booking.js'}"></script>
 {% endblock %}
 
 {% block content %}
@@ -60,75 +58,17 @@
     
         <p class="input-label" >Estimated Pricing : </p>
         <input type="text" readonly id="estimated_price">
-        <script>
-            flatpickr(".flatpickr", {
-                enableTime: true,
-                dateFormat: "Y-m-d H:i",
-            });
-        </script>
     
         <button type="submit">Rent a Car now</button>
       </form>
 
       <input type="hidden" id="hourly-rate" value="{{ car.hourly_rate }}">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script>
-        window.onload = function() {
-            var location = localStorage.getItem('location');
-            var pickup_datetime = localStorage.getItem('pickup_datetime');
-            var dropoff_datetime = localStorage.getItem('dropoff_datetime');
-    
-            if (location) {
-                document.getElementById('id_location').value = location;
-            }
-            if (pickup_datetime) {
-                document.getElementById('id_pickup_datetime').value = pickup_datetime;
-            }
-            if (dropoff_datetime) {
-                document.getElementById('id_dropoff_datetime').value = dropoff_datetime;
-            }
-            var hourlyRate = parseFloat($("#hourly-rate").val());
-        
-            var calculateTotalCost = function() {
-                var pickupTime = new Date($("#id_pickup_datetime").val().replace(" ", "T"));
-                var dropoffTime = new Date($("#id_dropoff_datetime").val().replace(" ", "T"));
-        
-                if (pickupTime && dropoffTime) {
-                    var diff = Math.abs(dropoffTime - pickupTime);  // difference in milliseconds
-                    var hours = diff / 1000 / 60 / 60;  // convert to hours
-        
-                    var totalCost = hours * hourlyRate;
-        
-                    $("#estimated_price").val(totalCost.toFixed(2));
-                }
-            };
-            
-            calculateTotalCost();  // Invoke the function
-        };
-    </script>
 
     </div>
 
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            var hourlyRate = parseFloat($("#hourly-rate").val());
-        
-            $("#id_pickup_datetime, #id_dropoff_datetime").change(function(){
-                var pickupTime = new Date($("#id_pickup_datetime").val().replace(" ", "T"));
-                var dropoffTime = new Date($("#id_dropoff_datetime").val().replace(" ", "T"));
-        
-                if (pickupTime && dropoffTime) {
-                    var diff = Math.abs(dropoffTime - pickupTime);  // difference in milliseconds
-                    var hours = diff / 1000 / 60 / 60;  // convert to hours
-        
-                    var totalCost = hours * hourlyRate;
-        
-                    $("#estimated_price").val(totalCost.toFixed(2));
-                }
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{% static 'booking.js' %}"></script>
 
 {% endblock %}
