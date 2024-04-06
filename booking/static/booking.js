@@ -30,7 +30,28 @@ window.onload = function() {
     };
 
     calculateTotalCost();  // Invoke the function
+
+
+     // Add event listeners to the pickup and dropoff datetime fields
+     document.getElementById('id_pickup_datetime').addEventListener('change', calculateTotalCost);
+     document.getElementById('id_dropoff_datetime').addEventListener('change', calculateTotalCost);
+
+    document.querySelector('#carForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.querySelector('#termsModal').style.display = 'block';
+    });
+    
+    document.querySelector('#agreeButton').addEventListener('click', function() {
+        document.querySelector('#termsModal').style.display = 'none';
+        document.querySelector('#carForm').submit();
+    });
+    
+    document.querySelector('#disagreeButton').addEventListener('click', function() {
+        document.querySelector('#termsModal').style.display = 'none';
+    });
 };
+
+
 
 flatpickr(".flatpickr", {
     enableTime: true,

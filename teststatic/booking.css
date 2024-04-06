@@ -17,7 +17,7 @@ body {
 
 .navbar a {
     display: inline-block;
-    color: white;
+    color: whiate;
     text-align: center;
     padding: 20px 24px;
     text-decoration: none;
@@ -97,7 +97,6 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 2;
 }
 
 .vertical-container p {

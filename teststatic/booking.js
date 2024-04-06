@@ -30,7 +30,23 @@ window.onload = function() {
     };
 
     calculateTotalCost();  // Invoke the function
+
+    document.querySelector('#carForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.querySelector('#termsModal').style.display = 'block';
+    });
+    
+    document.querySelector('#agreeButton').addEventListener('click', function() {
+        document.querySelector('#termsModal').style.display = 'none';
+        document.querySelector('#carForm').submit();
+    });
+    
+    document.querySelector('#disagreeButton').addEventListener('click', function() {
+        document.querySelector('#termsModal').style.display = 'none';
+    });
 };
+
+
 
 flatpickr(".flatpickr", {
     enableTime: true,
