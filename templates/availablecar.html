@@ -15,12 +15,11 @@
 
 {% block content %}
 <h1>for you</h1>
-image
-
+<img src="car.png" alt="Placeholder Image" width="200"/>
 
     <h1>Available Cars</h1>
     {% if cars %}
-      <div class="car-container">
+      <div class="availablecar-container">
         {% for car in cars %}
           <div class="car-card">
             <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
