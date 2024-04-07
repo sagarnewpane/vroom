@@ -1,0 +1,39 @@
+.modal {
+    display: none;
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.terms-conditions {
+    border-radius: 10px;
+    height: 300px;
+    margin-bottom: 20px;
+    background-color: #f1f1f1;
+    padding: 0px;
+}
+
+#disagreeButton{
+    background-color: rgb(212, 66, 66);
+}
+
+iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow-y: auto;
+}

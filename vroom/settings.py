@@ -123,6 +123,7 @@ STATIC_ROOT = BASE_DIR  / 'static'
 STATICFILES_DIRS = [
     'vroom/static',
     'accounts/static',
+    'booking/static'
 ]
 
 # Default primary key field type
