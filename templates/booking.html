@@ -16,17 +16,25 @@
     <div class="content-container">
         <div class="car-specs-container">
             <div class="car-image">
-                <img src="https://source.unsplash.com/random/200x150" alt="Car Image">
+            <img
+                class="car-image"
+                loading="lazy"
+                alt=""
+                src="https://source.unsplash.com/random/200x150"
+              />
             </div>
             <div class="car-specifications">
-                <h3>Specifications</h3>
-                <ul>
-                    <li>Transmission: Automatic</li>
-                    <li>Doors: 4</li>
-                    <li>Air Conditioning: Yes</li>
-                    <li>Seating Capacity: 5</li>
-                    <li>Cost: XX /hr, XXX/day, XXXX /week</li> <!-- Cost added here -->
-                </ul>
+                <h2>Hyundai</h2>
+                <h3>Verna</h3>
+                <h4>Specifications</h4>
+                <section id="car-info">
+                    <p>Fuel: XXXXX</p>
+                    <p>Mileage: 40,000</p>
+                    <p>Transmission: Manual</p>
+                    <p>Seats: 5 Adults</p>
+                </section>
+                   <p>Cost: XX /hr, XXX/day, XXXX /week</p> <!-- Cost added here -->
+
             </div>
         </div>
     </div>
@@ -51,7 +59,7 @@
                     dateFormat: "Y-m-d H:i",
                 });
             </script>
-            <button type="submit">Rent a Car now</button>
+            <button type="submit">Book now</button>
         </form>
     </div>
 {% endblock %}

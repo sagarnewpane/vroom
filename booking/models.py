@@ -32,6 +32,12 @@ class Booking(models.Model):
     ]
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user_email = models.EmailField()
+    car_model = models.CharField(max_length=100)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     booking_date = models.DateTimeField()  # Removed auto_now_add=True
+    pickup_location = models.CharField(max_length=100)
+    dropoff_location = models.CharField(max_length=100)
+    pickup_date = models.DateField()
+    dropoff_date = models.DateField()
     status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='pending')

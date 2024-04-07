@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages framework
 from django.shortcuts import redirect
 from .models import Booking, Car
+from .forms import  BookingForm
+from django.core.mail import send_mail
+from django.conf import settings 
 
 def search_cars(request):
     if request.method == 'POST':
@@ -55,14 +58,29 @@ def book_car(request, car_id):
         return render(request, 'booking.html', {'car': car, 'message': 'You have already booked this car.'})
     
     if request.method == 'POST':
-        form = CarSearchForm(request.POST)
+        form = BookingForm(request.POST)
         if form.is_valid():
-            pickup_datetime = form.cleaned_data['pickup_datetime']
-            # dropoff_datetime = form.cleaned_data['dropoff_datetime']
-            # location = form.cleaned_data['location'] # No need for location as it is used only for searching
-            Booking.objects.create(user=request.user, car=car, status='pending',booking_date=pickup_datetime)
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.car = car
+            booking.status = 'pending'
+            booking.save()
+            
+            # Send booking confirmation email
+            send_booking_confirmation_email(request.user.email)
+            
             return redirect('view_bookings')
+    # if request.method == 'POST':
+    #     form = CarSearchForm(request.POST),
+    #     if form.is_valid():
+    #         pickup_datetime = form.cleaned_data['pickup_datetime']
+    #         # dropoff_datetime = form.cleaned_data['dropoff_datetime']
+    #         # location = form.cleaned_data['location'] # No need for location as it is used only for searching
+    #         Booking.objects.create(user=request.user, car=car, status='pending',booking_date=pickup_datetime)
+    #         return redirect('view_bookings')
         
+            
+          
     else:
         form = CarSearchForm()
     return render(request, 'booking.html', {'car': car,'form':form})
@@ -72,3 +90,9 @@ def view_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'view_bookings.html', {'bookings': bookings})
 
+def send_booking_confirmation_email(email):
+    subject = 'Booking Confirmation'
+    message = 'Thank you for booking with us. Your booking is confirmed.'
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, from_email, recipient_list)
