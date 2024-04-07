@@ -4,62 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Rental Booking</title>
-    <link rel="stylesheet" href="{static 'booking.css'}">
+    <link rel="stylesheet" href="{% static 'booking.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 {% endblock %}
 
 {% block content %}
     <h1>Booking</h1>
+    <div class="message">
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>
     <div class="content-container">
-        <div class="car-specs-container">
-            <div class="car-image">
-            <img
-                class="car-image"
-                loading="lazy"
-                alt=""
-                src="https://source.unsplash.com/random/200x150"
-              />
-            </div>
-            <div class="car-specifications">
-                <h2>Hyundai</h2>
-                <h3>Verna</h3>
-                <h4>Specifications</h4>
-                <section id="car-info">
-                    <p>Fuel: XXXXX</p>
-                    <p>Mileage: 40,000</p>
-                    <p>Transmission: Manual</p>
-                    <p>Seats: 5 Adults</p>
-                </section>
-                   <p>Cost: XX /hr, XXX/day, XXXX /week</p> <!-- Cost added here -->
-
+        {% if car %}
+        <div class="car-container">
+            <div class="car">
+                <img src="{{ car.image.url }}" alt="Car Image">
+                <div class="specifications">
+                    <h3>Specifications</h3>
+                    <ul>
+                        <li>Company: {{ car.company }}</li>
+                        <li>Model: {{ car.model }}</li>
+                        <li>Mileage: {{ car.mileage }} kilometers per liter</li>
+                        <li>Transmission: {{ car.transmission }}</li>
+                        <li>Seats: {{ car.seats }}</li>
+                        <li>Luggage: {{ car.luggage }}</li>
+                        <li>Fuel: {{ car.fuel }}</li>
+                        <li>Cost: {{ car.hourly_rate }} /hr</li> <!-- Cost added here -->
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
+
+       
     <div class="vertical-container">
-        <h3>Book a Car</h3>
-        <form method="post">
-            {% csrf_token %}
-            <p class="input-label">Pick Up Location</p>
-            <select name="{{ form.location.name }}" id="id_location" class="location-dropdown">
-                <option value="Kathmandu">Kathmandu</option>
-                <option value="Pokhara">Pokhara</option>
-            </select>
-            <p class="input-label">Pick Up Date</p>
-            <input type="text" name="{{ form.pickup_datetime.name }}" required="" id="id_pickup_datetime"
-                   class="date-input flatpickr">
-            <p class="input-label">Drop Off Date</p>
-            <input type="text" name="{{ form.dropoff_datetime.name }}" required="" id="id_dropoff_datetime"
-                   class="date-input flatpickr">
-            <script>
-                flatpickr(".flatpickr", {
-                    enableTime: true,
-                    dateFormat: "Y-m-d H:i",
-                });
-            </script>
-            <button type="submit">Book now</button>
-        </form>
+      <h3>Book a Car</h3>
+    
+      <form method="post" id="carForm">
+        {% csrf_token %}
+        <p class="input-label" hidden>Pick Up Location</p>
+        <select name="{{ form.location.name }}" id="id_location" class="location-dropdown" hidden>
+          <option value="Kathmandu">Kathmandu</option>
+          <option value="Pokhara">Pokhara</option>
+        </select>
+        <p class="input-label">Pick Up Date</p>
+        <input type="text" name="{{ form.pickup_datetime.name }}" required="" id="id_pickup_datetime" class="date-input flatpickr">
+    
+        <p class="input-label">Drop Off Date</p>
+        <input type="text" name="{{ form.dropoff_datetime.name }}" required="" id="id_dropoff_datetime" class="date-input flatpickr">
+    
+        <p class="input-label" >Estimated Pricing : </p>
+        <input type="text" readonly id="estimated_price">
+    
+        <button type="submit">Rent a Car now</button>
+      </form>
+
+      <input type="hidden" id="hourly-rate" value="{{ car.hourly_rate }}">
+
     </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{% static 'booking.js' %}"></script>
+
 {% endblock %}

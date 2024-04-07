@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'userprofile.css' %}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="user-info-container">
+            <div class="user-info">
+                <h2>User Profile</h2>
+                <div class="info">
+                    <p><strong>Username:</strong> {{user.username}}</p>
+                    <p><strong>Email:</strong> {{user.email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="booking-history-container">
+            <div class="booking-history">
+                <h2>Booking History</h2>
+                {% for booking in bookings %}
+                    <div class="booking">
+                        <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100"/>
+                        <div class="details">
+                            <p><strong>Model:</strong> {{ booking.car.model }}</p>
+                            <p><strong>Type:</strong> {{ booking.car.type }}</p>
+                            <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
+                            <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                        </div>
+                        <p><strong>Status:</strong> {{ booking.status }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".cancel-btn").click(function(){
+                var bookingId = $(this).data('booking-id');
+                var button = $(this);  // store $(this) in a variable
+        
+                // display a confirmation dialog
+                var confirmDelete = confirm("Are you sure you want to cancel this booking?");
+                if (confirmDelete) {
+                    $.ajax({
+                        url: '{% url "cancel_booking" %}',
+                        data: {
+                            'booking_id': bookingId,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        type: 'post',
+                        success: function(response){
+                            // handle success, for example remove the booking from the page
+                            if(response.status == 'ok'){
+                                button.closest('.booking').remove();  // use the stored $(this)
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

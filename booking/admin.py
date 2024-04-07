@@ -6,8 +6,8 @@ from django.utils.html import format_html
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ['make', 'model', 'availability', 'num_seats', 'hourly_rate', 'display_image']
-    search_fields = ['make', 'model','availability','num_seats', 'hourly_rate']
+    list_display = ['model', 'availability', 'hourly_rate', 'display_image']
+    search_fields = [ 'model','availability', 'hourly_rate']
 
     def display_image(self, obj):
         return format_html('<img src="{}" width="50" height="50" />', obj.image.url) if obj.image else None
