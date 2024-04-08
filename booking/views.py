@@ -9,6 +9,9 @@ from django.shortcuts import redirect
 from .models import Booking, Car
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
+from vroom.settings import EMAIL_HOST_USER
+
 
 def search_cars(request):
     if request.method == 'POST':
@@ -44,9 +47,6 @@ def available_cars(request):
     return render(request, 'availablecar.html', {'cars': all_cars})
 
 
-
-
-
 @login_required(login_url='login')
 def book_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)
@@ -67,11 +67,27 @@ def book_car(request, car_id):
 
             # location = form.cleaned_data['location'] # No need for location as it is used only for searching
             Booking.objects.create(user=request.user, car=car, status='pending',estimated_price=total_price,drop_off_date=dropoff_datetime,pick_up_date=pickup_datetime)
+            
+            # Send an email to the user
+            send_mail(
+                f'Booking Successful for Car {car.model} on {pickup_datetime.date()}',
+                f'''Your booking has been successful and waiting confiramation by the dealer.
+                Car: {car.model}.
+                For date {pickup_datetime.date()} to {dropoff_datetime.date()}.
+                Total Price: {total_price}.\n
+                Thank you for booking with us.
+                ''',
+                EMAIL_HOST_USER,
+                [request.user.email],
+                fail_silently=False,
+            )
+
             return redirect('view_bookings')
         
     else:
         form = CarSearchForm()
     return render(request, 'booking.html', {'car': car,'form':form})
+
 
 @login_required(login_url='login')
 def view_bookings(request):
