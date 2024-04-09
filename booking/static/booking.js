@@ -45,6 +45,7 @@ window.onload = function() {
     document.querySelector('#agreeButton').addEventListener('click', function() {
         document.querySelector('#termsModal').style.display = 'none';
         document.querySelector('#carForm').submit();
+        alert('Email has been sent!');  // Add this line
     });
     
     document.querySelector('#disagreeButton').addEventListener('click', function() {
