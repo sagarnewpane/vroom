@@ -1,11 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms</title>
+    <meta charset="utf-8">
+    <title>
+    </title>
+    <style>
+        body {
+            line-height: 108%;
+            font-family: Arial;
+            font-size: 12pt
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0pt 0pt 8pt
+        }
+
+        h1 {
+            margin-top: 12pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Arial;
+            font-size: 16pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        h2 {
+            margin-top: 2pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Arial;
+            font-size: 14pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        h3 {
+            margin-top: 2pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Arial;
+            font-size: 14pt;
+            font-weight: normal;
+            color: #000000
+        }
+
+        h4 {
+            margin-top: 4pt;
+            margin-bottom: 2pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 12pt;
+            font-weight: normal;
+            font-style: italic;
+            color: #0f4761
+        }
+
+        h5 {
+            margin-top: 4pt;
+            margin-bottom: 2pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 12pt;
+            font-weight: normal;
+            color: #0f4761
+        }
+
+        h6 {
+            margin-top: 2pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 12pt;
+            font-weight: normal;
+            font-style: italic;
+            color: #595959
+        }
+
+        .Heading7 {
+            margin-top: 2pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 12pt;
+            font-weight: normal;
+            font-style: normal;
+            color: #595959
+        }
+
+        .Heading8 {
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 12pt;
+            font-weight: normal;
+            font-style: italic;
+            color: #272727
+        }
+
+        .Heading9 {
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 12pt;
+            font-weight: normal;
+            font-style: normal;
+            color: #272727
+        }
+
+        .IntenseQuote {
+            margin: 18pt 43.2pt;
+            text-align: center;
+            line-height: 108%;
+            border-top: 0.75pt solid #0f4761;
+            border-bottom: 0.75pt solid #0f4761;
+            padding-top: 10pt;
+            padding-bottom: 10pt;
+            font-family: Arial;
+            font-size: 12pt;
+            font-style: italic;
+            color: #0f4761
+        }
+
+        .ListParagraph {
+            margin-left: 36pt;
+            margin-bottom: 8pt;
+            line-height: 108%;
+            font-family: Arial;
+            font-size: 12pt;
+            color: #000000
+        }
+
+        .Quote {
+            margin-top: 8pt;
+            margin-bottom: 8pt;
+            text-align: center;
+            line-height: 108%;
+            font-family: Arial;
+            font-size: 12pt;
+            font-style: italic;
+            color: #404040
+        }
+
+        .Subtitle {
+            margin-bottom: 8pt;
+            line-height: 108%;
+            font-family: Aptos;
+            font-size: 14pt;
+            letter-spacing: 0.75pt;
+            color: #595959
+        }
+
+        .Title {
+            margin-bottom: 4pt;
+            line-height: normal;
+            font-family: 'Aptos Display';
+            font-size: 28pt;
+            letter-spacing: -0.5pt;
+            color: #000000
+        }
+
+        span.Heading1Char {
+            font-family: Arial;
+            font-size: 16pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        span.Heading2Char {
+            font-family: Arial;
+            font-size: 14pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        span.Heading3Char {
+            font-family: Arial;
+            font-size: 14pt;
+            color: #000000
+        }
+
+        span.Heading4Char {
+            font-size: 12pt;
+            font-style: italic;
+            color: #0f4761
+        }
+
+        span.Heading5Char {
+            font-size: 12pt;
+            color: #0f4761
+        }
+
+        span.Heading6Char {
+            font-size: 12pt;
+            font-style: italic;
+            color: #595959
+        }
+
+        span.Heading7Char {
+            font-size: 12pt;
+            color: #595959
+        }
+
+        span.Heading8Char {
+            font-size: 12pt;
+            font-style: italic;
+            color: #272727
+        }
+
+        span.Heading9Char {
+            font-size: 12pt;
+            color: #272727
+        }
+
+        span.IntenseEmphasis {
+            font-style: italic;
+            color: #0f4761
+        }
+
+        span.IntenseQuoteChar {
+            font-family: Arial;
+            font-size: 12pt;
+            font-style: italic;
+            color: #0f4761
+        }
+
+        span.IntenseReference {
+            font-weight: bold;
+            font-variant: small-caps;
+            letter-spacing: 0.25pt;
+            color: #0f4761
+        }
+
+        span.QuoteChar {
+            font-family: Arial;
+            font-size: 12pt;
+            font-style: italic;
+            color: #404040
+        }
+
+        span.SubtitleChar {
+            font-size: 14pt;
+            letter-spacing: 0.75pt;
+            color: #595959
+        }
+
+        span.TitleChar {
+            font-family: 'Aptos Display';
+            font-size: 28pt;
+            letter-spacing: -0.5pt
+        }
+    </style>
 </head>
+
 <body>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore velit illum vero nemo vitae? Optio obcaecati error, ipsum quo veniam eum reiciendis, eligendi dolores esse ullam nulla harum alias unde ad tempora corrupti beatae in dicta hic natus cumque similique. Natus vero voluptatibus cupiditate enim ab rerum odit perspiciatis culpa eius dignissimos fugit blanditiis magni voluptatum, commodi, ratione temporibus? Sed nobis quia iure architecto, modi nostrum odit officia eveniet quis distinctio omnis reprehenderit aut consequatur unde incidunt totam quisquam, vel tenetur ipsam. Est ipsa, ab unde magni numquam natus fugit quibusdam quo id nam ullam optio hic facere minima animi, nihil aspernatur? Odit accusamus repellendus corporis quia qui iure rem fugit ab sunt est! Commodi natus at quibusdam, non dolorem minus fuga aliquam quaerat, facere eaque eligendi. Deleniti architecto officia cum laudantium velit. Deleniti officia voluptatum sed id enim perspiciatis in sint unde culpa autem, necessitatibus nostrum laudantium nesciunt est quas aliquam, sapiente reiciendis dignissimos illum atque voluptatibus dolore aut ipsam! Doloribus voluptatum tenetur esse, harum saepe porro illum voluptas sed nulla laudantium dolore nesciunt quibusdam facilis maiores dignissimos corporis ullam asperiores modi rem. Quidem temporibus consectetur, aperiam ex explicabo debitis et. Quae maxime unde tenetur ullam itaque voluptate sapiente.
+    <p><strong><span style="font-size: 20px;">VROOM Car Rental Service Terms and Conditions</span></strong></p>
+    <p>&nbsp;</p>
+    <p><strong>1. Insurance Coverage:</strong></p>
+    <p>&nbsp;</p>
+    <p>1.1. All rentals include basic insurance coverage, which typically covers damages to the rental vehicle in case of accidents, theft, or vandalism, subject to a deductible.</p>
+    <p>&nbsp;</p>
+    <p>1.2. Additional insurance options, such as collision damage waiver (CDW) or personal accident insurance (PAI), may be available for purchase at an extra cost.</p>
+    <p>&nbsp;</p>
+    <p>1.3. Renter is responsible for familiarizing themselves with the terms and coverage of the insurance policy provided and any additional insurance options.</p>
+    <p>&nbsp;</p>
+    <p><strong>2. Renter Responsibility:</strong></p>
+    <p>&nbsp;</p>
+    <p>2.1. The renter is responsible for the safe and lawful operation of the rental vehicle throughout the duration of the rental period.</p>
+    <p>&nbsp;</p>
+    <p>2.2. Renter must return the vehicle in the same condition it was rented, with the exception of normal wear and tear.</p>
+    <p>&nbsp;</p>
+    <p>2.3. Renter is liable for any damages, fines, or penalties incurred during the rental period, including but not limited to traffic violations, parking tickets, and tolls.</p>
+    <p>&nbsp;</p>
+    <p><strong>3. Price Negotiations:</strong></p>
+    <p>&nbsp;</p>
+    <p>3.1. Prices for rental vehicles are non-negotiable and are determined based on factors such as vehicle type, rental duration, and location.</p>
+    <p>&nbsp;</p>
+    <p>3.2. VROOM reserves the right to adjust rental prices at any time without prior notice.</p>
+    <p>&nbsp;</p>
+    <p><strong>4. Available Locations:</strong></p>
+    <p>&nbsp;</p>
+    <p>4.1. VROOM operates rental locations in select cities and regions, as listed on our website or through our customer service representatives.</p>
+    <p>&nbsp;</p>
+    <p>4.2. Availability of specific vehicle models may vary by location and is subject to change without prior notice.</p>
+    <p>&nbsp;</p>
+    <p><strong>5. Time Duration of Rental:</strong></p>
+    <p>&nbsp;</p>
+    <p>5.1. The rental period begins at the scheduled pickup time and ends at the scheduled return time agreed upon during the reservation process.</p>
+    <p>&nbsp;</p>
+    <p>5.2. Extensions to the rental period may be possible, subject to vehicle availability and approval by VROOM.</p>
+    <p>&nbsp;</p>
+    <p>5.3. Late returns may incur additional fees, charged on a pro-rated basis according to the hourly or daily rental rate.</p>
+    <p>&nbsp;</p>
+    <p><strong>6. Cancellation Policy:</strong></p>
+    <p>&nbsp;</p>
+    <p>6.1. Renters may cancel a reservation without penalty up to 3 hours after the reservation is made.</p>
+    <p>&nbsp;</p>
+    <p>6.2. If cancellation occurs more than 3 hours after the reservation is made but at least 24 hours prior to the scheduled pickup time, a cancellation fee of 20% of the total rental cost will be charged.</p>
+    <p>&nbsp;</p>
+    <p>6.3. In the event of a no-show (failure to pick up the rental vehicle at the scheduled time without prior notification), the full rental cost will be charged as a cancellation fee.</p>
+    <p>&nbsp;</p>
+    <p>6.4. Cancellation requests must be submitted through the VROOM website or by contacting our customer service team directly.</p>
+    <p>&nbsp;</p>
+    <p>6.5. VROOM reserves the right to waive cancellation fees under extenuating circumstances, such as documented medical emergencies or severe weather conditions.</p>
+    <p style="bottom: 10px; right: 10px; position: absolute;"><a href="https://wordtohtml.net" target="_blank" style="font-size:11px; color: #d0d0d0;">Converted to HTML with WordToHTML.net</a></p>
 </body>
+
 </html>
