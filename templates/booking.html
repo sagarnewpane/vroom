@@ -19,58 +19,99 @@
             <p>{{ message }}</p>
         {% endif %}
     </div>
-    <div class="content-container">
+
         {% if car %}
         <div class="car-container">
-            <div class="car">
-                <img src="{{ car.image.url }}" alt="Car Image">
-                <div class="specifications">
-                    <h3>Specifications</h3>
-                    <ul>
-                        <li>Type: {{ car.type }}</li>
-                        <li>Model: {{ car.model }}</li>
-                        <li>Mileage: {{ car.mileage }} kilometers per liter</li>
-                        <li>Transmission: {{ car.transmission }}</li>
-                        <li>Seats: {{ car.seats }}</li>
-                        <li>Luggage: {{ car.luggage }}</li>
-                        <li>Fuel: {{ car.fuel }}</li>
-                        <li>Cost: {{ car.hourly_rate }} /hr</li> <!-- Cost added here -->
-                    </ul>
-                </div>
+            <div class="car-img">
+                    <img src="{{ car.image.url }}" alt="Car Image">
             </div>
+                <div class="specifications-container">
+                    <p class="type">{{ car.type }}</p>
+                    <p class="model">{{ car.model }}</p>
+                    <h2>Specifications</h2>
+                  {% comment %} <div class="specifications-info-container">
+                      <p><img src="{% static 'icon/speed.png' %}" alt="milage of the image"> Mileage: {{ car.mileage }} kilometers per liter</p>
+                      <p><img src="{% static 'icon/transmission.png' %}" alt="transmission of the image"> Transmission: {{ car.transmission }}</p>
+                      <p><img src="{% static 'icon/seat.png' %}" alt="seat of the image"> Seats: {{ car.seats }}</p>
+                      <p><img src="{% static 'icon/luggage.png' %}" alt="luggagee of the image"> Luggage: {{ car.luggage }}</p>
+                      <p><img src="{% static 'icon/fuel.png' %}" alt="fuel of the image"> Fuel: {{ car.fuel }}</p>
+                    </div> {% endcomment %}
+
+                    <div class="specifications-info-container">
+                        <div class="row">
+                            <div class ="specify">
+                                <img src="{% static 'icon/speed.png' %}" alt="milage of the image">
+                                <div>
+                                    <p style="font-weight:bold;">Mileage</p>
+                                    <p>{{ car.mileage }} kilometers per liter</p>
+                                </div>
+                            </div>
+                            <div class ="specify">
+                                <img src="{% static 'icon/transmission.png' %}" alt="transmission of the image">
+                                <div>
+                                    <p style="font-weight:bold;">Transmission</p>
+                                    <p>{{ car.transmission }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class ="specify">
+                                <img src="{% static 'icon/seat.png' %}" alt="seat of the image">
+                                <div>
+                                    <p style="font-weight:bold;">Seats</p>
+                                    <p>{{car.seats }} </p>
+                                </div>
+                            </div>
+                            <div class ="specify">
+                                <img src="{% static 'icon/luggage.png' %}" alt="luggagee of the image">
+                                <div>
+                                    <p style="font-weight:bold;">Luggage</p>
+                                    <p>{{ car.luggage }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class =" specify">
+                                <img src="{% static 'icon/fuel.png' %}" alt="fuel of the image">
+                                <div>
+                                    <p style="font-weight:bold;">Fuel</p>
+                                    <p>{{car.fuel }} </p>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                <p class="cost">Cost: {{ car.hourly_rate }} /hr</p> <!-- Cost added here -->
+                </div>
+
+                <div class="booking-container">
+                    <h2>Booking Info</h2>
+                  
+                    <form method="post" id="carForm">
+                      {% csrf_token %}
+                      <p class="input-label" hidden>Pick Up Location</p>
+                      <select name="{{ form.location.name }}" id="id_location" class="location-dropdown" hidden>
+                        <option value="Kathmandu">Kathmandu</option>
+                        <option value="Pokhara">Pokhara</option>
+                      </select>
+                      <p class="input-label">Pick Up Date</p>
+                      <input type="text" name="{{ form.pickup_datetime.name }}" required="" id="id_pickup_datetime" class="date-input flatpickr">
+                  
+                      <p class="input-label">Drop Off Date</p>
+                      <input type="text" name="{{ form.dropoff_datetime.name }}" required="" id="id_dropoff_datetime" class="date-input flatpickr">
+                  
+                      <p class="input-label"  >Estimated Pricing : </p>
+                      <input type="text" readonly id="estimated_price">
+                  <br>
+                      <button type="submit" id="rent-btn" >Rent a Car now</button>
+                    </form>
+              
+                    <input type="hidden" id="hourly-rate" value="{{ car.hourly_rate }}">
+              
+                </div>
+
         </div>
     {% endif %}
 
-       
-    <div class="vertical-container">
-      <h3>Book a Car</h3>
-    
-      <form method="post" id="carForm">
-        {% csrf_token %}
-        <p class="input-label" hidden>Pick Up Location</p>
-        <select name="{{ form.location.name }}" id="id_location" class="location-dropdown" hidden>
-          <option value="Kathmandu">Kathmandu</option>
-          <option value="Pokhara">Pokhara</option>
-        </select>
-        <p class="input-label">Pick Up Date</p>
-        <input type="text" name="{{ form.pickup_datetime.name }}" required="" id="id_pickup_datetime" class="date-input flatpickr">
-    
-        <p class="input-label">Drop Off Date</p>
-        <input type="text" name="{{ form.dropoff_datetime.name }}" required="" id="id_dropoff_datetime" class="date-input flatpickr">
-    
-        <p class="input-label" >Estimated Pricing : </p>
-        <input type="text" readonly id="estimated_price">
-    
-        {% if isbooked %}
-            <button type="submit" id="rent-btn" disabled style="cursor: not-allowed;">Rent a Car now</button>
-        {% else %}
-            <button type="submit" id="rent-btn">Rent a Car now</button>
-        {% endif %}
-      </form>
-
-      <input type="hidden" id="hourly-rate" value="{{ car.hourly_rate }}">
-
-    </div>
 
     <!-- Terms and Conditions -->
     <div id="termsModal" class="modal">
