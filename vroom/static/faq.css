@@ -50,9 +50,21 @@ body {
   }
   
   .panel p {
-    margin-top: 0;
+    margin-top: 2;
   }
   
+  .accordion::after {
+    content: '\002B'; /* Plus symbol */
+    font-size: 20px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active::after {
+    content: "\2212"; /* Minus symbol */
+}
+
   .active {
     display: block;
   }

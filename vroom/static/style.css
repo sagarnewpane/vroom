@@ -162,7 +162,6 @@ cursor: pointer;
   color: #fff;
 }
 
-/* Style the car list */
 .car-list {
   display: flex;
   justify-content: center; /* Center the cars horizontally */
@@ -171,7 +170,6 @@ cursor: pointer;
   gap: 20px; /* Add space between the car lists */
 }
 
-/* Style individual car elements */
 .car {
   width: 250px;
   margin: 20px;
@@ -183,7 +181,6 @@ cursor: pointer;
   transition: transform 0.3s ease-in-out; /* Add transition effect */
 }
 
-/* Add hover effect */
 .car:hover {
   transform: translateY(-10px); /* Move the card up slightly on hover */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -208,7 +205,7 @@ cursor: pointer;
 
 .popular-rentals{
 padding: 20px;
-background-color: rgba(255, 255, 255, 0.8);
+background-color: rgba(247, 247, 248, 0.8);
 margin-top: 20px; /*  to create space between containers */
 position: relative; /*  section is positioned relative to its parent */
 z-index: 2; /*  section appears above other content */

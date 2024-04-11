@@ -13,7 +13,25 @@
 {% endblock %}
 
 {% block content %}
-
+<style>
+  .car button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    display: flex;
+    margin-left: 85px;
+    align-items: center;
+  }
+</style>
   <div class="booking-container" style="background-image: url({% static 'BMW.png' %});">
     <!-- <img src="{% static 'BMW.png' %}" alt="" srcset=""> -->
     <div class="container">
