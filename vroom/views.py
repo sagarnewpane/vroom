@@ -8,6 +8,7 @@ from decimal import Decimal
 from django.shortcuts import render, redirect
 
 def home(request):
+
     if request.method == 'POST':
         form = CarSearchForm(request.POST)
         if form.is_valid():
@@ -31,8 +32,16 @@ def home(request):
             return render(request, 'availablecar.html', {'cars': available_cars})
     else:
         form = CarSearchForm()
+    
+        featured_cars = Car.objects.filter(
+            availability='available'
+        ).order_by('hourly_rate')[:3]
 
-    return render(request, 'Vroom.html', {'form': form})
+        popular_cars = Car.objects.filter(
+            availability='available'
+        )[:3]
+
+    return render(request, 'Vroom.html', {'form': form,'featured_cars': featured_cars,'popular_cars': popular_cars})
 
 def about(request):
     return render(request,'about.html')
