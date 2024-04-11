@@ -1,3 +1,14 @@
+main{
+    margin-top: 70px;
+    padding-left: 30px;
+}
+
+.message{
+    background-color: red;
+    color: #ffffff;
+    padding: 5px;
+}
+
 .car-container {
     display: flex; /* Make it a flex container */
 }
@@ -17,8 +28,9 @@
 /* Additional styling for the child elements */
 
 .car-img{
-    padding: 30px;
-    padding-top: 120px;
+    padding: 0px;
+    padding-top: 100px;
+    padding-right: 30px;
 }
 
 .car-img img {
@@ -34,6 +46,10 @@
     margin-right: 30px;
     /* justify-content: center; */
     
+}
+
+.specifications-container{
+    margin: 50px;
 }
 
 .specify{
@@ -56,12 +72,22 @@
     text-align: center;
 } */
 
-p.model, p.type {
+p.model {
     font-size: 30px;
 }
+
+p.type{
+    font-size: 20px;
+}
+
+
 .cost{
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.booking-container{
+    margin-left: 40px;
 }
 
 .booking-container h2{
@@ -69,10 +95,10 @@ p.model, p.type {
 }
 
 .booking-container p{
-    font-size: 20px;
+    font-size: 15px;
 }
 .booking-container input{
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .input-label {

@@ -1,8 +1,6 @@
 body {
   padding: 0;
   margin: 0;
-  /* height: 100vh;
-  overflow-y: auto; */
 }
 body {
   height: 100vh;
@@ -28,23 +26,27 @@ body {
   width: 100%;
 } */
 
-.container {
-  height: 280px;
-  width: 95%; /* Adjusted width */
-  max-width: 650px; /* Added max-width */
-  margin: 50px auto; /* Center the container */
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 52%;
-  left: 40%;
-  transform: translate(-50%, 51%); /* Adjusted to move the container down */
-  /* z-index: 1; */
+.booking-container {
+  background-size: cover;
+  background-position: center;
 }
 
+.container {
+  height: 280px;
+  max-width: 600px; 
+  margin: 0px auto; 
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, 50%);
+}
 
+.container {
+  position: relative;
+  }
 
 .container h2{
 text-align: center;
@@ -76,15 +78,12 @@ width: 300px;
 height: 400px;
 padding: 20px; 
 margin: 20px auto;
-background-color: rgba(255, 255, 255, 0.8); 
+background-color: rgba(255, 255, 255, 0.9); 
 border-radius: 10px; 
 box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
-position: absolute-innit;
 top: 45%;
-left: calc(50% -500px); /* Position slightly to the left */
-transform: translate(-50%, -50%);
+transform: translate(-80%, -50%);
 text-align: center; /* Center the content horizontally */
-/* z-index: 2; Ensure this container is above the other container */
 }
 
 .vertical-container p {
@@ -100,6 +99,8 @@ border-radius: 5px;
 border: 1px solid #ccc; 
 box-sizing: border-box; 
 }
+
+
 
 .input-label {
   font-size: 16px;
@@ -117,7 +118,7 @@ box-sizing: border-box;
   box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
-.location-input {
+#id_location {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -133,22 +134,11 @@ box-sizing: border-box;
   color: #333;
 }
 
-
-/* Style for Firefox's default styling of datetime-local input */
-input[type=datetime-local]::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
-/* Style for Chrome's default styling of datetime-local input */
-input[type=datetime-local]::-webkit-inner-spin-button,
-input[type=datetime-local]::-webkit-clear-button {
-  display: none;
-}
-
-.vertical-container button {
+button {
 width: calc(100% -20px); 
 padding: 10px; 
 margin-top: 30px; 
+margin-bottom: 10px;
 border: none; 
 border-radius: 5px; 
 background-color: #007bff; 
@@ -159,15 +149,17 @@ cursor: pointer;
 /* Featured Cars Section */
 .featured-cars {
   padding: 30px;
-  background-color: rgba(50, 28, 148, 0.8);
   margin: 20px auto; /* Center the section horizontally */
   width: 80%; /* Adjust width as needed */
   position: relative;
 }
 
 /* Center the h2 within featured-cars */
-.featured-cars h2 {
+.featured-cars h2:nth-child(1) {
   text-align: center;
+  background-color: #007bff;
+  padding: 10px;
+  color: #fff;
 }
 
 /* Style the car list */
@@ -184,7 +176,7 @@ cursor: pointer;
   width: 250px;
   margin: 20px;
   padding: 10px;
-  border: 2px solid #19054b;
+  border: 2px solid #0367d1;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a stylish look */
@@ -204,16 +196,17 @@ cursor: pointer;
 
 .car h3 {
   margin-top: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .car p {
   margin-top: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 /* Popular Rentals Section */
-.popular-rentals {
+
+.popular-rentals{
 padding: 20px;
 background-color: rgba(255, 255, 255, 0.8);
 margin-top: 20px; /*  to create space between containers */
@@ -221,21 +214,15 @@ position: relative; /*  section is positioned relative to its parent */
 z-index: 2; /*  section appears above other content */
 }
 
-.popular-rentals h2 {
-text-align: center;
+.popular-rentals h2:nth-child(1)  {
+  text-align: center;
+  background-color: #007bff;
+  padding: 10px;
+  color: #fff;
 }
 
-.container {
-position: relative;
-}
 
-/* .navbar {
-position: fixed; 
-top: 0;
-left: 0;
-width: 100%;
-z-index: 3; 
-} */
+
 
 .footer {
   background-color: #000;
