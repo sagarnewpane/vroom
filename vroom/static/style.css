@@ -40,7 +40,7 @@ body {
   position: fixed;
   top: 52%;
   left: 40%;
-  transform: translate(-50%, 51%); /* Adjusted to move the container down */
+  transform: translate(-55%, 60%); /* Adjusted to move the container down */
   /* z-index: 1; */
 }
 
@@ -75,13 +75,13 @@ margin-top: 10px; /* Add space between icon and text */
 width: 300px; 
 height: 400px;
 padding: 20px; 
-margin: 20px auto;
+margin: 20px 500px;
 background-color: rgba(255, 255, 255, 0.8); 
 border-radius: 10px; 
 box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
 position: absolute-innit;
 top: 45%;
-left: calc(50% -500px); /* Position slightly to the left */
+left: calc(60% -550px); /* Position slightly to the left */
 transform: translate(-50%, -50%);
 text-align: center; /* Center the content horizontally */
 /* z-index: 2; Ensure this container is above the other container */
@@ -159,7 +159,7 @@ cursor: pointer;
 /* Featured Cars Section */
 .featured-cars {
   padding: 30px;
-  background-color: rgba(50, 28, 148, 0.8);
+  background-color: rgba(247, 247, 248, 0.8);
   margin: 20px auto; /* Center the section horizontally */
   width: 80%; /* Adjust width as needed */
   position: relative;
@@ -170,7 +170,6 @@ cursor: pointer;
   text-align: center;
 }
 
-/* Style the car list */
 .car-list {
   display: flex;
   justify-content: center; /* Center the cars horizontally */
@@ -179,7 +178,6 @@ cursor: pointer;
   gap: 20px; /* Add space between the car lists */
 }
 
-/* Style individual car elements */
 .car {
   width: 250px;
   margin: 20px;
@@ -191,7 +189,6 @@ cursor: pointer;
   transition: transform 0.3s ease-in-out; /* Add transition effect */
 }
 
-/* Add hover effect */
 .car:hover {
   transform: translateY(-10px); /* Move the card up slightly on hover */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -212,10 +209,9 @@ cursor: pointer;
   text-align: center;
 }
 
-/* Popular Rentals Section */
 .popular-rentals {
 padding: 20px;
-background-color: rgba(255, 255, 255, 0.8);
+background-color: rgba(247, 247, 248, 0.8);
 margin-top: 20px; /*  to create space between containers */
 position: relative; /*  section is positioned relative to its parent */
 z-index: 2; /*  section appears above other content */

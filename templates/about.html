@@ -14,58 +14,85 @@
 
 {% block content %}
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh; /* Ensure the container is centered vertically */
+  margin: 0; /* Remove default margin */
 }
 
-header {
+/* header {
   background-color: #333;
   padding: 10px 0;
-}
+} */
 
-nav ul {
-  list-style-type: none;
+.welcome-container {
+  position: relative;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
   text-align: center;
+  color: rgb(116, 102, 102);
+  max-width: calc(100% - 100px);
+  margin-top: 150px;
+  margin-right: 50px;
+  margin-left: 50px;
+  z-index: 1; /* Ensure content is above the overlay */
 }
 
-nav ul li {
-  display: inline;
-  margin: 0 10px;
+.welcome-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; /* Cover the entire width */
+  bottom: 0; /* Cover the entire height */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  z-index: -1;
 }
 
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
+.welcome-container h1{
+  z-index: 1; /* Ensure text is above the overlay */
+  color: rgb(253, 248, 248); /* Text color */
+  font-size: 30px; /* Adjust font size as needed */
+  text-align: center; /* Justify text */
 }
 
-.container {
+.welcome-container p {
+  z-index: 1; /* Ensure text is above the overlay */
+  color: rgb(228, 213, 213); /* Text color */
+  font-size: 24px; /* Adjust font size as needed */
+  text-align: center; /* Justify text */
+}
+
+
+.container2 {
   max-width: 960px;
   margin: 20px auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.container h1 {
+.container2 h2 {
   font-size: 2.5rem;
   color: #333;
+  text-align: center;
 }
 
-.container p {
+.container2 p {
   font-size: 1.1rem;
   color: #666;
 }
 
 section {
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 section h2 {
@@ -79,24 +106,29 @@ section p {
   color: #666;
 }
 </style>
-
-<div class="container">
+<main>
+<div class="welcome-container"  >
   <h1>Welcome to Vroom Car Rental</h1>
-  <p>Your trusted partner for convenient, reliable, and affordable car rentals.</p>
+  <p>At Vroom Car Rental, we're your premier destination for hassle-free and convenient vehicle rentals in Kathmandu and Pokhara, Nepal. Whether you're exploring the vibrant streets of Kathmandu or embarking on a scenic journey through Pokhara, we've got you covered with our extensive fleet of vehicles and exceptional services.
+
+    Forget the stress of public transportation or the limitations of taxi services. With Vroom Car Rental, you have the freedom to explore your destination at your own pace. Whether you need a vehicle for a half-day excursion or an extended road trip, we offer flexible rental options to suit your itinerary. Starting at just Rs. 4000 for half a day and Rs. 6000 for a full day, our affordable rates ensure that you get the most value out of your rental experience.
+
+    At Vroom Car Rental, we understand that every traveler has unique preferences and requirements. That's why we offer a diverse range of vehicles to cater to your specific needs. From sleek sedans and sporty convertibles to spacious SUVs, eco-friendly EVs, and versatile MPVs, we have a car to match every adventure and budget.<br>
+
+    Booking your rental vehicle with Vroom Car Rental is quick and easy. Simply give us a call at 01-59789765 or 9881001424. We offer optional driver services upon request, allowing you to sit back, relax, and enjoy the ride.
+
+    Discover the freedom of the open road and embark on unforgettable adventures with Vroom Car Rental. Whether you're a local resident in need of temporary transportation or a visitor exploring the beauty of Nepal, we invite you to experience the convenience, reliability, and affordability of renting with Vroom. Book your rental vehicle today and let the journey begin!</p>
 </div>
 
+<div class="mission">
 <section id="mission">
-  <div class="container">
+  <div class="container2">
     <h2>Our Mission</h2>
     <p>Our mission is to redefine the car rental experience by offering exceptional customer service, a diverse fleet of vehicles, and competitive pricing. We believe in delivering more than just a vehicle; we aim to provide peace of mind and convenience to every customer.</p>
   </div>
 </section>
-
-
-<!-- Other sections like Why Choose Us, Sustainability, Get in Touch can be added similarly -->
-
-
-
+</div>
+</main>
 
 {% endblock %}
 
