@@ -14,7 +14,7 @@
 
 {% block content %}
     <h1>Booking</h1>
-    <div class="message">
+    <div class="message" hidden>
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
@@ -26,8 +26,8 @@
                     <img src="{{ car.image.url }}" alt="Car Image">
             </div>
                 <div class="specifications-container">
-                    <p class="type">{{ car.type }}</p>
                     <p class="model">{{ car.model }}</p>
+                    <p class="type">Category : <strong>{{ car.type }}</strong></p>
                     <h2>Specifications</h2>
                   {% comment %} <div class="specifications-info-container">
                       <p><img src="{% static 'icon/speed.png' %}" alt="milage of the image"> Mileage: {{ car.mileage }} kilometers per liter</p>

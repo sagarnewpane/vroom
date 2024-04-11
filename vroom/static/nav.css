@@ -9,9 +9,11 @@
   z-index: 3;
   display: flex;
   align-items: center;
-  padding: 0px 50px;
+  padding-right: 150px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .navbar .logo {
@@ -41,7 +43,7 @@
   display: flex;
   align-items: center;
   padding: 10px; 
-  margin-right: 250px;
+  margin-right: 150px;
 }
 
 .navbar .search input[type="text"] {
@@ -70,12 +72,15 @@
   border: none; 
   outline: none;
   cursor: pointer;
+  margin-top: 0px;
+  margin-bottom: 0px;
   }
 
 .navbar .user-dropdown .dropbtn img {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 }
+
 
 .navbar .user-dropdown .dropdown-content {
   /* display: none;  */
