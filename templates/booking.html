@@ -102,7 +102,12 @@
                       <p class="input-label"  >Estimated Pricing : </p>
                       <input type="text" readonly id="estimated_price">
                   <br>
-                      <button type="submit" id="rent-btn" >Rent a Car now</button>
+                    <!-- <button type="submit" id="rent-btn">Rent a Car now</button> -->
+                    {% if isbooked %}
+                        <button type="submit" id="rent-btn" disabled style="cursor: not-allowed;">Rent a Car now</button>
+                    {% else %}
+                        <button type="submit" id="rent-btn">Rent a Car now</button>
+                    {% endif %}
                     </form>
               
                     <input type="hidden" id="hourly-rate" value="{{ car.hourly_rate }}">
