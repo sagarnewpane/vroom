@@ -13,26 +13,8 @@
 {% endblock %}
 
 {% block content %}
-<style>
-  .car button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 16px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 12px;
-    display: flex;
-    margin-left: 85px;
-    align-items: center;
-  }
-</style>
-  <div class="booking-container" style="background-image: url({% static 'BMW.png' %});">
+
+  <div class="booking-container" style="background-image: url({% static 'lc.png' %});">
     <!-- <img src="{% static 'BMW.png' %}" alt="" srcset=""> -->
     <div class="container">
       <h2  >Better way to rent your car</h2>
@@ -53,7 +35,7 @@
     </div>
     
     <div class="vertical-container">
-      <h3>Book a Car</h3>
+      <h2>Book a Car</h2>
     
       <form method="post" id="carForm">
         {% csrf_token %}

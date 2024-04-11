@@ -14,11 +14,11 @@
 
 {% block content %}
     <h1>Booking</h1>
-    <div class="message" hidden>
-        {% if message %}
+    {% if message %}
+    <div class="message">
             <p>{{ message }}</p>
-        {% endif %}
     </div>
+    {% endif %}
 
         {% if car %}
         <div class="car-container">
