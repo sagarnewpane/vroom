@@ -29,6 +29,8 @@ urlpatterns = [
     path('signup/', auth_view.signup, name='signup'),
     path('login/', auth_view.login_view, name='login'),
     path('logout/', auth_view.logout_view, name='logout'),
+    path('about/', views.about, name='about'),
+    path('faq/', views.faq, name='faq'),
     path('password-reset/', 
          pass_view.PasswordResetView.as_view(template_name = 'resetpass.html'), 
          name='password_reset'),
