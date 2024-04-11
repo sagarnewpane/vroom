@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'faq.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <title>Vroom Car Rental</title>
+{% endblock %}
+
+{% block content %}
+  
+    
+    <main>
+      <div class="faqheader">
+        <h1>Frequently Asked Questions</h1>
+    </div>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="accordion">How do I rent a car?</button>
+          <div class="panel">
+            <p>You can rent a car by visiting our website, selecting your desired car, dates, and completing the booking process.</p>
+          </div>
+        </div>
+  
+        <div class="faq-item">
+          <button class="accordion">What types of cars do you offer?</button>
+          <div class="panel">
+            <p>We offer a variety of cars including sedans, SUVs, trucks, and luxury vehicles.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="accordion">What is the rental car price in Nepal?</button>
+          <div class="panel">
+            <p>You can hire a vehicle in Kathmandu for half a day and a full day at the starting price of Rs. 4000 and Rs. 6000 respectively.</p>
+          </div>
+        </div>
+  
+        <div class="faq-item">
+          <button class="accordion">How can you rent a car in Kathmandu Nepal?</button>
+          <div class="panel">
+            <p>You can rent a vehicle in Kathmandu, Nepal at Spark Car via call at 01-5971616 / 9801101924 or the Spark Car app.</p>
+          </div>
+        </div>
+        
+  
+      </div>
+    </main>
+  
+    <script src="{% static 'faq.js' %}"></script>
+  
+{% endblock %}

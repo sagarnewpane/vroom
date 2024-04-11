@@ -33,3 +33,9 @@ def home(request):
         form = CarSearchForm()
 
     return render(request, 'Vroom.html', {'form': form})
+
+def about(request):
+    return render(request,'about.html')
+
+def faq(request):
+    return render(request,'faq.html')

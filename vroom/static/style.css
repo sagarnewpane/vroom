@@ -1,110 +1,14 @@
 body {
   padding: 0;
   margin: 0;
+  /* height: 100vh;
+  overflow-y: auto; */
+}
+body {
   height: 100vh;
   overflow-y: auto;
- 
-}
-.navbar {
-  background-color: #007bff; 
-  overflow: hidden;
-  z-index: 1;
-  position: fixed; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 3; /* Ensure the navigation bar is above other content */
 }
 
-.navbar a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 20px 24px;
-  text-decoration: none;
-}
-
-.navbar a:hover {
-  background-color: #0056b3; 
-}
-
-.navbar .logo {
-  float: left;
-  padding: 19px 24px;
-  font-size: 20px;
-}
-
-.navbar .search {
-  padding: 14px 20px;
-  float: left;
-  /* color: white; */
-  /* margin-right: auto; */
-}
-
-  .navbar .search input[type="text"] {
-      flex: 1;
-      width: 550px;
-      height: 30px;
-      border-radius: 20px;
-      padding: 0 10px;
-      border: 3px solid #7caaef;
-      color: #e2d9d9;
-      background-color: transparent;
-      outline: none;
-      /* background-color: #007bff; */
-  }
-
-  .content {
-    margin-top: 56px;
-  }
-
-/* Dropdown button */
-.dropbtn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-/* Position the dropdown container */
-.dropdown {
-  float: right;
-  top: 20%;
-}
-
-/* Style the icon */
-.dropbtn img {
-  width: 24px; /* Adjust the width and height as needed */
-  padding: 17px ;
-  
-}
-
-/* Dropdown content */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 120px;
-  z-index: 2; /* Increase the z-index */
-  right: 100%; /* Position the dropdown content to the left of the button */
-  top: 0; /* Align the top of the dropdown with the button */
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #000000;
-}
-
-.user-dropdown:hover .dropdown-content {
-  display: block;
-}
 
   /* body {
     position: relative;
@@ -125,18 +29,22 @@ body {
 } */
 
 .container {
-  width: 600px; 
-  height: 300px;
-  margin: 0 auto; /* Center the container horizontally */
-  padding: 20px; 
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  border-radius: 10px; 
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
-  position: absolute;
-  top: 50%;
+  height: 280px;
+  width: 95%; /* Adjusted width */
+  max-width: 650px; /* Added max-width */
+  margin: 50px auto; /* Center the container */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 52%;
   left: 40%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 51%); /* Adjusted to move the container down */
+  /* z-index: 1; */
 }
+
+
 
 .container h2{
 text-align: center;
@@ -172,7 +80,7 @@ background-color: rgba(255, 255, 255, 0.8);
 border-radius: 10px; 
 box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
 position: absolute-innit;
-top: 50%;
+top: 45%;
 left: calc(50% -500px); /* Position slightly to the left */
 transform: translate(-50%, -50%);
 text-align: center; /* Center the content horizontally */
@@ -237,58 +145,71 @@ input[type=datetime-local]::-webkit-clear-button {
   display: none;
 }
 
-button {
+.vertical-container button {
 width: calc(100% -20px); 
 padding: 10px; 
-margin-top: 30px; /* Add space above button */
+margin-top: 30px; 
 border: none; 
 border-radius: 5px; 
 background-color: #007bff; 
 color: white; 
 cursor: pointer; 
 }
+
 /* Featured Cars Section */
 .featured-cars {
-padding: 20px;
-background-color: rgba(255, 255, 255, 0.8);
-margin-top: 10px; /* Add margin to create space between containers */
-position: relative; 
-z-index: 2; /* Ensure the section appears above other content */
+  padding: 30px;
+  background-color: rgba(50, 28, 148, 0.8);
+  margin: 20px auto; /* Center the section horizontally */
+  width: 80%; /* Adjust width as needed */
+  position: relative;
 }
 
+/* Center the h2 within featured-cars */
 .featured-cars h2 {
-text-align: center;
+  text-align: center;
 }
 
+/* Style the car list */
 .car-list {
-display: flex;
-justify-content: space-around;
-align-items: center;
-flex-wrap: wrap;
+  display: flex;
+  justify-content: center; /* Center the cars horizontally */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Add space between the car lists */
 }
 
+/* Style individual car elements */
 .car {
-width: 250px;
-margin: 20px;
-padding: 10px;
-border: 2px solid #19054b;
-border-radius: 5px;
-background-color: #fff;
+  width: 250px;
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #19054b;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a stylish look */
+  transition: transform 0.3s ease-in-out; /* Add transition effect */
+}
+
+/* Add hover effect */
+.car:hover {
+  transform: translateY(-10px); /* Move the card up slightly on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .car img {
-width: 100%;
-border-radius: 5px;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .car h3 {
-margin-top: 10px;
-text-align: center;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .car p {
-margin-top: 10px;
-text-align: center;
+  margin-top: 10px;
+  text-align: center;
 }
 
 /* Popular Rentals Section */
@@ -308,76 +229,18 @@ text-align: center;
 position: relative;
 }
 
-.navbar {
-position: fixed; /* Fix the navigation bar */
+/* .navbar {
+position: fixed; 
 top: 0;
 left: 0;
 width: 100%;
 z-index: 3; 
-}
-
-.customer-blogs {
-  padding: 20px;
-  background-color: #007bff; /* Blue theme */
-  margin-top: 20px;
-  color: white; /* Text color */
-}
-
-.customer-blogs h2 {
-  text-align: center;
-}
-
-.blog-container {
-  display: flex; /* Use flexbox */
-  justify-content: space-between; /* Distribute items evenly along the main axis */
-  align-items: flex-start;
-  flex-wrap: nowrap;  
-}
-
-.blog {
-  flex: 0 0 calc(40% - 20px); /* Adjust width and add margin */
-  margin-bottom: 20px;
-  padding: 20px;
-  border-radius: 10px; /* Rounded corners */
-  background-color: #fff; /* White background */
-}
-
-.blog:last-child {
-  margin-right: 0; /* Remove right margin from the last container */
-}
-
-.customer-blogs .blog-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 20px; /* Add margin to create space between containers */
-}
-
-.customer-info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.customer-info img {
-  width: 40px; /* Adjust size as needed */
-  height: 50px; /* Make it a circle */
-  border-radius: 50%; /* Make it a circle */
-  margin-right: 10px;
-}
-
-.customer-info h3 {
-  margin: 0;
-}
-
-.blog p {
-  margin-top: 10px;
-}
+} */
 
 .footer {
   background-color: #000;
   color: #fff;
-  padding: 20px 0;
+  padding: 47px 163px;
 }
 
 .footer-content {
