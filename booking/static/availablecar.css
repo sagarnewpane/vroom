@@ -14,7 +14,7 @@ h1 {
 
 .car-slider img {
     width: 100%;
-    height: 500px;  /* Adjust as needed */
+    height: 500px;
     object-fit: cover;
     
 }
@@ -23,5 +23,22 @@ h1 {
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
+}
+
+.car p{
+    text-align: left;
+}
+
+.car .availability {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.availability.available {
+    color: green;
+}
+
+.availability.unavailable {
+    color: red;
 }
