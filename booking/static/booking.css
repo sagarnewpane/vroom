@@ -1,5 +1,5 @@
 main{
-    margin-top: 70px;
+    margin-top: 90px;
     padding-left: 30px;
 }
 
@@ -28,9 +28,9 @@ main{
 /* Additional styling for the child elements */
 
 .car-img{
-    padding: 0px;
-    padding-top: 100px;
-    padding-right: 30px;
+    /* padding: 0px; */
+    padding-top: 170px;
+    /* padding-right: 30px; */
 }
 
 .car-img img {

@@ -43,7 +43,7 @@
                                 <img src="{% static 'icon/speed.png' %}" alt="milage of the image">
                                 <div>
                                     <p style="font-weight:bold;">Mileage</p>
-                                    <p>{{ car.mileage }} kilometers per liter</p>
+                                    <p>{{ car.mileage }} Km</p>
                                 </div>
                             </div>
                             <div class ="specify">
@@ -103,10 +103,10 @@
                       <input type="text" readonly id="estimated_price">
                   <br>
                     <!-- <button type="submit" id="rent-btn">Rent a Car now</button> -->
-                    {% if isbooked or car.availability == 'unavailable' %}
-                        <button type="submit" id="rent-btn" disabled style="cursor: not-allowed;">Rent a Car now</button>
+                    {% if isbooked or car.availability == 'unavailable' or car.availability == 'maintenance'%}
+                        <button type="submit" id="rent-btn" disabled style="cursor: not-allowed;">Unavailable</button>
                     {% else %}
-                        <button type="submit" id="rent-btn">Rent a Car now</button>
+                        <button type="submit" id="rent-btn">Book Now</button>
                     {% endif %}
                     </form>
               
