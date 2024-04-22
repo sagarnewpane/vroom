@@ -5,10 +5,8 @@ from booking.models import Booking, Car
 from booking.forms import CarSearchForm
 from decimal import Decimal
 
-from django.shortcuts import render, redirect
-
+# Home Page
 def home(request):
-
     if request.method == 'POST':
         form = CarSearchForm(request.POST)
         if form.is_valid():
@@ -33,18 +31,22 @@ def home(request):
     else:
         form = CarSearchForm()
     
-        featured_cars = Car.objects.filter(
-            availability='available'
-        ).order_by('hourly_rate')[:3]
+    # Sort 3 featured cars
+    featured_cars = Car.objects.filter(
+        availability='available'
+    ).order_by('hourly_rate')[:3]
 
-        popular_cars = Car.objects.filter(
-            availability='available'
-        )[:3]
+    # Sort 3 popular cars
+    popular_cars = Car.objects.filter(
+        availability='available'
+    )[:3]
 
     return render(request, 'Vroom.html', {'form': form,'featured_cars': featured_cars,'popular_cars': popular_cars})
 
+# About Page
 def about(request):
     return render(request,'about.html')
 
+# FAQ Page
 def faq(request):
     return render(request,'faq.html')

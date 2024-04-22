@@ -46,7 +46,7 @@ h3{
 }
 
 .availability.available {
-    color: green;
+    color: rgb(31, 184, 0);
 }
 
 .availability.unavailable {
