@@ -32,112 +32,91 @@
     align-items: center;
   }
 </style>
- <div class="container">
-  <h2  >Better way to rent your car</h2>
-
-  <p></p>
-  <div class="icon-container">
-    <div>
-        <img src="https://cdn-icons-png.flaticon.com/128/854/854929.png" alt="Location"> 
-        <p>Pick Locations</p>
+  <div class="booking-container" style="background-image: url({% static 'BMW.png' %});">
+    <!-- <img src="{% static 'BMW.png' %}" alt="" srcset=""> -->
+    <div class="container">
+      <h2  >Better way to rent your car</h2>
+      <div class="icon-container">
+        <div>
+            <img src="https://cdn-icons-png.flaticon.com/128/854/854929.png" alt="Location"> 
+            <p>Pick Locations</p>
+        </div>
+        <div>
+            <img src="https://cdn-icons-png.flaticon.com/128/15239/15239482.png" alt="Handshake">
+            <p>Easy Transactions</p>
+        </div>
+        <div>
+            <img src="https://cdn-icons-png.flaticon.com/128/7371/7371879.png" alt="Car"> 
+            <p>Choose Your Car</p>
+        </div>
+      </div>
     </div>
-    <div>
-        <img src="https://cdn-icons-png.flaticon.com/128/15239/15239482.png" alt="Handshake">
-        <p>Easy Transactions</p>
+    
+    <div class="vertical-container">
+      <h3>Book a Car</h3>
+    
+      <form method="post" id="carForm">
+        {% csrf_token %}
+        <p class="input-label" >Pick Up Location</p>
+        <select name="{{ form.location.name }}" id="id_location" class="location-dropdown">
+          <option value="Kathmandu">Kathmandu</option>
+          <option value="Pokhara">Pokhara</option>
+        </select>
+        <p class="input-label">Pick Up Date</p>
+        <input type="text" name="{{ form.pickup_datetime.name }}" required="" id="id_pickup_datetime" class="date-input flatpickr">
+    
+        <p class="input-label">Drop Off Date</p>
+        <input type="text" name="{{ form.dropoff_datetime.name }}" required="" id="id_dropoff_datetime" class="date-input flatpickr">
+    
+        <button type="submit">Rent a Car now</button>
+      </form>
+
     </div>
-    <div>
-        <img src="https://cdn-icons-png.flaticon.com/128/7371/7371879.png" alt="Car"> 
-        <p>Choose Your Car</p>
-    </div>
-</div>
-</div>
-
-<div class="vertical-container">
-  <h3>Book a Car</h3>
-
-  <form method="post" id="carForm">
-    {% csrf_token %}
-    <p class="input-label" >Pick Up Location</p>
-    <select name="{{ form.location.name }}" id="id_location" class="location-dropdown">
-      <option value="Kathmandu">Kathmandu</option>
-      <option value="Pokhara">Pokhara</option>
-    </select>
-    <p class="input-label">Pick Up Date</p>
-    <input type="text" name="{{ form.pickup_datetime.name }}" required="" id="id_pickup_datetime" class="date-input flatpickr">
-
-    <p class="input-label">Drop Off Date</p>
-    <input type="text" name="{{ form.dropoff_datetime.name }}" required="" id="id_dropoff_datetime" class="date-input flatpickr">
-
-    <button type="submit">Rent a Car now</button>
-  </form>
+  </div>
 
 
-</div>
-
+<!-- Featured Cars Section -->
 <div class="featured-cars">
   <h2>Featured Cars</h2>
   <div class="car-list">
+    {% for car in featured_cars %}
     <div class="car">
-      <img src="https://i.pinimg.com/564x/61/bd/54/61bd54db8650e8483583444b32abf6c0.jpg" alt="Car 1">
-      <h3>Mercedes AMG</h3>
-      <p>Sports</p>
-      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
-      <div style="display: flex; justify-content: space-between;">
-        <button style="background-color: #007bff; border-radius: 8px; padding: 12px;color: white">Details</button>
+      <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
+      <h2>{{ car.model }}</h2>
+      <h3>{{ car.type }}</h3>
+      <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
+      {% if car.total_price %}
+          <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p> 
+      {% endif %}
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+          <a href="{% url 'bookings' car.id  %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
+          <!-- <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p> -->
       </div>
-    </div>
-    <div class="car">
-      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
-      <h3>Ford Raptor</h3>
-      <p>SUV</p>
-      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
-      <div style="display: flex; justify-content: space-between;">
-        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
-      </div>
-    </div>
-    <div class="car">
-      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
-      <h3>Ford Raptor</h3>
-      <p>SUV</p>
-      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
-      <div style="display: flex; justify-content: space-between;">
-        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
-      </div>
-    </div>
-    <!-- Add more featured cars as needed -->
+  </div>
+  {% endfor %}
   </div>
 </div>
 
 <div class="popular-rentals">
   <h2>Popular Rentals</h2>
   <div class="car-list">
+    {% for car in popular_cars %}
     <div class="car">
-      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
-      <h3>Ford Raptor</h3>
-      <p>SUV</p>
-      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
-      <div style="display: flex; justify-content: space-between;">
-        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
+      <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
+      <h2>{{ car.model }}</h2>
+      <h3>{{ car.type }}</h3>
+      <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
+      {% if car.total_price %}
+          <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p> 
+      {% endif %}
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+          <a href="{% url 'bookings' car.id %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
+          <!-- <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p> -->
       </div>
-    </div>
-    <div class="car">
-      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
-      <h3>Ford Raptor</h3>
-      <p>SUV</p>
-      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
-      <div style="display: flex; justify-content: space-between;">
-        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
-      </div>
-    </div> 
-    <div class="car">
-      <img src="https://i.pinimg.com/564x/24/b3/71/24b37168482dc65d88321583316fac03.jpg" alt="Car 2">
-      <h3>Ford Raptor</h3>
-      <p>SUV</p>
-      <p style="color: rgb(21, 18, 122);">Rs2000 per day</p>
-      <div style="display: flex; justify-content: space-between;">
-        <button style="background-color: #7d58ee; border-radius: 8px; padding: 12px;color: white">Details</button>
-      </div>
-    </div> 
+  </div>
+  {% endfor %}
   </div>
 </div>
 

@@ -3,8 +3,9 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="{% static 'nav.css' %}"">
+  
   {% block head %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'nav.css' %}"">
 </head>
 <body>
 
@@ -20,16 +21,20 @@
     <div class="search">
         <input type="text" placeholder="Search..">
     </div>
-    <div class="user-dropdown">
-        <button class="dropbtn" id="dropdownButton">
-            <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
-        </button>
-        <div class="dropdown-content" id="dropdownContent">
-            <a href="{% url 'view_bookings' %}">Profile</a>
-            <a href="{%url 'faq'%}">Help</a>
-            <a href="{% url 'logout' %}">Logout</a>
+    {% if user.is_authenticated %}
+        <div class="user-dropdown">
+            <button class="dropbtn" id="dropdownButton">
+                <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
+            </button>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="{% url 'view_bookings' %}">Profile</a>
+                <a href="{%url 'faq'%}">Help</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
         </div>
-    </div>
+    {% else %} 
+        <a href="{% url 'login' %}" class="login-button">Login</a>
+    {% endif %}
 </nav>
   
 
