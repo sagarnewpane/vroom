@@ -266,3 +266,25 @@ z-index: 3;
   text-align: center;
   margin-top: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .icon-container img {
+    width: 35px;
+  }
+
+  .container {
+    width: 90%; 
+    max-width: 400px; 
+    margin: 20px auto; 
+  }
+
+  .vertical-container {
+    width: 90%; 
+    max-width: 400px; 
+    margin-top: 20px; 
+  }
+
+  .car {
+    width: 45%; 
+  }
+}
