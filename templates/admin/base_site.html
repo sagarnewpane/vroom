@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block userlinks %}
+    {{ block.super }}
+    <li id="new-requests">
+        <a href="{% url 'admin:booking_booking_changelist' %}?status=pending">
+            &#x1F514; New requests: {{ new_requests }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}">
+{% endblock %}
