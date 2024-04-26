@@ -23,6 +23,14 @@ h3{
     
 }
 
+/* Add styles for the title container */
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Add padding to adjust alignment */
+}
+
 .car-container {
     margin-top: 50px;
     display: flex;
@@ -51,4 +59,45 @@ h3{
 
 .availability.unavailable {
     color: red;
+}
+
+/* filter */
+
+/* filter */
+
+/* Add styles for the filter menu */
+.filter-menu {
+    display: none;
+    min-width: 300px;
+    background-color: #f1f1f1; /* Adjust color to match theme */
+    padding: 15px;
+    border: 1px solid #ddd; /* Adjust color to match theme */
+    transition: all 0.8s ease; /* Add transition */
+    margin-right: 20px; /* Add padding to adjust alignment */
+    margin-bottom: 20px;
+    margin-top: 70px;
+    font-family: Arial, sans-serif; /* Adjust font to match theme */
+    color: #000000; /* Adjust color to match theme */
+    border: 2px solid #0367d1;
+    border-radius: 10px;
+    /* height: 50%; */
+}
+
+/* Add styles for the filter options */
+.filter-menu label {
+    padding: 15px;
+    font-size: 1em;
+}
+
+/* Add styles for the parent container */
+.content-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Add styles for the car container */
+.car-container {
+    flex-grow: 1;
+    flex-shrink: 1;
+    transition: flex-shrink 0.8s ease;
 }

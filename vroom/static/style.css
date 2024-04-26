@@ -7,25 +7,6 @@ body {
   overflow-y: auto;
 }
 
-
-  /* body {
-    position: relative;
-    top: 0;
-    right: 0;
-   background-image: url('https://i.pinimg.com/564x/ad/0a/0f/ad0a0f75aa16861685e2dd64f1a82895.jpg');
-    
-    background-repeat: no-repeat;   
-  }
-
-.bg-text {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 100%;
-} */
-
 .booking-container {
   background-size: cover;
   background-position: center;
