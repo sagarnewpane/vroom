@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from vroom.settings import EMAIL_HOST_USER
 
+from accounts.models import IDVerification
+
 
 def search_cars(request):
     if request.method == 'POST':
@@ -100,7 +102,12 @@ def book_car(request, car_id):
 @login_required(login_url='login')
 def view_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user})
+    try:
+        id_verification = IDVerification.objects.get(user=request.user)
+        id_verification_status = id_verification.status == 'verified'
+    except IDVerification.DoesNotExist:
+        id_verification_status = False
+    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user, 'id_verification_status': id_verification_status})
 
 @csrf_exempt
 def cancel_booking(request):
