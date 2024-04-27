@@ -4,6 +4,13 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import IDVerification
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
+
+
 # Create your views here.
 from django.contrib import messages
 
@@ -43,9 +50,36 @@ def login_view(request):
     return render(request, 'login.html', context)
 
 
-def home(request):
-    return render(request, 'home.html')
-
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+
+
+@login_required
+def verify_id(request):
+    try:
+        id_verification = IDVerification.objects.get(user=request.user)
+        if id_verification.is_verified:
+            messages.error(request, 'Your ID has already been verified.')
+            return render(request, 'verify_id.html')
+        elif id_verification.id_image:
+            messages.error(request, 'Your ID is under verification. Please wait.')
+            return render(request, 'verify_id.html')
+    except IDVerification.DoesNotExist:
+        pass
+
+    if request.method == 'POST':
+        id_image = request.FILES.get('id_photo')
+        if id_image:
+            validate_image = FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])
+            try:
+                validate_image(id_image)
+                IDVerification.objects.create(user=request.user, id_image=id_image)
+                messages.success(request, 'ID image uploaded successfully. It will be verified soon.')
+            except ValidationError:
+                messages.error(request, 'Invalid file type. Please upload a jpg, jpeg, or png image.')
+        else:
+            messages.error(request, 'Please upload an image.')
+    return render(request, 'verify_id.html')
