@@ -33,7 +33,11 @@ class IDVerification(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk:  # if the object already exists in the database
-            old_status = IDVerification.objects.get(pk=self.pk).status
+            try:
+                old_status = IDVerification.objects.get(pk=self.pk).status
+            except IDVerification.DoesNotExist:
+                old_status = None
+
             if old_status != 'rejected' and self.status == 'rejected':
                 send_mail(
                     'Your ID verification was rejected',
@@ -45,3 +49,5 @@ class IDVerification(models.Model):
                 self.delete()  # delete the instance
             else:
                 super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)

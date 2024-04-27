@@ -50,7 +50,7 @@ class BookingAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        extra_context['new_requests'] = Booking.objects.filter(status='pending').count()
+        extra_context['new_booking_requests'] = Booking.objects.filter(status='pending').count()
         return super().changelist_view(request, extra_context=extra_context)
 
     def save_model(self, request, obj, form, change):

@@ -23,8 +23,9 @@ admin.site.register(CustomUser,CustomUserAdmin)
 class IDVerificationAdmin(admin.ModelAdmin):
     list_display = ('user', 'status', 'id_image')
     list_editable = ('status',)
-    list_filter = ('status',)  # add this line
+    list_filter = ('status',)
 
-    def display_id_image(self, obj):
-        return format_html('<a href="{}" target="_blank"><img src="{}" width="50" height="50" /></a>', obj.id_image.url, obj.id_image.url)
-    display_id_image.short_description = 'ID Image'
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['new_verification_requests'] = IDVerification.objects.filter(status='pending').count()
+        return super().changelist_view(request, extra_context=extra_context)

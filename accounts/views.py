@@ -61,10 +61,10 @@ def logout_view(request):
 def verify_id(request):
     try:
         id_verification = IDVerification.objects.get(user=request.user)
-        if id_verification.is_verified:
+        if id_verification.status == 'verified':
             messages.error(request, 'Your ID has already been verified.')
             return render(request, 'verify_id.html')
-        elif id_verification.id_image:
+        elif id_verification.status == 'pending':
             messages.error(request, 'Your ID is under verification. Please wait.')
             return render(request, 'verify_id.html')
     except IDVerification.DoesNotExist:
