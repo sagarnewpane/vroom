@@ -103,8 +103,11 @@
                       <input type="text" readonly id="estimated_price">
                   <br>
                     <!-- <button type="submit" id="rent-btn">Rent a Car now</button> -->
-                    {% if isbooked or car.availability == 'unavailable' or car.availability == 'maintenance'%}
+                    {% if isbooked or car.availability == 'unavailable' or car.availability == 'maintenance' %}
                         <button type="submit" id="rent-btn" disabled style="cursor: not-allowed;">Unavailable</button>
+                    {% elif not id_verification_status %}
+                        <p style="color: red;">Please verify yourself before booking.</p>
+                        <button><a href="{% url 'verify' %}" style="color: #fff; background-color: #007bff; padding: 10px 10px; text-decoration: none; border-radius: 5px;">Verfiy</a></button>
                     {% else %}
                         <button type="submit" id="rent-btn">Book Now</button>
                     {% endif %}
