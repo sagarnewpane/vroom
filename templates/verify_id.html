@@ -1,10 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+  <link rel="stylesheet" href="{% static 'verify.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <title>Vroom Car Rental</title>
+{% endblock %}
+
+
+{% block content %}
+
+<h2>ID Verification</h2>
+<p>
+    Welcome to the ID Verification process! We are committed to maintaining the trust and safety of our community. As part of this commitment, we require users to verify their identity by providing a government-issued ID.
+</p>
+<p>
+    Here's how to do it:
+</p>
+<ol>
+    <li><strong>Choose the right ID:</strong> We accept passports, driver's licenses, and national identity cards. Please make sure your ID is valid and not expired.</li>
+    <li><strong>Take a clear photo:</strong> The photo should be high-resolution and in color. Make sure your full name, photo, and ID number are clearly visible. Avoid glare and shadows.</li>
+    <li><strong>Don't modify the image:</strong> Do not use filters, adjust colors, or alter the image in any way. This can cause delays in the verification process.</li>
+    <li><strong>Upload the image:</strong> Click on the 'Upload' button below to select your ID photo. We accept JPEG, PNG, and PDF formats. The maximum file size is 5MB.</li>
+</ol>
+
 {% if messages %}
     {% for message in messages %}
-        <p>{{ message }}</p>
+        <div class="status-message">
+            <h3>Status - </h3> <p>{{ message }}</p>
+        </div>
     {% endfor %}
 {% endif %}
 <form method="post" enctype="multipart/form-data">
+    <h2>Upload your ID</h2>
     {% csrf_token %}
-    <input type="file" name="id_photo">
+    <label for="id_photo">Choose a file</label>
+    <input type="file" id="id_photo" name="id_photo" onchange="updateFileName(this)">
+    <span id="file-name"></span>
     <button type="submit">Upload</button>
 </form>
+
+<em>
+    *Rest assured, your ID photo will be
+     stored securely. We respect your privacy and will only use this information for verification purposes.
+</em>
+
+<script>
+    function updateFileName(inputElement) {
+        var fileName = inputElement.files[0].name;
+        document.getElementById('file-name').textContent = fileName;
+    }
+</script>
+
+{% endblock %}

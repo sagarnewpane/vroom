@@ -1,0 +1,68 @@
+main{
+    margin: 30px;
+    margin-top: 110px;
+}
+
+.status-message {
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    width: 100%;
+}
+
+.status-message h3{
+    color: rgb(102, 4, 4);
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+/* Hide the default file input */
+input[type="file"] {
+    display: none;
+}
+
+/* Style the label as a button */
+label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+label:hover {
+    background-color: #f0f0f0;
+}
+
+label:active {
+    background-color: #e0e0e0;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
