@@ -42,11 +42,20 @@ class IDVerification(models.Model):
                 send_mail(
                     'Your ID verification was rejected',
                     'Your ID was rejected. Please upload a new one.',
-                    'from@example.com',
+                    'staff@vroom.com',
                     [self.user.email],
                     fail_silently=False,
                 )
                 self.delete()  # delete the instance
+            elif old_status != 'verified' and self.status == 'verified':
+                send_mail(
+                    'Your ID verification was successful',
+                    'Your ID has been successfully verified.',
+                    'staff@vroom.com',
+                    [self.user.email],
+                    fail_silently=False,
+                )
+                super().save(*args, **kwargs)
             else:
                 super().save(*args, **kwargs)
         else:
