@@ -65,9 +65,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'booking.context_processors.new_requests',
             ],
         },
     },
+    
 ]
 
 WSGI_APPLICATION = 'vroom.wsgi.application'

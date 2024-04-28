@@ -20,10 +20,39 @@ class CarAdmin(admin.ModelAdmin):
 #     list_display = ('user', 'car', 'booking_date', 'status')
 
 # admin.site.register(Booking, BookingAdmin)
-    
+
+
+class BookingStatusFilter(admin.SimpleListFilter):
+    title = 'status'
+    parameter_name = 'status'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('pending', 'Pending'),
+            ('accepted', 'Accepted'),
+            ('rejected', 'Rejected'),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == 'pending':
+            return queryset.filter(status='pending')
+        elif self.value() == 'accepted':
+            return queryset.filter(status='accepted')
+        elif self.value() == 'rejected':
+            return queryset.filter(status='rejected')
+
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('user', 'car', 'booking_date', 'status')
+    list_editable = ('status',)
+    list_filter = (BookingStatusFilter,)
+    base_site_template = 'admin/base_site.html'
+    readonly_fields = ('user', 'car','pick_up_date', 'drop_off_date','estimated_price', 'booking_date',)
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['new_requests'] = Booking.objects.filter(status='pending').count()
+        return super().changelist_view(request, extra_context=extra_context)
 
     def save_model(self, request, obj, form, change):
         if obj.status == 'accepted':
