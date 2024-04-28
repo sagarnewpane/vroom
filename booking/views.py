@@ -41,10 +41,17 @@ def search_cars(request):
     return render(request, 'Vroom.html', {'form': form})
 
 def available_cars(request):
-    # Retrieve all cars
-    all_cars = Car.objects.all()
+    cars = Car.objects.all()
 
-    return render(request, 'availablecar.html', {'cars': all_cars})
+    if request.GET:
+        if 'car_location' in request.GET:
+            cars = cars.filter(car_location__in=request.GET.getlist('car_location'))
+        if 'type' in request.GET:
+            cars = cars.filter(type__in=request.GET.getlist('type'))
+        if 'availability' in request.GET:
+            cars = cars.filter(availability__in=request.GET.getlist('availability'))
+
+    return render(request, 'availablecar.html', {'cars': cars})
 
 
 @login_required(login_url='login')
