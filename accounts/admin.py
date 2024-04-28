@@ -21,9 +21,14 @@ admin.site.register(CustomUser,CustomUserAdmin)
 
 @admin.register(IDVerification)
 class IDVerificationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status', 'id_image')
+    list_display = ('get_user_email', 'id_image', 'status')
     list_editable = ('status',)
     list_filter = ('status',)
+    list_uneditable = ('get_user_email', 'id_image')
+
+    def get_user_email(self, obj):
+        return obj.user.email
+    get_user_email.short_description = 'User Email'  # Sets column header
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
