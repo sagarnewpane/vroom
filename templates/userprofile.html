@@ -20,8 +20,8 @@
                     <p><strong>Username:</strong> {{user.username}}</p>
                     <p><strong>Email:</strong> {{user.email}}</p>
                     {% if not id_verification_status %}
-                        <p><strong style="color: red;">Please verify yourself!</strong></p>
-                        <a href="{% url 'verify' %}">Verify</a>
+                        <h2 style="color: red;">Please verify yourself!</h2>
+                        <h3><a href="{% url 'verify' %}">Verify</a></h3>
                     {% endif %}
                 </div>
             </div>

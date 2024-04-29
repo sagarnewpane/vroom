@@ -107,7 +107,7 @@
                         <button type="submit" id="rent-btn" disabled style="cursor: not-allowed;">Unavailable</button>
                     {% elif not id_verification_status %}
                         <p style="color: red;">Please verify yourself before booking.</p>
-                        <button><a href="{% url 'verify' %}" style="color: #fff; background-color: #007bff; padding: 10px 10px; text-decoration: none; border-radius: 5px;">Verfiy</a></button>
+                        <button><a href="{% url 'view_bookings' %}" style="color: #fff; background-color: #007bff; padding: 10px 10px; text-decoration: none; border-radius: 5px;">Verfiy</a></button>
                     {% else %}
                         <button type="submit" id="rent-btn">Book Now</button>
                     {% endif %}

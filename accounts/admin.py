@@ -21,10 +21,16 @@ admin.site.register(CustomUser,CustomUserAdmin)
 
 @admin.register(IDVerification)
 class IDVerificationAdmin(admin.ModelAdmin):
-    list_display = ('get_user_email', 'id_image', 'status')
-    list_editable = ('status',)
     list_filter = ('status',)
-    list_uneditable = ('get_user_email', 'id_image')
+    search_fields = ('user__email', 'name')
+    list_display = ['get_user_email','id_image','status']
+    list_uneditable = ('get_user_email', 'id_image', 'name', 'dob', 'address')
+    exclude = ('user',)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return self.list_uneditable
+        return []
 
     def get_user_email(self, obj):
         return obj.user.email

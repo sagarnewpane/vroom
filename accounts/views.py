@@ -72,14 +72,18 @@ def verify_id(request):
 
     if request.method == 'POST':
         id_image = request.FILES.get('id_photo')
-        if id_image:
+        name = request.POST.get('name')
+        dob = request.POST.get('dob')
+        address = request.POST.get('address')
+
+        if id_image and name and dob and address:
             validate_image = FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])
             try:
                 validate_image(id_image)
-                IDVerification.objects.create(user=request.user, id_image=id_image)
-                messages.success(request, 'ID image uploaded successfully. It will be verified soon.')
+                IDVerification.objects.create(user=request.user, id_image=id_image, name=name, dob=dob, address=address)
+                messages.success(request, 'ID image and details uploaded successfully. They will be verified soon.')
             except ValidationError:
                 messages.error(request, 'Invalid file type. Please upload a jpg, jpeg, or png image.')
         else:
-            messages.error(request, 'Please upload an image.')
+            messages.error(request, 'Please fill in all fields and upload an image.')
     return render(request, 'verify_id.html')

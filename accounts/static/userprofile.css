@@ -6,10 +6,24 @@
 
 }
 
-h2 {
+.user-info h2 {
    
     margin-bottom: 20px;
     text-align: center;
+}
+
+.user-info h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.user-info h3 a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.user-info h3 a:hover {
+    color: #0056b3;
 }
 
 .user-info-container {
