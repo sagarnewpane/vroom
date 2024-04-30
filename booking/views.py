@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from vroom.settings import EMAIL_HOST_USER
+from django.db.models import Q
 
 
 def search_cars(request):
@@ -46,6 +47,22 @@ def available_cars(request):
 
     return render(request, 'availablecar.html', {'cars': all_cars})
 
+def search_cars1(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+
+        if query:
+            available_cars = Car.objects.filter(
+                Q(car_model__icontains=query) |
+                Q(car_location__icontains=query),
+                availability='available'
+            )
+
+            return render(request, 'search_results.html', {'cars': available_cars, 'query': query})
+        else:
+            return render(request, 'search_results.html', {'cars': None, 'query': None})
+    else:
+        return redirect('home')
 
 @login_required(login_url='login')
 def book_car(request, car_id):
@@ -103,3 +120,4 @@ def cancel_booking(request):
         return JsonResponse({'status':'ok'})
     else:
         return JsonResponse({'status':'error'})
+    

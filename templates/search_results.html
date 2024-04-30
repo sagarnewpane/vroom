@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>Search Results</title>
+{% endblock %}
+
+{% block content %}
+<style>
+  .car button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    display: flex;
+    margin-left: 85px;
+    align-items: center;
+  }
+</style>
+
+<h1>Search Results</h1>
+
+{% if query %}
+<p>Showing results for: <strong>{{ query }}</strong></p>
+{% else %}
+<p>No search query provided.</p>
+{% endif %}
+
+<div class="car-list">
+  {% if cars %}
+  {% for car in cars %}
+  <div class="car">
+    <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
+    <h2>{{ car.model }}</h2>
+    <h3>{{ car.type }}</h3>
+    <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
+    {% if car.total_price %}
+    <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p>
+    {% endif %}
+
+    <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+      <a href="{% url 'bookings' car.id  %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p>No cars found.</p>
+  {% endif %}
+</div>
+<a href="{% url 'search_cars1' %}">Back to Search Results</a>
+
+{% endblock %}

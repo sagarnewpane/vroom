@@ -44,6 +44,6 @@ urlpatterns = [
          pass_view.PasswordResetCompleteView.as_view(template_name = 'resetpass_done_complete.html'), 
          name='password_reset_complete'),
 
-    path('cars/', include('booking.urls'))
+    path('cars/', include('booking.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
