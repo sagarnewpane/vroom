@@ -3,6 +3,8 @@
 <h1>Revenue Report</h1>
 <a href="{% url 'admin:revenue_report_order' 'asc' %}">Sort by ascending order</a>
 <a href="{% url 'admin:revenue_report_order' 'desc' %}">Sort by descending order</a>
+
+<a href="{% url 'admin:export_revenue_report' %}">Export as CSV</a>
 <table>
     <tr>
         <th>Rank</th>

@@ -1,0 +1,10 @@
+{% extends "admin/index.html" %}
+{% block content %}
+{{ block.super }}
+<div class="">
+    <h2>Reports</h2>
+    <ul class="">
+        <li><a class="button" href="{% url 'admin:revenue_report' %}">Revenue Report</a></li>
+    </ul>
+</div>
+{% endblock %}

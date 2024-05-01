@@ -10,7 +10,9 @@ from django.urls import path
 from django.shortcuts import render
 from .models import Car, Booking
 from django.db.models import Avg
-
+from django.urls import path
+from django.http import HttpResponse
+import csv
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
@@ -22,15 +24,36 @@ class CarAdmin(admin.ModelAdmin):
 
     display_image.short_description = 'Image'
 
-    from django.urls import path
-
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
             path('revenue_report/', self.admin_site.admin_view(self.revenue_report), name='revenue_report'),
-            path('revenue_report/<str:order>/', self.admin_site.admin_view(self.revenue_report), name='revenue_report_order')
+            path('revenue_report/<str:order>/', self.admin_site.admin_view(self.revenue_report), name='revenue_report_order'),
+            path('export_revenue_report/', self.admin_site.admin_view(self.export_revenue_report), name='export_revenue_report'),
         ]
         return custom_urls + urls
+
+    def export_revenue_report(self, request):
+        cars = Car.objects.all()
+        for car in cars:
+            bookings = Booking.objects.filter(car=car, status='accepted')
+            car.revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
+            car.num_bookings = bookings.count()
+            total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
+            car.avg_booking_duration = total_duration / car.num_bookings if car.num_bookings else 0
+        cars = sorted(cars, key=lambda car: car.revenue, reverse=True)
+        for i, car in enumerate(cars, start=1):
+            car.rank = i
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="revenue_report.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['Rank', 'Car Model', 'Availability', 'Hourly Rate', 'Number of Bookings', 'Average Booking Duration (hours)', 'Revenue'])
+        for car in cars:
+            writer.writerow([car.rank, car.model, car.availability, car.hourly_rate, car.num_bookings, car.avg_booking_duration, car.revenue])
+
+        return response
 
     def revenue_report(self, request, order='desc'):
         cars = Car.objects.all()
