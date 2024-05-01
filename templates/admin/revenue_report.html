@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Revenue Report</h1>
+<a href="{% url 'admin:revenue_report_order' 'asc' %}">Sort by ascending order</a>
+<a href="{% url 'admin:revenue_report_order' 'desc' %}">Sort by descending order</a>
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Car Model</th>
+        <th>Availability</th>
+        <th>Hourly Rate</th>
+        <th>Number of Bookings</th>
+        <th>Average Booking Duration (hours)</th>
+        <th>Revenue</th>
+    </tr>
+    {% for car in cars %}
+    <tr>
+        <td>{{ car.rank }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.availability }}</td>
+        <td>{{ car.hourly_rate }}</td>
+        <td>{{ car.num_bookings }}</td>
+        <td>{{ car.avg_booking_duration }}</td>
+        <td>{{ car.revenue }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

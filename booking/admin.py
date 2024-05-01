@@ -4,6 +4,14 @@ from .models import Booking
 
 from django.utils.html import format_html
 
+from django.contrib import admin
+from django.db.models import Sum
+from django.urls import path
+from django.shortcuts import render
+from .models import Car, Booking
+from django.db.models import Avg
+
+
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = ['model', 'availability', 'hourly_rate', 'display_image']
@@ -14,13 +22,31 @@ class CarAdmin(admin.ModelAdmin):
 
     display_image.short_description = 'Image'
 
+    from django.urls import path
 
-# @admin.register(Booking)
-# class BookingAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'car', 'booking_date', 'status')
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('revenue_report/', self.admin_site.admin_view(self.revenue_report), name='revenue_report'),
+            path('revenue_report/<str:order>/', self.admin_site.admin_view(self.revenue_report), name='revenue_report_order')
+        ]
+        return custom_urls + urls
 
-# admin.site.register(Booking, BookingAdmin)
+    def revenue_report(self, request, order='desc'):
+        cars = Car.objects.all()
+        for car in cars:
+            bookings = Booking.objects.filter(car=car, status='accepted')
+            car.revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
+            car.num_bookings = bookings.count()
+            total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
+            car.avg_booking_duration = total_duration / car.num_bookings if car.num_bookings else 0
+        cars = sorted(cars, key=lambda car: car.revenue, reverse=(order=='desc'))
+        for i, car in enumerate(cars, start=1):
+            car.rank = i
+        return render(request, 'admin/revenue_report.html', {'cars': cars})
 
+admin.site.unregister(Car)
+admin.site.register(Car, CarAdmin)
 
 class BookingStatusFilter(admin.SimpleListFilter):
     title = 'status'
