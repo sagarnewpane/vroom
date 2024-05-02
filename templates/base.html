@@ -18,9 +18,11 @@
         <a href="{%url 'about'%}">About</a>
         <a href="#">Contact</a>
     </div>
+    <form action="{% url 'search_cars1' %}" method="get">
     <div class="search">
         <input type="text" placeholder="Search..">
     </div>
+    </form>
     {% if user.is_authenticated %}
         <div class="user-dropdown">
             <button class="dropbtn" id="dropdownButton">
