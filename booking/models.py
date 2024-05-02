@@ -44,3 +44,6 @@ class Booking(models.Model):
     estimated_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     drop_off_date = models.DateTimeField(default=datetime.now)
     pick_up_date = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return f'Booking car {self.car.model} by {self.user.email}'

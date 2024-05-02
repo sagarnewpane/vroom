@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from vroom.settings import EMAIL_HOST_USER
 
+from accounts.models import IDVerification
+
 
 def search_cars(request):
     if request.method == 'POST':
@@ -58,10 +60,15 @@ def available_cars(request):
 def book_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)
     
+    # Check if the user is verified
+    try:
+        id_verification = IDVerification.objects.get(user=request.user)
+        id_verification_status = id_verification.status == 'verified'
+    except IDVerification.DoesNotExist:
+        id_verification_status = False
+    
     # Check if the user has already booked this car
     if Booking.objects.filter(user=request.user, car=car).exists():
-        # If the user has already booked this car, display a message on the same page
-        # return render(request, 'booking.html', {'car': car, 'message': {'You have already booked this car.','isbooked': True}})
         return render(request, 'booking.html', {'car': car, 'message': 'You have already booked this car.', 'isbooked': True})
     
     if request.method == 'POST':
@@ -94,13 +101,17 @@ def book_car(request, car_id):
         
     else:
         form = CarSearchForm()
-    return render(request, 'booking.html', {'car': car,'form':form})
-
+    return render(request, 'booking.html', {'car': car,'form':form, 'id_verification_status': id_verification_status})
 
 @login_required(login_url='login')
 def view_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user})
+    try:
+        id_verification = IDVerification.objects.get(user=request.user)
+        id_verification_status = id_verification.status == 'verified'
+    except IDVerification.DoesNotExist:
+        id_verification_status = False
+    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user, 'id_verification_status': id_verification_status})
 
 @csrf_exempt
 def cancel_booking(request):

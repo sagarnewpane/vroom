@@ -5,7 +5,10 @@
     {{ block.super }}
     <li id="new-requests">
         <a href="{% url 'admin:booking_booking_changelist' %}?status=pending">
-            &#x1F514; New requests: {{ new_requests }}
+            &#x1F514; New requests: {{ new_booking_requests }}
+        </a>
+        <a href="{% url 'admin:accounts_idverification_changelist' %}?status=pending">
+            &#x1F514; New Verification: {{ new_verification_requests }}
         </a>
     </li>
 {% endblock %}
