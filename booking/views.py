@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from vroom.settings import EMAIL_HOST_USER
 
 from accounts.models import IDVerification
+from accounts.models import Favourite
 
 
 def search_cars(request):
@@ -106,12 +107,15 @@ def book_car(request, car_id):
 @login_required(login_url='login')
 def view_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
+    favourites = Favourite.objects.filter(user=request.user)
     try:
         id_verification = IDVerification.objects.get(user=request.user)
         id_verification_status = id_verification.status == 'verified'
     except IDVerification.DoesNotExist:
         id_verification_status = False
-    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user, 'id_verification_status': id_verification_status})
+    return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user, 'id_verification_status': id_verification_status, 'favourites': favourites})
+
+
 
 @csrf_exempt
 def cancel_booking(request):
@@ -121,3 +125,7 @@ def cancel_booking(request):
         return JsonResponse({'status':'ok'})
     else:
         return JsonResponse({'status':'error'})
+    
+from django.shortcuts import get_object_or_404, redirect
+
+

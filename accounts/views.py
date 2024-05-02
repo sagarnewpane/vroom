@@ -9,6 +9,9 @@ from django.contrib import messages
 from .models import IDVerification
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
+from django.shortcuts import get_object_or_404
+from accounts.models import Favourite
+from booking.models import Car
 
 
 # Create your views here.
@@ -87,3 +90,39 @@ def verify_id(request):
         else:
             messages.error(request, 'Please fill in all fields and upload an image.')
     return render(request, 'verify_id.html')
+
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Favourite
+from booking.models import Car
+
+@login_required(login_url='login')
+def toggle_favourite(request):
+    car_id = request.POST.get('car_id')
+    car = get_object_or_404(Car, id=car_id)
+    favourited = False
+
+    if Favourite.objects.filter(user=request.user, car=car).exists():
+        Favourite.objects.filter(user=request.user, car=car).delete()
+        favourited = False
+    else:
+        Favourite.objects.create(user=request.user, car=car)
+        favourited = True
+
+    print(favourited)
+
+    return JsonResponse({'favourited': favourited})
+
+
+@login_required(login_url='login')
+def favourite_cars(request):
+    favourites = Favourite.objects.filter(user=request.user)
+    return render(request, 'favourites.html', {'favourites': favourites})
+
+@login_required(login_url='login')
+def check_favourite(request):
+    car_id = request.POST.get('car_id')
+    favourited = Favourite.objects.filter(user=request.user, car_id=car_id).exists()
+    return JsonResponse({'favourited': favourited})

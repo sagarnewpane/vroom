@@ -26,6 +26,9 @@
                     <img src="{{ car.image.url }}" alt="Car Image">
             </div>
                 <div class="specifications-container">
+                    <!-- Fav button -->
+                    <button class="favourite-button" data-car-id="{{ car.id }}"></button>
+
                     <p class="model">{{ car.model }}</p>
                     <p class="type">Category : <strong>{{ car.type }}</strong></p>
                     <h2>Specifications</h2>
@@ -80,6 +83,7 @@
                             </div>
                         </div>
                       </div>
+                      
                 <p class="cost">Cost: {{ car.hourly_rate }} /hr</p> <!-- Cost added here -->
                 </div>
 
@@ -138,4 +142,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
     <script src="{% static 'booking.js' %}"></script>
 
+    <script>
+        function updateButtonStatus(button, carId) {
+            var url = "{% url 'check_favourite' %}";
+            $.ajax({
+                url: url,
+                data: {
+                    'car_id': carId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                type: 'post',
+                dataType: 'json',
+                success: function(data){
+                    if(data.favourited){
+                        button.text('Remove from Favourites');
+                    } else {
+                        button.text('Add to Favourites');
+                    }
+                }
+            });
+        }
+        
+        $(document).ready(function(){
+            $('.favourite-button').each(function(){
+                var button = $(this);
+                var carId = button.data('car-id');
+                updateButtonStatus(button, carId);
+            });
+
+            $('.favourite-button').click(function(){
+                var carId = $(this).data('car-id');
+                var url = "{% url 'toggle_favourite' %}";
+                var button = $(this);  // Store the button in a variable
+
+                $.ajax({
+                    url: url,
+                    data: {
+                        'car_id': carId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function(data){
+                        if(data.favourited){
+                            button.text('Remove from Favourites');
+                        } else {
+                            button.text('Add to Favourites');
+                        }
+                    }
+                });
+            });
+        });    
+    </script>
+
 {% endblock %}
+
