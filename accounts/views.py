@@ -12,6 +12,7 @@ from django.core.validators import FileExtensionValidator
 from django.shortcuts import get_object_or_404
 from accounts.models import Favourite
 from booking.models import Car
+from django.core.files.base import ContentFile
 
 
 # Create your views here.
@@ -60,6 +61,14 @@ def logout_view(request):
 
 
 
+from django.core.exceptions import ValidationError
+from django.core.files.base import ContentFile
+from django.core.validators import FileExtensionValidator
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from datetime import datetime
+from .models import IDVerification
+
 @login_required
 def verify_id(request):
     try:
@@ -83,6 +92,9 @@ def verify_id(request):
             validate_image = FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])
             try:
                 validate_image(id_image)
+                sanitized_filename = id_image.name.replace(' ', '_')
+                id_image.file = ContentFile(id_image.read(), name=sanitized_filename)
+                dob = datetime.strptime(dob, '%Y-%m-%d 00:00').date()
                 IDVerification.objects.create(user=request.user, id_image=id_image, name=name, dob=dob, address=address)
                 messages.success(request, 'ID image and details uploaded successfully. They will be verified soon.')
             except ValidationError:
