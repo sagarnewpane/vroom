@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from booking.models import Booking, Car
 from booking.forms import CarSearchForm
 from decimal import Decimal
+from booking.models import Car
 
 # Home Page
 def home(request):
@@ -43,6 +44,12 @@ def home(request):
 
     return render(request, 'Vroom.html', {'form': form,'featured_cars': featured_cars,'popular_cars': popular_cars})
 
+# Search Page
+def search(request):
+    query = request.GET.get('q')
+    results = Car.objects.filter(model__icontains=query)
+    return render(request, 'availablecar.html', {'cars': results, 'query': query})
+
 # About Page
 def about(request):
     return render(request,'about.html')
@@ -50,3 +57,4 @@ def about(request):
 # FAQ Page
 def faq(request):
     return render(request,'faq.html')
+
