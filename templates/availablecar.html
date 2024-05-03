@@ -15,18 +15,23 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if query %}
+      <div class="title-container">
+          <h1>Search Result</h1>
+          <h2>Showing results for "{{ query }}"</h2>
+          <button onclick="toggleFilterMenu()" >Filter</button>
+      </div>
+    {% else %}
     <div class="car-slider">
       <img src="{% static 'BMW.png' %}" alt="" srcset="">
     </div>
-
     
-    
-
     <div class="title-container">
-      <h1>Available Cars</h1>
-      <button onclick="toggleFilterMenu()" >Filter</button>
-  </div>
-
+        <h1>Available Cars</h1>
+        <button onclick="toggleFilterMenu()" >Filter</button>
+    </div>
+  {% endif %}
     <div class="content-container">
       <div class="car-container">
         {% if cars %}
