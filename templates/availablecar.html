@@ -15,29 +15,21 @@
 {% endblock %}
 
 {% block content %}
-
-    {% if query %}
-    
-      <div class="title-container">
-          <h1>Search Result</h1>
-          <h2>Showing results for "{{ query }}"</h2>
-          <button onclick="toggleFilterMenu()" >Filter</button>
-      </div>
-    {% else %}
-
     <div class="car-slider">
       <img src="{% static 'BMW.png' %}" alt="" srcset="">
     </div>
 
-    <div class="title-container">
-        <h1>Available Cars</h1>
-        <button onclick="toggleFilterMenu()" >Filter</button>
-    </div>
-  {% endif %}
+    
+    
 
-    {% if cars %}
+    <div class="title-container">
+      <h1>Available Cars</h1>
+      <button onclick="toggleFilterMenu()" >Filter</button>
+  </div>
+
     <div class="content-container">
       <div class="car-container">
+        {% if cars %}
         {% for car in cars %}
 
         <div class="car">
@@ -57,8 +49,10 @@
         </div>
 
         {% endfor %}
+        {% else %}
+          <h1 style="margin-bottom: 50px;">No Car for your liking :(</h1>
+        {% endif %}
       </div>
-
       <div id="filter-menu" class="filter-menu">
         <h2>Filter Options</h2>
         <form method="get">
@@ -89,9 +83,6 @@
       </form>
     </div>
     </div>
-    {% else %}
-    <h1 style="margin-bottom: 50px;">No Car for your liking :(</h1>
-    {% endif %}
     
     <script src="{% static 'availablecar.js' %}"></script>
 {% endblock %}
