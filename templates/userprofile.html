@@ -45,6 +45,29 @@
         </div>
     </div>
 
+    <div class="favourite-cars-container">
+        <h2>Your Favourite Cars</h2>
+        {% for favourite in favourites %}
+            <div class="car">
+                <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" width="100"/>
+                <h2>{{ favourite.car.model }}</h2>
+                <h3>{{ favourite.car.type }}</h3>
+                <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
+                {% if favourite.car.total_price %}
+                    <p>Estimated : <strong>Rs {{ favourite.car.total_price }}</strong></p> 
+                {% endif %}
+                <p style="color: rgb(27, 27, 27);">Location : <strong>{{ favourite.car.car_location }}</strong></p>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+                    <a href="{% url 'bookings' favourite.car.id %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
+                    <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>You have no favourite cars.</p>
+        {% endfor %}
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){

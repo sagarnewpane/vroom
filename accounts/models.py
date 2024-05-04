@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-
+from django.apps import apps
 
 
 # Create your models here.
@@ -19,6 +19,21 @@ class CustomUser(AbstractUser):
         return self.email
 
 User = get_user_model()
+
+
+class Favourite(models.Model):
+    user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
+    car = models.ForeignKey('booking.Car', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'car')
+
+    def __str__(self):
+        CustomUser = apps.get_model('accounts', 'CustomUser')
+        Car = apps.get_model('booking', 'Car')
+        user = CustomUser.objects.get(id=self.user_id)
+        car = Car.objects.get(id=self.car_id)
+        return f'{user.email} - {car.name}'
 
 class IDVerification(models.Model):
     STATUS_CHOICES = [

@@ -9,6 +9,10 @@ from django.contrib import messages
 from .models import IDVerification
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
+from django.shortcuts import get_object_or_404
+from accounts.models import Favourite
+from booking.models import Car
+from django.core.files.base import ContentFile
 
 
 # Create your views here.
@@ -57,6 +61,14 @@ def logout_view(request):
 
 
 
+from django.core.exceptions import ValidationError
+from django.core.files.base import ContentFile
+from django.core.validators import FileExtensionValidator
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from datetime import datetime
+from .models import IDVerification
+
 @login_required
 def verify_id(request):
     try:
@@ -80,6 +92,9 @@ def verify_id(request):
             validate_image = FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])
             try:
                 validate_image(id_image)
+                sanitized_filename = id_image.name.replace(' ', '_')
+                id_image.file = ContentFile(id_image.read(), name=sanitized_filename)
+                dob = datetime.strptime(dob, '%Y-%m-%d 00:00').date()
                 IDVerification.objects.create(user=request.user, id_image=id_image, name=name, dob=dob, address=address)
                 messages.success(request, 'ID image and details uploaded successfully. They will be verified soon.')
             except ValidationError:
@@ -87,3 +102,39 @@ def verify_id(request):
         else:
             messages.error(request, 'Please fill in all fields and upload an image.')
     return render(request, 'verify_id.html')
+
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Favourite
+from booking.models import Car
+
+@login_required(login_url='login')
+def toggle_favourite(request):
+    car_id = request.POST.get('car_id')
+    car = get_object_or_404(Car, id=car_id)
+    favourited = False
+
+    if Favourite.objects.filter(user=request.user, car=car).exists():
+        Favourite.objects.filter(user=request.user, car=car).delete()
+        favourited = False
+    else:
+        Favourite.objects.create(user=request.user, car=car)
+        favourited = True
+
+    print(favourited)
+
+    return JsonResponse({'favourited': favourited})
+
+
+@login_required(login_url='login')
+def favourite_cars(request):
+    favourites = Favourite.objects.filter(user=request.user)
+    return render(request, 'favourites.html', {'favourites': favourites})
+
+@login_required(login_url='login')
+def check_favourite(request):
+    car_id = request.POST.get('car_id')
+    favourited = Favourite.objects.filter(user=request.user, car_id=car_id).exists()
+    return JsonResponse({'favourited': favourited})
