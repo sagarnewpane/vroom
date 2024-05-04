@@ -1,0 +1,29 @@
+{% extends "admin/index.html" %}
+{% block content %}
+{{ block.super }}
+
+<style>
+    .editable{
+        float: left;
+    }
+
+    #content-related{
+        /* float: right;
+        clear: both; */
+        left: 700px;
+        position: absolute;
+        /* right: 300px; */
+    }
+</style>
+
+<div class="editable">
+    <h1>Reports</h1>
+    <a class="button" href="{% url 'admin:revenue_report' %}">Revenue Report</a>
+</div>
+<!-- <div class="">
+    <h2>Reports</h2>
+    <ul class="">
+        <li><a class="button" href="{% url 'admin:revenue_report' %}">Revenue Report</a></li>
+    </ul>
+</div> -->
+{% endblock %}

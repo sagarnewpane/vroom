@@ -28,6 +28,27 @@ class Car(models.Model):
 
     def __str__(self):
         return f"{self.type} {self.model}"
+    
+    def calculate_revenue(self):
+        bookings = Booking.objects.filter(car=self, status='accepted')
+        total_revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
+        return total_revenue
+
+    @staticmethod
+    def get_cars_by_revenue():
+        cars = Car.objects.all()
+        cars = sorted(cars, key=lambda car: car.calculate_revenue(), reverse=True)
+        return cars
+
+    @staticmethod
+    def export_to_csv(cars, file_path):
+        with open(file_path, 'w', newline='') as csvfile:
+            fieldnames = ['Car Type', 'Car Model', 'Revenue']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for car in cars:
+                writer.writerow({'Car Type': car.type, 'Car Model': car.model, 'Revenue': car.calculate_revenue()})
 
 
 class Booking(models.Model):
