@@ -62,27 +62,29 @@
         <h2>Filter Options</h2>
         <form method="get">
           <h3>Location</h3>
-          <input type="checkbox" name="car_location" value="Kathmandu"><label for="Kathmandu">Kathmandu</label><br>
-          <input type="checkbox" name="car_location" value="Pokhara"><label for="Pokhara">Pokhara</label><br>
+          
+          <input type="checkbox" name="car_location" value="Kathmandu" {% if 'Kathmandu' in car_location %}checked{% endif %}><label for="Kathmandu">Kathmandu</label><br>
+          <input type="checkbox" name="car_location" value="Pokhara" {% if 'Pokhara' in car_location %}checked{% endif %}><label for="Pokhara">Pokhara</label><br>
 
           <!-- Add more locations as needed -->
-      
-          <h3>Type</h3>
-          <input type="checkbox" name="type" value="Sedan"><label for="Sedan">Sedan</label><br>
-          <input type="checkbox" name="type" value="SUV"><label for="SUV">SUV</label><br>
-          <input type="checkbox" name="type" value="Sports"><label for="Sports">Sports</label><br>
-          <input type="checkbox" name="type" value="EV"><label for="EV">EV</label><br>
-          <input type="checkbox" name="type" value="MPV"><label for="MPV">MPV</label><br>
 
+          <h3>Type</h3>
+          <input type="checkbox" name="type" value="Sedan" {% if 'Sedan' in type %}checked{% endif %}><label for="Sedan">Sedan</label><br>
+          <input type="checkbox" name="type" value="SUV" {% if 'SUV' in type %}checked{% endif %}><label for="SUV">SUV</label><br>
+          <input type="checkbox" name="type" value="Sports" {% if 'Sports' in type %}checked{% endif %}><label for="Sports">Sports</label><br>
+          <input type="checkbox" name="type" value="EV" {% if 'EV' in type %}checked{% endif %}><label for="EV">EV</label><br>
+          <input type="checkbox" name="type" value="MPV" {% if 'MPV' in type %}checked{% endif %}><label for="MPV">MPV</label><br>
 
           <!-- Add more types as needed -->
-      
-          <h3>Availability</h3>
-          <input type="checkbox" name="availability" value="available"><label for="available">Available</label><br>
-          <input type="checkbox" name="availability" value="unavailable"><label for="unavailable">Unavailable</label><br>
-          <input type="checkbox" name="availability" value="maintenance"><label for="maintenance">Maintainance</label><br>
 
-      
+          <h3>Availability</h3>
+          <input type="checkbox" name="availability" value="available" {% if 'available' in availability %}checked{% endif %}><label for="available">Available</label><br>
+          <input type="checkbox" name="availability" value="unavailable" {% if 'unavailable' in availability %}checked{% endif %}><label for="unavailable">Unavailable</label><br>
+          <input type="checkbox" name="availability" value="maintenance" {% if 'maintenance' in availability %}checked{% endif %}><label for="maintenance">Maintainance</label><br>
+
+
+          <input type="hidden" name="q" value="{{ query }}">
+
           <button type="submit">Apply Filters</button>
           <button type="button" onclick="window.location.href=window.location.pathname;">Reset Filters</button>
       </form>

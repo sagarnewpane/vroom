@@ -46,16 +46,32 @@ def search_cars(request):
 def available_cars(request):
     cars = Car.objects.all()
 
-    if request.GET:
-        if 'car_location' in request.GET:
-            cars = cars.filter(car_location__in=request.GET.getlist('car_location'))
-        if 'type' in request.GET:
-            cars = cars.filter(type__in=request.GET.getlist('type'))
-        if 'availability' in request.GET:
-            cars = cars.filter(availability__in=request.GET.getlist('availability'))
+    car_location = request.GET.getlist('car_location')
+    type = request.GET.getlist('type')
+    availability = request.GET.getlist('availability')
+    query = request.GET.get('q', '')  # Use an empty string as the default value
 
-    return render(request, 'availablecar.html', {'cars': cars})
+    print(car_location)
 
+    # if request.GET:
+    if 'q' in request.GET:  # Add this line to apply the search query filter
+        cars = cars.filter(model__icontains=query)
+    if 'car_location' in request.GET:
+        cars = cars.filter(car_location__in=car_location)
+    if 'type' in request.GET:
+        cars = cars.filter(type__in=type)
+    if 'availability' in request.GET:
+        cars = cars.filter(availability__in=availability)
+        
+
+    return render(request, 'availablecar.html', {
+        'cars': cars,
+        'car_location': car_location,
+        'type': type,
+        'availability': availability,
+        'query': query, 
+        # Pass other context variables as needed
+    })
 
 @login_required(login_url='login')
 def book_car(request, car_id):
@@ -126,6 +142,3 @@ def cancel_booking(request):
     else:
         return JsonResponse({'status':'error'})
     
-from django.shortcuts import get_object_or_404, redirect
-
-

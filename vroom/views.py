@@ -44,11 +44,30 @@ def home(request):
 
     return render(request, 'Vroom.html', {'form': form,'featured_cars': featured_cars,'popular_cars': popular_cars})
 
-# Search Page
 def search(request):
-    query = request.GET.get('q')
-    results = Car.objects.filter(model__icontains=query)
-    return render(request, 'availablecar.html', {'cars': results, 'query': query})
+    car_location = request.GET.getlist('car_location')
+    type = request.GET.getlist('type')
+    availability = request.GET.getlist('availability')
+
+    query = request.GET.get('q', '')  # Use an empty string as the default value
+    results = Car.objects.all()
+
+    if query:
+        results = results.filter(model__icontains=query)
+        if results and car_location:
+            results = results.filter(car_location__in=car_location)
+        if results and type:
+            results = results.filter(type__in=type)
+        if results and availability:
+            results = results.filter(availability__in=availability)
+
+    return render(request, 'availablecar.html', {
+        'cars': results, 
+        'query': query, 
+        'car_location': car_location,
+        'type': type,
+        'availability': availability,
+    })
 
 # About Page
 def about(request):

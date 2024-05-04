@@ -24,9 +24,9 @@
     </div>
     <div class="search">
       <form method="GET" action="{% url 'search' %}">
-          <input type="text" placeholder="Search.." name="q">
-          <input type="submit" value="Search">
-      </form>
+        <input type="text" placeholder="Search.." name="q" value="{{ query }}">
+        <input type="submit" value="Search">
+    </form>
     </div>
     {% if user.is_authenticated %}
         <div class="user-dropdown">
