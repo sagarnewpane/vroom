@@ -13,6 +13,8 @@ from django.db.models import Avg
 from django.urls import path
 from django.http import HttpResponse
 import csv
+from django.db.models import Count
+from django.db.models.functions import TruncDate
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
@@ -54,19 +56,50 @@ class CarAdmin(admin.ModelAdmin):
             writer.writerow([car.rank, car.model, car.availability, car.hourly_rate, car.num_bookings, car.avg_booking_duration, car.revenue])
 
         return response
+    
+    
 
     def revenue_report(self, request, order='desc'):
         cars = Car.objects.all()
+
         for car in cars:
             bookings = Booking.objects.filter(car=car, status='accepted')
             car.revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
             car.num_bookings = bookings.count()
-            total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
-            car.avg_booking_duration = total_duration / car.num_bookings if car.num_bookings else 0
+            car.total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
+            car.avg_booking_duration = car.total_duration / car.num_bookings if car.num_bookings else 0
+
+            # Group bookings by date
+            bookings_by_date = bookings.annotate(date=TruncDate('booking_date')).values('date').annotate(count=Count('id')).order_by('date')
+            car.time_periods = [booking['date'].strftime('%Y-%m-%d') for booking in bookings_by_date]
+            car.counts = [booking['count'] for booking in bookings_by_date]
+
         cars = sorted(cars, key=lambda car: car.revenue, reverse=(order=='desc'))
         for i, car in enumerate(cars, start=1):
             car.rank = i
         return render(request, 'admin/revenue_report.html', {'cars': cars})
+
+    
+
+    # def revenue_report(self, request, order='desc'):
+    #     cars = Car.objects.all()
+    #     cars_data = []
+    #     for car in cars:
+    #         bookings = Booking.objects.filter(car=car, status='accepted')
+    #         car.revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
+    #         car.num_bookings = bookings.count()
+    #         total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
+    #         car.avg_booking_duration = total_duration / car.num_bookings if car.num_bookings else 0
+
+    #         # Group bookings by date
+    #         bookings_by_date = bookings.annotate(date=TruncDate('booking_date')).values('date').annotate(count=Count('id')).order_by('date')
+    #         time_periods = [booking['date'].strftime('%Y-%m-%d') for booking in bookings_by_date]
+    #         counts = [booking['count'] for booking in bookings_by_date]
+
+    #     cars_data = sorted(cars_data, key=lambda car_data: car_data['car'].revenue, reverse=(order=='desc'))
+    #     for i, car_data in enumerate(cars_data, start=1):
+    #         car_data['car'].rank = i
+    #     return render(request, 'admin/revenue_report.html', {'cars': cars_data})
 
 admin.site.unregister(Car)
 admin.site.register(Car, CarAdmin)
