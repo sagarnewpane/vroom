@@ -146,7 +146,10 @@ def cancel_booking(request):
         if timezone.now() > booking.booking_date + timedelta(hours=3):
             # Deduct 20% from the payment
             booking.estimated_price *=  Decimal('0.8')
-            # Change the booking status to 'rejected'
+
+        else:
+            booking.estimated_price = 0
+        # Change the booking status to 'rejected'
         booking.status = 'cancelled'
         # Save the changes
         booking.save()
