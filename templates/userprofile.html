@@ -30,6 +30,7 @@
             <div class="booking-history">
                 <h2>Your Bookings</h2>
                 {% for booking in bookings %}
+                {% if not booking.status == 'cancelled' %}
                     <div class="booking">
                         <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100"/>
                         <div class="details">
@@ -40,6 +41,7 @@
                         </div>
                         <p><strong>Status:</strong> {{ booking.status }}</p>
                     </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

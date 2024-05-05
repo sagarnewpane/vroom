@@ -56,12 +56,13 @@ class Booking(models.Model):
         ('pending', 'Pending'),
         ('accepted', 'Accepted'),
         ('rejected', 'Rejected'),
+        ('cancelled', 'Cancelled'),
     ]
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     booking_date = models.DateTimeField(auto_now_add=True)  # Removed auto_now_add=True
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     estimated_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     drop_off_date = models.DateTimeField(default=datetime.now)
     pick_up_date = models.DateTimeField(default=datetime.now)

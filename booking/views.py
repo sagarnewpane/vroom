@@ -132,13 +132,26 @@ def view_bookings(request):
     return render(request, 'userprofile.html', {'bookings': bookings, 'user': request.user, 'id_verification_status': id_verification_status, 'favourites': favourites})
 
 
+from django.utils import timezone
+from datetime import timedelta
+from decimal import Decimal
 
 @csrf_exempt
 def cancel_booking(request):
     if request.method == 'POST':
         booking_id = request.POST.get('booking_id')
-        Booking.objects.filter(id=booking_id).delete()
+        booking = Booking.objects.get(id=booking_id)
+
+        # Check if the current time is more than 3 hours from the booking time
+        if timezone.now() > booking.booking_date + timedelta(hours=3):
+            # Deduct 20% from the payment
+            booking.estimated_price *=  Decimal('0.8')
+            # Change the booking status to 'rejected'
+        booking.status = 'cancelled'
+        # Save the changes
+        booking.save()
+
         return JsonResponse({'status':'ok'})
+        
     else:
         return JsonResponse({'status':'error'})
-    
