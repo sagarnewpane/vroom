@@ -20,6 +20,7 @@ from django.db.models.functions import TruncDate
 class CarAdmin(admin.ModelAdmin):
     list_display = ['model', 'availability', 'hourly_rate', 'display_image']
     search_fields = [ 'model','availability', 'hourly_rate']
+    list_editable = ['availability']
 
     def display_image(self, obj):
         return format_html('<img src="{}" width="50" height="50" />', obj.image.url) if obj.image else None
