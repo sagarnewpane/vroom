@@ -88,6 +88,16 @@
     background-color: #d32f2f;
 }
 
+.booking-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.booking-link:hover {
+    text-decoration: none;
+}
+
+
 /* Responsive styles */
 @media (max-width: 600px) {
     .booking {
