@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from accounts.models import Favourite
 from booking.models import Car
 from django.core.files.base import ContentFile
-
+from datetime import timedelta
 
 # Create your views here.
 from django.contrib import messages
@@ -95,6 +95,9 @@ def verify_id(request):
                 sanitized_filename = id_image.name.replace(' ', '_')
                 id_image.file = ContentFile(id_image.read(), name=sanitized_filename)
                 dob = datetime.strptime(dob, '%Y-%m-%d 00:00').date()
+                if dob > datetime.now().date() - timedelta(days=18*365):
+                    messages.error(request, 'You must be at least 18 years old.')
+                    return render(request, 'verify_id.html')
                 IDVerification.objects.create(user=request.user, id_image=id_image, name=name, dob=dob, address=address)
                 messages.success(request, 'ID image and details uploaded successfully. They will be verified soon.')
             except ValidationError:
