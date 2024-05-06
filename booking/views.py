@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from vroom.settings import EMAIL_HOST_USER
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 from accounts.models import IDVerification
 from accounts.models import Favourite
@@ -85,7 +87,7 @@ def book_car(request, car_id):
         id_verification_status = False
     
     # Check if the user has already booked this car
-    if Booking.objects.filter(user=request.user, car=car).exists():
+    if Booking.objects.filter(user=request.user, car=car, status='pending').exists():
         return render(request, 'booking.html', {'car': car, 'message': 'You have already booked this car.', 'isbooked': True})
     
     if request.method == 'POST':
@@ -97,24 +99,20 @@ def book_car(request, car_id):
             duration_hours = Decimal((dropoff_datetime - pickup_datetime).total_seconds()) / Decimal(3600)
             total_price = round(duration_hours * car.hourly_rate, 2)
 
-            # location = form.cleaned_data['location'] # No need for location as it is used only for searching
-            Booking.objects.create(user=request.user, car=car, status='pending',estimated_price=total_price,drop_off_date=dropoff_datetime,pick_up_date=pickup_datetime)
-            
-            # Send an email to the user
-            send_mail(
-                f'Booking Successful for Car {car.model} on {pickup_datetime.date()}',
-                f'''Your booking has been successful and waiting confiramation by the dealer.
-                Car: {car.model}.
-                For date {pickup_datetime.date()} to {dropoff_datetime.date()}.
-                Total Price: {total_price}.\n
-                Thank you for booking with us.
-                ''',
-                EMAIL_HOST_USER,
-                [request.user.email],
-                fail_silently=False,
-            )
+            # Convert pickup_datetime and dropoff_datetime to strings
+            pickup_datetime_str = pickup_datetime.strftime('%Y-%m-%d %H:%M:%S')
+            dropoff_datetime_str = dropoff_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
-            return redirect('view_bookings')
+            # Create a context dictionary
+            context = {
+                'car': car,
+                'pickup_datetime': pickup_datetime_str,
+                'dropoff_datetime': dropoff_datetime_str,
+                'total_price': total_price,
+            }
+
+            # Redirect to the payment page with necessary data
+            return render(request, 'payment.html', context)
         
     else:
         form = CarSearchForm()
@@ -158,3 +156,43 @@ def cancel_booking(request):
         
     else:
         return JsonResponse({'status':'error'})
+    
+from django.contrib import messages
+
+from django.shortcuts import render, get_object_or_404
+from django.core.mail import send_mail
+from .models import Booking, Car
+
+def payment(request, car_id, pickup_datetime, dropoff_datetime, total_price):
+    car = get_object_or_404(Car, id=car_id)
+
+    if request.method == 'POST':
+        # Check if a booking already exists
+        existing_booking = Booking.objects.filter(user=request.user, car=car, pick_up_date=pickup_datetime, drop_off_date=dropoff_datetime,status='pending').exists()
+
+        if existing_booking:
+            # Render the payment page with an error message
+            return render(request, 'payment.html', {'car': car, 'pickup_datetime': pickup_datetime, 'dropoff_datetime': dropoff_datetime, 'total_price': total_price, 'error_message': 'You have already booked this car for the selected time range.'})
+        else:
+            # Create the booking
+            Booking.objects.create(user=request.user, car=car, status='pending', estimated_price=total_price, drop_off_date=dropoff_datetime, pick_up_date=pickup_datetime)
+
+            # Send an email to the user
+            send_mail(
+                f'Booking Successful for Car {car.model} on {pickup_datetime}',
+                f'''Your booking has been successful and waiting confiramation by the dealer.
+                Car: {car.model}.
+                For date {pickup_datetime} to {dropoff_datetime}.
+                Total Price: {total_price}.\n
+                Thank you for booking with us.
+                ''',
+                EMAIL_HOST_USER,
+                [request.user.email],
+                fail_silently=False,
+            )
+
+            # Render the payment page with the success message
+            return render(request, 'payment.html', {'car': car, 'pickup_datetime': pickup_datetime, 'dropoff_datetime': dropoff_datetime, 'total_price': total_price, 'booking_confirmed': True})
+
+    # Render the payment page
+    return render(request, 'payment.html', {'car': car, 'pickup_datetime': pickup_datetime, 'dropoff_datetime': dropoff_datetime, 'total_price': total_price})
