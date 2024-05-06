@@ -39,7 +39,7 @@ window.onload = function() {
         var pickup_datetime = new Date(document.getElementById('id_pickup_datetime').value);
         var dropoff_datetime = new Date(document.getElementById('id_dropoff_datetime').value);
         var duration = (dropoff_datetime - pickup_datetime) / (1000 * 60 * 60); // convert milliseconds to hours
-
+    
         if (dropoff_datetime <= pickup_datetime) {
             alert('Dropoff time must be greater than pickup time.');
             event.preventDefault(); // prevent form from submitting
@@ -49,15 +49,16 @@ window.onload = function() {
         } else {
             // Form submission is valid
             document.querySelector('#termsModal').style.display = 'block';
+            event.preventDefault(); // prevent form from submitting until terms are agreed to
         }
     });
-
+    
     document.querySelector('#agreeButton').addEventListener('click', function() {
         document.querySelector('#termsModal').style.display = 'none';
-        document.querySelector('#carForm').submit();
-        alert('Email has been sent!');  // Add this line
-    });
+        document.querySelector('#carForm').submit();  // Manually submit the form
 
+    });
+    
     document.querySelector('#disagreeButton').addEventListener('click', function() {
         document.querySelector('#termsModal').style.display = 'none';
     });
