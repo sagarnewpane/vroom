@@ -17,7 +17,7 @@ def home(request):
 
             # Query available cars within the specified date range and location
             available_cars = Car.objects.filter(
-                # availability='available',
+                availability='available',
                 car_location=location
             )
 
