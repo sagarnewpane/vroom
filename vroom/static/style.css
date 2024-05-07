@@ -260,13 +260,38 @@ z-index: 2; /*  section appears above other content */
     border: 1px solid #ccc; 
     box-sizing: border-box; 
     transform: translate(0%, 0%);
+    margin-bottom: 0;
   }
+
+  .featured-cars, .popular-rentals {
+    padding: 0px;
+    margin: 0px; /* Center the section horizontally */
+    width: 100%; /* Adjust width as needed */
+    position: relative;
+  }
+
   .car-list {
     display: flex;
     justify-content: center; /* Center the cars horizontally */
     align-items: center;
     flex-wrap: nowrap;
-    gap: 20px; 
+    gap: 0px; 
+  }
+
+  .car-list .car{
+    margin: 10px;
+  }
+
+  .car h2{
+    font-size: 1em;
+  }
+
+  .car h3{
+    font-size: 0.9em;
+  }
+
+  .car p{
+    font-size: 0.8em;
   }
 
   .footer {
@@ -279,21 +304,6 @@ z-index: 2; /*  section appears above other content */
   }
   .car {
     width: 45%; 
-  }
-  
-  .welcome-container {
-    margin-top: 80px;
-    margin-right: 10px;
-    margin-left: 10px;
-    padding: 20px;
-  }
-
-  .welcome-container h1 {
-    font-size: 20px;
-  }
-
-  .welcome-container p {
-    font-size: 16px;
   }
 
   .container2 h2 {
