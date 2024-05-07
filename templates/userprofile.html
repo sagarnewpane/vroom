@@ -50,8 +50,6 @@
 
                             {% if booking.status == 'accepted' %}
                                 <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
-                                <p><strong>Feedback:</strong> {{ booking.feedback }}</p>
-                                <p><strong>Rating:</strong> {{ booking.rating }}</p>
                             {% endif %}
 
                             {% if booking.status == 'returned' %}
