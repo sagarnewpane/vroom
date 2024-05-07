@@ -36,7 +36,6 @@
                         <div class="details">
                             <p><strong>Model:</strong> {{ booking.car.model }}</p>
                             <p><strong>Type:</strong> {{ booking.car.type }}</p>
-                            <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
                             <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
                             {% if booking.status == 'pending' %}
                                 <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
