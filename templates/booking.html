@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'popup.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 {% endblock %}
 
@@ -136,6 +137,28 @@
             <button id="disagreeButton">I Disagree</button>
         </div>
     </div>
+
+    <h2>Customer Reviews</h2>
+    {% for review in reviews %}
+        {% if review.approved %}
+            <div class="review-card">
+                <p class="review-content">{{ review.content }}</p>
+                <div class="review-stars">
+                    {% for i in "12345"|make_list %}
+                        {% if i|add:0 <= review.rating %}
+                            <span class="fa fa-star checked"></span>
+                        {% else %}
+                            <span class="fa fa-star"></span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="review-user">Written by: {{ review.user }}</p>
+                <p class="review-date">Date: {{ review.updated_at|date:"F j, Y" }}</p>
+            </div>
+        {% endif %}
+    {% empty %}
+        <p>No reviews available.</p>
+    {% endfor %}
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

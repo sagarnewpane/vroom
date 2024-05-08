@@ -121,3 +121,11 @@ class BookingAdmin(admin.ModelAdmin):
             obj.car.availability = 'unavailable'
             obj.car.save()
         super().save_model(request, obj, form, change)
+
+from django.contrib import admin
+from .models import Review
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['user', 'car', 'content','rating', 'approved', 'created_at', 'updated_at']
+    list_editable = ['approved']
