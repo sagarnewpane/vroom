@@ -240,9 +240,9 @@ def contact(request):
                 fail_silently=True,
             )
 
-            return render(request, 'contact_test.html', {'form': form, 'success': True})
+            return render(request, 'contact.html', {'form': form, 'success': True})
 
     else:
         form = ContactForm()
 
-    return render(request, 'contact_test.html', {'form': form})
+    return render(request, 'contact.html', {'form': form})

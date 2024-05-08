@@ -76,8 +76,3 @@ def about(request):
 # FAQ Page
 def faq(request):
     return render(request,'faq.html')
-
-#Contact Page
-def contact(request):
-    return render(request, 'contact.html')
-
