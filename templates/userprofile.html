@@ -32,39 +32,40 @@
         <div class="booking-history">
             <h2>Your Bookings</h2>
             {% for booking in bookings %}
-            <a href="{% url 'bookings' booking.car.id %}" class="booking-link">
-                <div class="booking">
-                    <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100" />
-                    <div class="details">
-                        <p><strong>Model:</strong> {{ booking.car.model }}</p>
-                        <p><strong>Type:</strong> {{ booking.car.type }}</p>
-                        <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
-                        <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
-                        {% if booking.status == 'pending' %}
-                        <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
-                        {% endif %}
-                        {% if booking.status == 'cancelled' %}
-                        <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
-                        {% endif %}
+            <div class="booking">
+                <a href="{% url 'bookings' booking.car.id %}" class="booking-link"></a>
+                <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100" />
+                <div class="details">
+                    <p><strong>Model:</strong> {{ booking.car.model }}</p>
+                    <p><strong>Type:</strong> {{ booking.car.type }}</p>
+                    <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
+                    <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+                    </a>
+                    {% if booking.status == 'pending' %}
+                    <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                    {% endif %}
+                    {% if booking.status == 'cancelled' %}
+                    <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                    {% endif %}
 
-                        {% if booking.status == 'rejected' %}
-                        <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
-                        {% endif %}
+                    {% if booking.status == 'rejected' %}
+                    <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                    {% endif %}
 
-                        {% if booking.status == 'accepted' %}
-                        <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
-                        {% endif %}
+                    {% if booking.status == 'accepted' %}
+                    <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                    {% endif %}
 
-                        {% if booking.status == 'returned' %}
-                        <a href="{% url 'submit_review' booking.car.id %}">
-                            <button>Leave a Review</button>
-                        </a>
-                        {% endif %}
+                    {% if booking.status == 'returned' %}
+                    <a href="{% url 'submit_review' booking.car.id %}">
+                        <button>Leave a Review</button>
+                    </a>
+                    {% endif %}
 
-                    </div>
-                    <p><strong>Status:</strong> {{ booking.status }}</p>
                 </div>
-            </a>
+                <p class="status"><strong>Status:</strong> {{ booking.status }}</p>
+            </div>
+
             {% endfor %}
         </div>
     </div>
@@ -113,9 +114,11 @@
                     },
                     type: 'post',
                     success: function (response) {
-                        // handle success, for example remove the booking from the page
                         if (response.status == 'ok') {
-                            button.closest('.booking').remove();  // use the stored $(this)
+                            // Find the status element and change its text
+                            button.closest('.booking').find('.status').html('<strong>Status:</strong> cancelled');
+                            // Hide the cancel button
+                            button.hide();
                         }
                     }
                 });
