@@ -29,14 +29,14 @@
   flex-grow: 1;
   /* display: flex; */
   /* justify-content: center; */
-  margin-left: 340px;
+  margin-left: 220px;
 
 }
 
 .navbar .navbar-links a {
   color: white;
   text-align: center;
-  padding: 10px 20px;
+  padding: 5px 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
@@ -49,17 +49,32 @@
 .navbar .search {
   display: flex;
   align-items: center;
-  padding: 10px; 
-  /* margin-right: 250px; */
+  padding: 10px 8px; 
+  border-radius: 20px; 
+  background-color: #4f8dea; 
 }
 
 .navbar .search input[type="text"] {
-  border-radius: 20px;
+  flex-grow: 1; 
+  border-radius: 20px; 
   padding: 0 10px;
-  border: 3px solid #7caaef;
+  border: none; 
   color: #e2d9d9;
   background-color: transparent;
   outline: none;
+}
+
+.navbar .search .search-icon {
+  background: none;
+  border: none;
+  color: white; 
+  font-size: 15px; 
+  cursor: pointer;
+  margin-left: -30px; 
+}
+
+.navbar .search .search-placeholder {
+  font-size: 18px; 
 }
 
 .navbar .login-button{
@@ -70,7 +85,7 @@
 
 .navbar .user-dropdown {
   position: relative;
-  margin-right: 150px;
+  margin-right: 100px;
   background-color: #007bff;
   margin-top: 7px;
 }

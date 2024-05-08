@@ -9,6 +9,7 @@ main{
     padding: 5px;
 }
 
+
 .car-container {
     display: flex; /* Make it a flex container */
 }

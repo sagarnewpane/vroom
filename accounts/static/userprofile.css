@@ -1,13 +1,22 @@
-.user-profile-container {
-
+.container-profilepg {
     display: flex;
-    padding: 50px;
-    margin-top: 140px;    
+    justify-content: space-between;
+    padding-bottom: 30px;
+    padding-top: 50px;
+}
 
+.user-profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    margin-top: 140px;
+}
+
+.user-info-container {
+    margin-right: 20px;
 }
 
 .user-info h2 {
-   
     margin-bottom: 20px;
     text-align: center;
 }
@@ -23,44 +32,138 @@
 }
 
 .user-info h3 a:hover {
-    color: #0056b3;
+    color: #aeb2b6;
+}
+
+.user-info-container,
+.booking-history-container,
+.favourite-cars-container {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column; 
 }
 
 .user-info-container {
-    width: 50%;
     margin-right: 20px;
-    display: flex;
 }
 
-.user-info {
-    width: 100%;
-    padding: 15px;
-    /* background-color: #f9f9f9; */
+.user-info-box {
+    padding: 60px;
+    background-color: #f2f2f2; 
+    border: 1px solid #ccc;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content:center;
     align-items: center;
+}
+
+.user-icon {
+    margin-right: 20px;
+}
+
+.user-icon img {
+    border-radius: 50%;
+}
+
+.user-details {
+    flex-grow: 1;
+}
+
+.user-details h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.user-details h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.user-details h3 a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.user-details h3 a:hover {
+    color: #aeb2b6;
+}
+
+.user-info-container,
+.booking-history-container,
+.favourite-cars-container {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column; 
+}
+
+.content-container2 {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.content-box {
+    /* padding: 30px; */
+    background-color: #f2f2f2;
+    border: 5px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    width: 600px;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.favourite-cars-container {
+    flex-grow: 2; 
+    display: flex;
+    flex-direction: column;
+    height: 1000px; 
+    overflow-y: auto; 
+}
+
+.favourite-cars {
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    overflow-y: auto; 
 }
 
 .booking-history-container {
-    width: 50%;
+    flex-grow: 2; 
     display: flex;
+    flex-direction: column; 
 }
+
 
 .booking-history {
     align-items: center;
     justify-content: center;
-    width: 100%;
+}
+
+.car {
+    padding: 15px;
+    border-bottom: 3px solid #ccc;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 300px;
+}
+
+.car img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px; 
 }
 
 .booking {
-    
     padding: 15px;
     border-bottom: 1px solid #ccc;
     display: flex;
-    
-    
+    align-items: center; 
 }
 
 .booking img {
@@ -71,21 +174,66 @@
     margin-right: 20px;
 }
 
-.details {
-    flex-grow: 1;
+.button-container {
+    display: flex;
+    align-items: center;
 }
 
-.cancel-btn {
-    background-color: #f44336;
+.button-container button {
+    background-color: #007bff;
     color: #fff;
     border: none;
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+.cancel-btn {
+    background-color: #f44336;
 }
 
 .cancel-btn:hover {
     background-color: #d32f2f;
+}
+
+.box {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+}
+.tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+}
+.tab {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px ;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.tab.active {
+    background-color: #e0e0e0;
+}
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+.tab-content.active {
+    display: block;
+}
+.tab-left {
+    order: 1;
+}
+.tab-right {
+    order: 3;
 }
 
 /* Responsive styles */

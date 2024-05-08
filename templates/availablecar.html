@@ -29,10 +29,14 @@
     
     <div class="title-container">
         <h1>Available Cars</h1>
-        <button onclick="toggleFilterMenu()" >Filter</button>
+    </div>
+    <div class="filter">
+      <button onclick="toggleFilterMenu()" >Filter</button>
     </div>
   {% endif %}
+
     <div class="content-container">
+      
       <div class="car-container">
         {% if cars %}
         {% for car in cars %}
