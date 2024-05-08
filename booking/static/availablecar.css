@@ -32,9 +32,20 @@ h3{
 /* Add styles for the title container */
 .title-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px; /* Add padding to adjust alignment */
+    justify-content: center; 
+    align-items: center; 
+    padding: 0 20px; 
+}
+
+.title-container button {
+    margin-left: auto; /* Push the button to the right */
+}
+.title-container h1 {
+    text-align: center;
+}
+
+.title-container h1 {
+    text-align: center;
 }
 
 .car-container {
@@ -47,8 +58,6 @@ h3{
 .car p{
     text-align: left;
 }
-
-
 
 .car button{
     margin: 0;
