@@ -23,6 +23,7 @@ from django.contrib.auth import views as pass_view
 from django.conf.urls.static import static
 from django.conf import settings
 
+from booking.views import contact
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -48,6 +49,7 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     
     path('search/', views.search, name='search'),
+    path('contact/', contact, name='contact'),
 
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

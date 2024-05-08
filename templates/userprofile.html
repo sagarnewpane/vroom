@@ -2,101 +2,126 @@
 {% load static %}
 
 {% block head %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'userprofile.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile</title>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'userprofile.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {% endblock %}
 
 {% block content %}
-    <div class="user-profile-container">
-        <div class="user-info-container">
-            <div class="user-info">
-                <h2>User Profile</h2>
-                <div class="info">
-                    <p><strong>Username:</strong> {{user.username}}</p>
-                    <p><strong>Email:</strong> {{user.email}}</p>
-                    {% if not id_verification_status %}
-                        <h2 style="color: red;">Please verify yourself!</h2>
-                        <h3><a href="{% url 'verify' %}">Verify</a></h3>
-                    {% endif %}
-                </div>
+<div class="user-profile-container">
+    <div class="user-info-container">
+        <div class="user-info">
+            <h2>User Profile</h2>
+            <div class="info">
+                <p><strong>Username:</strong> {{user.username}}</p>
+                <p><strong>Email:</strong> {{user.email}}</p>
+                {% if not id_verification_status %}
+                <h2 style="color: red;">Please verify yourself!</h2>
+                <h3><a href="{% url 'verify' %}">Verify</a></h3>
+                {% endif %}
             </div>
         </div>
-        <div class="booking-history-container">
-            <div class="booking-history">
-                <h2>Your Bookings</h2>
-                {% for booking in bookings %}
-                {% if not booking.status == '' %}
-                    <div class="booking">
-                        <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100"/>
-                        <div class="details">
-                            <p><strong>Model:</strong> {{ booking.car.model }}</p>
-                            <p><strong>Type:</strong> {{ booking.car.type }}</p>
-                            <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
-                            <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
-                        </div>
-                        <p><strong>Status:</strong> {{ booking.status }}</p>
+    </div>
+    <div class="booking-history-container">
+        <div class="booking-history">
+            <h2>Your Bookings</h2>
+            {% for booking in bookings %}
+            <a href="{% url 'bookings' booking.car.id %}" class="booking-link">
+                <div class="booking">
+                    <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100" />
+                    <div class="details">
+                        <p><strong>Model:</strong> {{ booking.car.model }}</p>
+                        <p><strong>Type:</strong> {{ booking.car.type }}</p>
+                        <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
+                        <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+                        {% if booking.status == 'pending' %}
+                        <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                        {% endif %}
+                        {% if booking.status == 'cancelled' %}
+                        <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                        {% endif %}
+
+                        {% if booking.status == 'rejected' %}
+                        <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                        {% endif %}
+
+                        {% if booking.status == 'accepted' %}
+                        <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                        {% endif %}
+
+                        {% if booking.status == 'returned' %}
+                        <a href="{% url 'submit_review' booking.car.id %}">
+                            <button>Leave a Review</button>
+                        </a>
+                        {% endif %}
+
                     </div>
-                {% endif %}
-                {% endfor %}
-            </div>
+                    <p><strong>Status:</strong> {{ booking.status }}</p>
+                </div>
+            </a>
+            {% endfor %}
         </div>
     </div>
+</div>
 
-    <div class="favourite-cars-container">
-        <h2>Your Favourite Cars</h2>
-        {% for favourite in favourites %}
-            <div class="car">
-                <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" width="100"/>
-                <h2>{{ favourite.car.model }}</h2>
-                <h3>{{ favourite.car.type }}</h3>
-                <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
-                {% if favourite.car.total_price %}
-                    <p>Estimated : <strong>Rs {{ favourite.car.total_price }}</strong></p> 
-                {% endif %}
-                <p style="color: rgb(27, 27, 27);">Location : <strong>{{ favourite.car.car_location }}</strong></p>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
-                    <a href="{% url 'bookings' favourite.car.id %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
-                    <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
-                </div>
-            </div>
-        {% empty %}
-            <p>You have no favourite cars.</p>
-        {% endfor %}
+<div class="favourite-cars-container">
+    <h2>Your Favourite Cars</h2>
+    {% for favourite in favourites %}
+    <div class="car">
+        <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" width="100" />
+        <h2>{{ favourite.car.model }}</h2>
+        <h3>{{ favourite.car.type }}</h3>
+        <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
+        {% if favourite.car.total_price %}
+        <p>Estimated : <strong>Rs {{ favourite.car.total_price }}</strong></p>
+        {% endif %}
+        <p style="color: rgb(27, 27, 27);">Location : <strong>{{ favourite.car.car_location }}</strong></p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+            <a href="{% url 'bookings' favourite.car.id %}"><button type="button"
+                    style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book
+                    Now</button></a>
+            <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
+        </div>
     </div>
+    {% empty %}
+    <p>You have no favourite cars.</p>
+    {% endfor %}
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".cancel-btn").click(function(){
-                var bookingId = $(this).data('booking-id');
-                var button = $(this);  // store $(this) in a variable
-        
-                // display a confirmation dialog
-                var confirmDelete = confirm("Are you sure you want to cancel this booking?");
-                if (confirmDelete) {
-                    $.ajax({
-                        url: '{% url "cancel_booking" %}',
-                        data: {
-                            'booking_id': bookingId,
-                            'csrfmiddlewaretoken': '{{ csrf_token }}'
-                        },
-                        type: 'post',
-                        success: function(response){
-                            // handle success, for example remove the booking from the page
-                            if(response.status == 'ok'){
-                                button.closest('.booking').remove();  // use the stored $(this)
-                            }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".cancel-btn").click(function () {
+            var bookingId = $(this).data('booking-id');
+            var button = $(this);  // store $(this) in a variable
+
+            // display a confirmation dialog
+            var confirmDelete = confirm("Are you sure you want to cancel this booking?");
+            if (confirmDelete) {
+                $.ajax({
+                    url: '{% url "cancel_booking" %}',
+                    data: {
+                        'booking_id': bookingId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    type: 'post',
+                    success: function (response) {
+                        // handle success, for example remove the booking from the page
+                        if (response.status == 'ok') {
+                            button.closest('.booking').remove();  // use the stored $(this)
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
         });
-    </script>
+    });
+</script>
 
 {% endblock %}
