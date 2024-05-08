@@ -67,9 +67,6 @@ h3{
     color: red;
 }
 
-/* filter */
-
-/* filter */
 
 /* Add styles for the filter menu */
 .filter-menu {
@@ -106,4 +103,57 @@ h3{
     flex-grow: 1;
     flex-shrink: 1;
     transition: flex-shrink 0.8s ease;
+}
+/* Responsive styles */
+
+@media screen and (max-width: 430px) {
+    /* Adjustments for smaller screens */
+    .car h1 {
+        font-size: 1em;
+    }
+    .car h3{
+        font-size: 0.9em;
+    }
+    .car p{
+        font-size: 0.8em;
+    }
+    .car-container .car{
+        margin: 5px;
+    }
+    .car {
+        width: 40%; 
+    }
+    .car-slider {
+        height: 300px;
+    }
+    
+    .car-slider img {
+        height: 300px;
+    }
+    .car-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        flex-grow: unset;
+        flex-shrink: unset;
+        transition: none;
+    }
+    .filter-menu {
+        display: none;
+        min-width: 150px;
+        background-color: #f1f1f1;
+        padding: 30px;
+        border: 1px solid #ddd;
+        transition: all 0.8s ease;
+        margin-right: 50px;
+        margin-bottom: 999px;
+        margin-top: 60px;
+        font-family: Arial, sans-serif;
+        color: #000000;
+        border: 2px solid #0367d1;
+        border-radius: 10px;
+        height: 45%;
+    }
+    
 }

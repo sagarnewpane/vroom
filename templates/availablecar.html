@@ -27,7 +27,7 @@
       <img src="{% static 'BMW.png' %}" alt="" srcset="">
     </div>
     
-    <div class="title-container">
+    <div class="title-container available">
         <h1>Available Cars</h1>
         <button onclick="toggleFilterMenu()" >Filter</button>
     </div>
@@ -55,7 +55,7 @@
 
         {% endfor %}
         {% else %}
-          <h1 style="margin-bottom: 50px;">No Car for your liking :(</h1>
+          <h1 style="margin-bottom: 50px;">No Car for your liking :</h1>
         {% endif %}
       </div>
       <div id="filter-menu" class="filter-menu">
