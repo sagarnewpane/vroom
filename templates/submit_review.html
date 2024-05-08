@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Booking</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'popup.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="review-container">
+    <h1 class="review-header">Leave a Review for {{ car.model }}</h1>
+    <div class="review-content">
+        <img class="review-car-image" src="{{ car.image.url }}" alt="{{ car.model }}">
+        <form method="post" class="review-form">
+            {% csrf_token %}
+            <h3>Feedback</h3>
+            {{ form.content }}
+            <div class="star-rating">
+                {% for value, star in form.rating.field.choices %}
+                    <input type="radio" id="star{{ value }}" name="{{ form.rating.name }}" value="{{ value }}" {% if form.rating.value == value %}checked{% endif %}/>
+                    <label for="star{{ value }}" data-value="{{ value }}"><i class="fa fa-star"></i></label>
+                {% endfor %}
+            </div>
+            <button type="submit" class="submit-btn">Leave a Review</button>
+        </form>
+       
+    </div>
+</div>
+<a href="{% url 'view_bookings' %}" class="back-link">Go to Profile</a> <!-- Add this line -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<style>
+    main {
+            margin-top: 100px;
+        }
+
+        /* Review container styles */
+        .review-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Review content styles */
+        .review-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .review-car-image {
+            max-width: 60%;
+            margin-right: 10px;
+            border-radius: 10px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* Review form styles */
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); /* Add a shadow effect */
+            margin: auto; /* Center the box */
+            max-width: 800px; /* Limit the maximum width */
+        }
+
+        .review-form h3 {
+            color: #333;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .review-form textarea {
+            max-width: 400px;  /* Adjust as needed */
+            max-height: 150px; /* Adjust as needed */
+            min-height: 150px;
+            min-width: 400px;
+            overflow-y: auto;
+        }
+
+        /* Star rating styles */
+        .star-rating {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .star-rating input[type=radio] {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 30px;
+            padding: 0;
+            cursor: pointer;
+            color: lightgray;
+        }
+
+        .star-rating input[type=radio]:checked ~ label,
+        .star-rating input[type=radio]:checked ~ label ~ input[type=radio] ~ label {
+            color: blue;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ input[type=radio] ~ label {
+            color: blue;
+        }
+
+        /* Submit button styles */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-link {
+            position: fixed;
+            text-decoration: none;
+            top: 630px;
+            right: 200px;
+            font-size: larger;
+            color: blue;
+        }
+</style>
+
+<script>
+    document.querySelectorAll('.star-rating label').forEach(label => {
+    label.addEventListener('mouseover', event => {
+        let value = event.currentTarget.getAttribute('data-value');
+        document.querySelectorAll(`.star-rating label`).forEach(star => {
+            star.style.color = star.getAttribute('data-value') <= value ? 'blue' : 'lightgray';
+        });
+    });
+
+    label.addEventListener('click', event => {
+        let value = event.currentTarget.getAttribute('data-value');
+        document.querySelectorAll(`.star-rating label`).forEach(star => {
+            star.style.color = star.getAttribute('data-value') <= value ? 'blue' : 'lightgray';
+        });
+        // Save the selected value to keep the color of the stars after mouseout
+        label.parentElement.setAttribute('data-selected', value);
+    });
+});
+
+// Update the color of the stars based on the selected value when the mouse leaves the star rating
+document.querySelector('.star-rating').addEventListener('mouseout', event => {
+    let value = event.currentTarget.getAttribute('data-selected');
+    document.querySelectorAll(`.star-rating label`).forEach(star => {
+        star.style.color = star.getAttribute('data-value') <= value ? 'blue' : 'lightgray';
+    });
+});
+</script>
+
+{% endblock%}
