@@ -44,6 +44,10 @@ h3{
     text-align: center;
 }
 
+.title-container h1 {
+    text-align: center;
+}
+
 .car-container {
     margin-top: 50px;
     display: flex;

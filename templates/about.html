@@ -105,6 +105,102 @@ section p {
   font-size: 1.1rem;
   color: #666;
 }
+
+.footer-section {
+  display: block;
+}
+
+.Responsive-section {
+  display: none;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .welcome-container {
+    margin-top: 100px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 30px;
+  }
+
+  .welcome-container h1 {
+    font-size: 24px;
+  }
+
+  .welcome-container p {
+    font-size: 18px;
+  }
+
+  .container2 {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .container2 h2 {
+    font-size: 2rem;
+  }
+
+  .container2 p {
+    font-size: 1rem;
+  }
+  .vroom-intro {
+    display: none;
+  }
+  
+  .Responsive-section {
+    display: block;
+  }
+  .navbar {
+    padding: 8px 20px; /* Reduce padding */
+  }
+
+  .navbar .logo {
+    padding: 0 20px; /* Reduce logo padding */
+  }
+
+  .navbar .navbar-links {
+    margin-left: 0; /* Reset margin */
+    display: none; /* Hide navbar links by default */
+    flex-direction: column; /* Arrange links vertically */
+    align-items: center; /* Center links */
+  }
+
+  .navbar .navbar-links a {
+    padding: 10px 0; /* Add padding to each link */
+    width: 100%; /* Make links full width */
+  }
+
+  .navbar .search {
+    margin-right: auto; /* Move search to the left */
+  }
+
+  .navbar .user-dropdown {
+    margin-right: 0; /* Reset margin */
+  }
+
+  .navbar .user-dropdown .dropdown-content {
+    top: 70px; /* Adjust dropdown position */
+  }
+
+  .navbar.active .navbar-links {
+    display: flex; /* Show navbar links when active */
+  }
+
+  .dropdown-content {
+    display: block; /* Show dropdown content by default */
+  }
+
+  /* Hide dropdown content */
+  .user-dropdown.active .dropdown-content {
+    display: none;
+  }
+}
+
+  
+}
+
+
+
 </style>
 <main>
 <div class="welcome-container"  >
