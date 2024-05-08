@@ -15,12 +15,13 @@
 
   <!-- Navigation Bar -->
   <nav class="navbar">
-    <div class="logo">Vroom</div>
+    <div class="logo"><a href="{% url 'home' %}" class="logo" style="text-decoration: none; display: inline-block;">Vroom</a>
+    </div>
     <div class="navbar-links">
         <a href="{%url 'home'%}">Home</a>
         <a href="{%url 'available_cars'%}">Cars</a>
         <a href="{%url 'about'%}">About</a>
-        <a href="#">Contact</a>
+        <a href="{%url 'contact'%}">Contact</a>
     </div>
     <div class="search">
       <form method="GET" action="{% url 'search' %}">
@@ -62,10 +63,10 @@
       <div class="footer-section">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Term and Conditions</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="{%url 'about'%}">About</a></li>
+          <li><a href="{%url 'available_cars'%}">Cars</a></li>
+          <li><a href="{%url 'contact'%}">Contact</a></li>
+          <li><a href="{%url 'faq'%}">Help</a>
         </ul>
       </div>
       <div class="footer-section">

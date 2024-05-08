@@ -77,3 +77,7 @@ def about(request):
 def faq(request):
     return render(request,'faq.html')
 
+#Contact Page
+def contact(request):
+    return render(request, 'contact.html')
+
