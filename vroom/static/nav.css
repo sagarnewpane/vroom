@@ -15,8 +15,6 @@
   padding: 8px 50px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 .navbar .logo {
@@ -112,4 +110,59 @@
 
 .dropdown-content{
   display: none;
+}
+
+@media screen and (max-width: 1710px) {
+  .navbar .navbar-links {
+    margin-left: 280px; 
+  }
+
+  .navbar .search {
+    margin-right: 150px;
+  }
+}
+
+@media screen and (max-width: 1560px) {
+  .navbar .navbar-links {
+    margin-left: 240px; 
+  }
+
+  .navbar .search {
+    margin-right: 110px;
+  }
+}
+
+@media screen and (max-width: 1490px) {
+  .navbar .navbar-links {
+    margin-left: 200px; 
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .navbar .navbar-links {
+    margin-left: 160px; 
+  }
+}
+
+@media screen and (max-width: 1390px) {
+  .navbar .navbar-links {
+    margin-left: 100px; 
+  }
+}
+
+@media screen and (max-width: 1380px) {
+  .navbar .navbar-links {
+    margin-left: 90px; 
+  }
+}
+@media screen and (max-width: 1150px) {
+  .navbar .navbar-links {
+    margin-left: 60px; 
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .navbar .navbar-links {
+    margin-left: 55px; 
+  }
 }
