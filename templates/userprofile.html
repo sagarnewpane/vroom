@@ -79,6 +79,7 @@
             <div class="booking-history">
                 <h2>Your Bookings</h2>
                 {% for booking in bookings %}
+<<<<<<< HEAD
                     {% if not booking.status == '' %}
                         <div class="booking">
                             <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}"/>
@@ -89,6 +90,17 @@
                                 <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
                             </div>
                             <p><strong>Status:</strong> {{ booking.status }}</p>
+=======
+                {% if not booking.status == '' %}
+                    <div class="booking">
+                        <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100"/>
+                        <div class="details">
+                            <p><strong>Model:</strong> {{ booking.car.model }}</p>
+                            <p><strong>Type:</strong> {{ booking.car.type }}</p>
+                            <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+                            <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
+                            <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+>>>>>>> bd8f6c64875ca727cc3a7f0a4e1b76799a94b5a7
                         </div>
                     {% endif %}
                 {% endfor %}

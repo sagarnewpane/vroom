@@ -42,6 +42,12 @@ h3{
     padding: 0 10px;
 }
 
+<<<<<<< HEAD
+=======
+.title-container h1 {
+    text-align: center;
+}
+>>>>>>> bd8f6c64875ca727cc3a7f0a4e1b76799a94b5a7
 
 .car-container {
     margin-top: 55px;
