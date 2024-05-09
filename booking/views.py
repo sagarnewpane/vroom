@@ -223,6 +223,7 @@ def submit_review(request, car_id):
 from django.core.mail import send_mail
 from django.shortcuts import render
 from .forms import ContactForm
+from accounts.models import CustomUser
 
 def contact(request):
     if request.method == 'POST':
@@ -232,11 +233,14 @@ def contact(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
+            # Fetch all admin emails
+            admin_emails = CustomUser.objects.filter(is_staff=True).values_list('email', flat=True)
+
             send_mail(
                 f'From - {email} | {title}',
                 f'From - {email} \n {message}',
                 email,
-                [EMAIL_HOST_USER],
+                admin_emails,
                 fail_silently=True,
             )
 
