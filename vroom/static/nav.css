@@ -15,8 +15,6 @@
   padding: 8px 50px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 .navbar .logo {
@@ -128,3 +126,22 @@
 .dropdown-content{
   display: none;
 }
+
+@media screen and (min-width: 430px) {
+  .navbar {
+    padding: 8px 50px;
+  }
+
+  .navbar .logo,
+  .navbar .navbar-links {
+    padding: 0;
+  }
+
+  .navbar .search {
+    display: flex; /* Show search on larger screens */
+    margin-right: auto; /* Align search to the left */
+  }
+}
+
+
+
