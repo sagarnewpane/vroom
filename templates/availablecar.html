@@ -3,95 +3,107 @@
 
 
 {% block head %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Cars</title>
-    
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'availablecar.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Available Cars</title>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'availablecar.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 {% endblock %}
 
 {% block content %}
 
-    {% if query %}
-      <div class="title-container">
-          <h1>Search Result</h1>
-          <h2>Showing results for "{{ query }}"</h2>
-          <button onclick="toggleFilterMenu()" >Filter</button>
+{% if query %}
+<div class="title-container">
+  <h1>Search Result</h1>
+  <h2>Showing results for "{{ query }}"</h2>
+  <button onclick="toggleFilterMenu()">Filter</button>
+</div>
+{% else %}
+<div class="car-slider">
+  <img src="{% static 'BMW.png' %}" alt="" srcset="">
+</div>
+
+<div class="title-container available">
+  <h1>Available Cars</h1>
+</div>
+<div class="filter">
+  <button onclick="toggleFilterMenu()">Filter</button>
+</div>
+{% endif %}
+
+
+<div class="content-container">
+  <div id="filter-menu" class="filter-menu">
+    <h2>Filter Options</h2>
+    <form method="get">
+      <h3>Location</h3>
+
+      <input type="checkbox" name="car_location" value="Kathmandu" {% if 'Kathmandu' in car_location %}checked{% endif %}><label for="Kathmandu">Kathmandu</label><br>
+      <input type="checkbox" name="car_location" value="Pokhara" {% if 'Pokhara' in car_location %}checked{% endif %}><label for="Pokhara">Pokhara</label><br>
+
+      <!-- Add more locations as needed -->
+
+      <h3>Type</h3>
+      <input type="checkbox" name="type" value="Sedan" {% if 'Sedan' in type %}checked{% endif %}><label
+        for="Sedan">Sedan</label><br>
+      <input type="checkbox" name="type" value="SUV" {% if 'SUV' in type %}checked{% endif %}><label
+        for="SUV">SUV</label><br>
+      <input type="checkbox" name="type" value="Sports" {% if 'Sports' in type %}checked{% endif %}><label
+        for="Sports">Sports</label><br>
+      <input type="checkbox" name="type" value="EV" {% if 'EV' in type %}checked{% endif %}><label
+        for="EV">EV</label><br>
+      <input type="checkbox" name="type" value="MPV" {% if 'MPV' in type %}checked{% endif %}><label
+        for="MPV">MPV</label><br>
+
+      <!-- Add more types as needed -->
+
+      <h3>Availability</h3>
+      <input type="checkbox" name="availability" value="available" {% if 'available' in availability %}checked{% endif %}><label for="available">Available</label><br>
+      <input type="checkbox" name="availability" value="unavailable" {% if 'unavailable' in availability %}checked{% endif %}><label for="unavailable">Unavailable</label><br>
+      <input type="checkbox" name="availability" value="maintenance" {% if 'maintenance' in availability %}checked{% endif %}><label for="maintenance">Maintainance</label><br>
+
+
+      <input type="hidden" name="q" value="{{ query }}">
+
+      <button type="submit">Apply Filters</button>
+      <button type="button" onclick="window.location.href=window.location.pathname;">Reset Filters</button>
+    </form>
+  </div>
+  <div class="car-container">
+    {% if cars %}
+    {% for car in cars %}
+
+    <div class="car">
+      <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100" />
+      <h2>{{ car.model }}</h2>
+      <h3>{{ car.type }}</h3>
+      <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
+      {% if car.total_price %}
+      <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p>
+      {% endif %}
+      <p style="color: rgb(27, 27, 27);">Location : <strong>{{ car.car_location }}</strong></p>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+        <a href="{% url 'bookings' car.id %}"><button type="button"
+            style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
+        <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p>
       </div>
+    </div>
+
+    {% endfor %}
     {% else %}
-    <div class="car-slider">
-      <img src="{% static 'BMW.png' %}" alt="" srcset="">
-    </div>
-    
-    <div class="title-container available">
-        <h1>Available Cars</h1>
-        <button onclick="toggleFilterMenu()" >Filter</button>
-    </div>
-  {% endif %}
-    <div class="content-container">
-      <div id="filter-menu" class="filter-menu">
-        <h2>Filter Options</h2>
-        <form method="get">
-          <h3>Location</h3>
-          
-          <input type="checkbox" name="car_location" value="Kathmandu" {% if 'Kathmandu' in car_location %}checked{% endif %}><label for="Kathmandu">Kathmandu</label><br>
-          <input type="checkbox" name="car_location" value="Pokhara" {% if 'Pokhara' in car_location %}checked{% endif %}><label for="Pokhara">Pokhara</label><br>
-
-          <!-- Add more locations as needed -->
-
-          <h3>Type</h3>
-          <input type="checkbox" name="type" value="Sedan" {% if 'Sedan' in type %}checked{% endif %}><label for="Sedan">Sedan</label><br>
-          <input type="checkbox" name="type" value="SUV" {% if 'SUV' in type %}checked{% endif %}><label for="SUV">SUV</label><br>
-          <input type="checkbox" name="type" value="Sports" {% if 'Sports' in type %}checked{% endif %}><label for="Sports">Sports</label><br>
-          <input type="checkbox" name="type" value="EV" {% if 'EV' in type %}checked{% endif %}><label for="EV">EV</label><br>
-          <input type="checkbox" name="type" value="MPV" {% if 'MPV' in type %}checked{% endif %}><label for="MPV">MPV</label><br>
-
-          <!-- Add more types as needed -->
-
-          <h3>Availability</h3>
-          <input type="checkbox" name="availability" value="available" {% if 'available' in availability %}checked{% endif %}><label for="available">Available</label><br>
-          <input type="checkbox" name="availability" value="unavailable" {% if 'unavailable' in availability %}checked{% endif %}><label for="unavailable">Unavailable</label><br>
-          <input type="checkbox" name="availability" value="maintenance" {% if 'maintenance' in availability %}checked{% endif %}><label for="maintenance">Maintainance</label><br>
+    <h1 style="margin-bottom: 50px;">No Car for your liking :</h1>
+    {% endif %}
+  </div>
 
 
-          <input type="hidden" name="q" value="{{ query }}">
+</div>
 
-          <button type="submit">Apply Filters</button>
-          <button type="button" onclick="window.location.href=window.location.pathname;">Reset Filters</button>
-      </form>
-    </div>
-      <div class="car-container">
-        {% if cars %}
-        {% for car in cars %}
-
-        <div class="car">
-            <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
-            <h2>{{ car.model }}</h2>
-            <h3>{{ car.type }}</h3>
-            <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
-            {% if car.total_price %}
-                <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p> 
-            {% endif %}
-            <p style="color: rgb(27, 27, 27);">Location : <strong>{{ car.car_location }}</strong></p>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
-                <a href="{% url 'bookings' car.id %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
-                <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p>
-            </div>
-        </div>
-
-        {% endfor %}
-        {% else %}
-          <h1 style="margin-bottom: 50px;">No Car for your liking :</h1>
-        {% endif %}
-      </div>
-      
-
-    </div>
-    
-    <script src="{% static 'availablecar.js' %}"></script>
+<script src="{% static 'availablecar.js' %}"></script>
 {% endblock %}
