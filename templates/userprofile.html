@@ -30,18 +30,38 @@
             <div class="booking-history">
                 <h2>Your Bookings</h2>
                 {% for booking in bookings %}
-                {% if not booking.status == '' %}
+                <a href="{% url 'bookings' booking.car.id %}" class="booking-link">
                     <div class="booking">
                         <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100"/>
                         <div class="details">
                             <p><strong>Model:</strong> {{ booking.car.model }}</p>
                             <p><strong>Type:</strong> {{ booking.car.type }}</p>
                             <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
-                            <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                            {% if booking.status == 'pending' %}
+                                <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                            {% endif %}
+                            {% if booking.status == 'cancelled' %}
+                                <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                            {% endif %}
+
+                            {% if booking.status == 'rejected' %}
+                                <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                            {% endif %}
+
+                            {% if booking.status == 'accepted' %}
+                                <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                            {% endif %}
+
+                            {% if booking.status == 'returned' %}
+                            <a href="{% url 'submit_review' booking.car.id %}">
+                                <button>Leave a Review</button>
+                            </a>
+                            {% endif %}
+                            
                         </div>
                         <p><strong>Status:</strong> {{ booking.status }}</p>
                     </div>
-                {% endif %}
+                </a>
                 {% endfor %}
             </div>
         </div>

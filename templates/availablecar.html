@@ -33,31 +33,6 @@
     </div>
   {% endif %}
     <div class="content-container">
-      <div class="car-container">
-        {% if cars %}
-        {% for car in cars %}
-
-        <div class="car">
-            <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
-            <h2>{{ car.model }}</h2>
-            <h3>{{ car.type }}</h3>
-            <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
-            {% if car.total_price %}
-                <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p> 
-            {% endif %}
-            <p style="color: rgb(27, 27, 27);">Location : <strong>{{ car.car_location }}</strong></p>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
-                <a href="{% url 'bookings' car.id %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
-                <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p>
-            </div>
-        </div>
-
-        {% endfor %}
-        {% else %}
-          <h1 style="margin-bottom: 50px;">No Car for your liking :</h1>
-        {% endif %}
-      </div>
       <div id="filter-menu" class="filter-menu">
         <h2>Filter Options</h2>
         <form method="get">
@@ -89,6 +64,33 @@
           <button type="button" onclick="window.location.href=window.location.pathname;">Reset Filters</button>
       </form>
     </div>
+      <div class="car-container">
+        {% if cars %}
+        {% for car in cars %}
+
+        <div class="car">
+            <img src="{{ car.image.url }}" alt="{{ car.model }}" width="100"/>
+            <h2>{{ car.model }}</h2>
+            <h3>{{ car.type }}</h3>
+            <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ car.hourly_rate }}</strong></p>
+            {% if car.total_price %}
+                <p>Estimated : <strong>Rs {{ car.total_price }}</strong></p> 
+            {% endif %}
+            <p style="color: rgb(27, 27, 27);">Location : <strong>{{ car.car_location }}</strong></p>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+                <a href="{% url 'bookings' car.id %}"><button type="button" style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
+                <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p>
+            </div>
+        </div>
+
+        {% endfor %}
+        {% else %}
+          <h1 style="margin-bottom: 50px;">No Car for your liking :</h1>
+        {% endif %}
+      </div>
+      
+
     </div>
     
     <script src="{% static 'availablecar.js' %}"></script>
