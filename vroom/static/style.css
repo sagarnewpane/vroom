@@ -56,14 +56,14 @@ margin-top: 10px; /* Add space between icon and text */
 
 .vertical-container {
 width: 300px; 
-height: 400px;
+height: auto;
 padding: 20px; 
 margin: 20px auto;
 background-color: rgba(255, 255, 255, 0.9); 
 border-radius: 10px; 
 box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
 top: 45%;
-transform: translate(-80%, -50%);
+transform: translate(-80%, -40%);
 text-align: center; /* Center the content horizontally */
 }
 
@@ -238,6 +238,7 @@ z-index: 2; /*  section appears above other content */
 .Responsive-section{
   display: none;
 }
+
 @media screen and (max-width: 430px) {
 
   main{
