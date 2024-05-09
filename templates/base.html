@@ -3,48 +3,52 @@
 <html>
 
 <head>
-  
+
   {% block head %}{% endblock %}
   <link rel="stylesheet" href="{% static 'nav.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="nav.css"  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
 
   <!-- Navigation Bar -->
   <nav class="navbar">
-    <div class="logo"><a href="{% url 'home' %}" class="logo" style="text-decoration: none; display: inline-block;">Vroom</a>
+    <div class="logo"><a href="{% url 'home' %}" class="logo"
+        style="text-decoration: none; display: inline-block;">Vroom</a>
     </div>
     <div class="navbar-links">
-        <a href="{%url 'home'%}">Home</a>
-        <a href="{%url 'available_cars'%}">Cars</a>
-        <a href="{%url 'about'%}">About</a>
-        <a href="{%url 'contact'%}">Contact</a>
+      <a href="{%url 'home'%}">Home</a>
+      <a href="{%url 'available_cars'%}">Cars</a>
+      <a href="{%url 'about'%}">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+
     </div>
     <div class="search">
       <form method="GET" action="{% url 'search' %}">
         <input type="text" placeholder="Search.." name="q" value="{{ query }}">
         <input type="submit" value="Search">
-    </form>
+      </form>
     </div>
     {% if user.is_authenticated %}
-        <div class="user-dropdown">
-            <button class="dropbtn" id="dropdownButton">
-                <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
-            </button>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="{% url 'view_bookings' %}">Profile</a>
-                <a href="{%url 'faq'%}">Help</a>
-                <a href="{% url 'logout' %}">Logout</a>
-            </div>
-        </div>
-    {% else %} 
-        <a href="{% url 'login' %}" class="login-button">Login</a>
+    <div class="user-dropdown">
+      <button class="dropbtn" id="dropdownButton">
+        <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
+      </button>
+      <div class="dropdown-content" id="dropdownContent">
+        <a href="{% url 'view_bookings' %}">Profile</a>
+        <a href="{%url 'faq'%}">Help</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+    {% else %}
+    <a href="{% url 'login' %}" class="login-button">Login</a>
     {% endif %}
-</nav>
-  
+  </nav>
+
 
 
   <main>
@@ -92,6 +96,6 @@
   <script src="{% static 'nav.js' %}"></script>
   <script src="{% static 'search.js' %}"></script>
 
-  </body>
+</body>
 
 </html>

@@ -218,3 +218,31 @@ def submit_review(request, car_id):
     else:
         form = ReviewForm()
     return render(request, 'submit_review.html', {'form': form, 'car': car})  # Pass the car to the template
+
+
+from django.core.mail import send_mail
+from django.shortcuts import render
+from .forms import ContactForm
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            send_mail(
+                f'From - {email} | {title}',
+                f'From - {email} \n {message}',
+                email,
+                [EMAIL_HOST_USER],
+                fail_silently=True,
+            )
+
+            return render(request, 'contact.html', {'form': form, 'success': True})
+
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact.html', {'form': form})

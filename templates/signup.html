@@ -1,42 +1,43 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vroom - Signup</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="{% static 'login.css' %}">
+  <link rel="stylesheet" href="{% static 'alert.css' %}">
+
 </head>
+
 <body>
   <div class="container">
-    
+
     <form id="signupForm" class="form" method="POST" action="{% url 'signup' %}">
       {% csrf_token %}
 
       <h2>Sign Up</h2>
       <div class="form-control">
         <label for="{{ form.username.id_for_label}}"><i class="fas fa-user"></i> Username:</label>
-        <input type="text" name="{{ form.username.name }}" class="form-control"/>
-        {% if form.username.errors %}
-          <span class="text-danger">{{ form.username.errors }}</span>
-        {% endif %}
+        <input type="text" name="{{ form.username.name }}" class="form-control" />
+        <span class="errorMessage">{{ form.username.errors }}</span>
       </div>
       <div class="form-control">
         <label for="{{ form.email.id_for_label}}"><i class="fas fa-envelope"></i> Email:</label>
         <input type="email" name="{{ form.email.name }}" class="form-control" />
-        <span class="text-danger">{{ form.email.errors }}</span>
+        <span class="errorMessage">{{ form.email.errors }}</span>
       </div>
       <div class="form-control">
         <label for="{{ form.password1.id_for_label}}"><i class="fas fa-lock"></i> Password:</label>
         <input type="password" name="{{ form.password1.name }}" class="form-control" />
-        <span class="text-danger">{{ form.password1.errors }}</span>
+        <span class="errorMessage">{{ form.password1.errors }}</span>
       </div>
       <div class="form-control">
         <label for="{{ form.password2.id_for_label}}"><i class="fas fa-lock"></i> Confirm Password:</label>
         <input type="password" name="{{ form.password2.name }}" class="form-control" />
-        <span class="text-danger">{{ form.password2.errors }}</span>
+        <span class="errorMessage">{{ form.password2.errors }}</span>
       </div>
       <button type="submit">Sign Up</button>
     </form>
@@ -44,4 +45,5 @@
   </div>
   <!-- <script src="ls.js"></script> -->
 </body>
+
 </html>

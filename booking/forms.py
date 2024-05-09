@@ -17,3 +17,10 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['content', 'rating']
+
+from django import forms
+
+class ContactForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
