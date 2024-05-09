@@ -16,17 +16,10 @@ document.getElementById("carForm").addEventListener("submit", function (event) {
   }
 
   if (errorMessage) {
-    document.getElementById("errorMessage").textContent = errorMessage; // Update the error message in the vertical container
+    document.querySelector(".errorMessage").textContent = errorMessage; // Update the error message in the vertical container
     event.preventDefault(); // prevent form from submitting
   } else {
     // Form submission is valid
     this.submit();
   }
 });
-
-document
-  .getElementById("modalCloseButton")
-  .addEventListener("click", function () {
-    document.getElementById("errorModal").style.display = "none";
-    document.getElementById("modalOverlay").style.display = "none";
-  });
