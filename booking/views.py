@@ -123,7 +123,7 @@ def book_car(request, car_id):
 
 @login_required(login_url='login')
 def view_bookings(request):
-    bookings = Booking.objects.filter(user=request.user)
+    bookings = Booking.objects.filter(user=request.user).order_by('-booking_date')
     favourites = Favourite.objects.filter(user=request.user)
     try:
         id_verification = IDVerification.objects.get(user=request.user)
