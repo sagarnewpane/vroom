@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Booking</h1>
     {% if message %}
     <div class="message">
             <p>{{ message }}</p>
@@ -24,14 +23,21 @@
         {% if car %}
         <div class="car-container">
             <div class="car-img">
+                <div class="image-container">
                     <img src="{{ car.image.url }}" alt="Car Image">
-            </div>
-                <div class="specifications-container">
-                    <!-- Fav button -->
-                    <button class="favourite-button" data-car-id="{{ car.id }}"></button>
-
+                    <div class="car-name">
+                    <div class="about-car">
                     <p class="model">{{ car.model }}</p>
                     <p class="type">Category : <strong>{{ car.type }}</strong></p>
+                </div> 
+                <button class="favourite-button" data-car-id="{{ car.id }}"></button>   
+                </div> 
+                <p class="cost">Cost: {{ car.hourly_rate }} /hr</p>
+            </div>
+            </div>
+
+            <div class="specification-box">
+                <div class="specifications-container">
                     <h2>Specifications</h2>
                   {% comment %} <div class="specifications-info-container">
                       <p><img src="{% static 'icon/speed.png' %}" alt="milage of the image"> Mileage: {{ car.mileage }} kilometers per liter</p>
@@ -84,8 +90,7 @@
                             </div>
                         </div>
                       </div>
-                      
-                <p class="cost">Cost: {{ car.hourly_rate }} /hr</p> <!-- Cost added here -->
+                      </div>
                 </div>
 
                 <div class="booking-container">

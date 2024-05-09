@@ -29,7 +29,6 @@ h3{
     
 }
 
-/* Add styles for the title container */
 .title-container {
     display: flex;
     justify-content: center; 
@@ -61,16 +60,16 @@ h3{
 }
 
 .car:hover {
-    transform: translateY(-8px); /* Add slight lift on hover */
+    transform: translateY(-8px); 
 }
 
 .car img {
     display: block;
-    margin: 0 auto 10px; /* Center image within car */
+    margin: 0 auto 10px; 
 }
 
 .car h2, .car h3, .car p {
-    margin: 0; /* Reset default margin */
+    margin: 0; 
 }
 
 .car button {
@@ -147,7 +146,6 @@ h3{
     justify-content: space-between;
 }
 
-/* Add styles for the car container */
 .car-container {
     flex-grow: 1;
     flex-shrink: 1;
