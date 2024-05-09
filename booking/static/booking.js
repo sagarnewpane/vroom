@@ -56,7 +56,6 @@ flatpickr(".flatpickr", {
 });
 
 // Alert
-// Alert
 document.getElementById("carForm").addEventListener("submit", function (event) {
   var pickup_datetime = new Date(
     document.getElementById("id_pickup_datetime").value
@@ -72,6 +71,8 @@ document.getElementById("carForm").addEventListener("submit", function (event) {
   } else if (duration < 5) {
     errorMessage = "Minimum booking duration is 5 hours.";
   }
+
+  console.log(errorMessage);
 
   if (errorMessage) {
     document.querySelector(".errorMessage").textContent = errorMessage; // Update the error message in the vertical container
