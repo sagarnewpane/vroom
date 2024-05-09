@@ -1,0 +1,15 @@
+/* Styles for error message */
+.errorMessage {
+    color: red;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: #ffe6e6;
+    display: none; /* Initially hidden */
+}
+
+/* Show the error message when it has content */
+.errorMessage:not(:empty) {
+    display: block;
+}
