@@ -256,7 +256,7 @@ z-index: 2; /*  section appears above other content */
   .vertical-container {
     margin-top: 90px;
     max-width: 300px; 
-    padding: 9px; 
+    padding: 10px; 
     border-radius: 5px; 
     border: 1px solid #ccc; 
     box-sizing: border-box; 
