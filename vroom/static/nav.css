@@ -127,31 +127,85 @@
   display: none;
 }
 
-
-@media (max-width: 430px) {
-  .navbar .navbar-links {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    text-align: center;
-    background: #004274;
-    gap: 0;
-    overflow: hidden;
-  }
-
-  .navbar .navbar-links {
-    padding: 20px;
-    padding-top: 0;
-  }
-
-  .navbar .menu-icon {
-    display: block;
-  }
-
-  #navbar-links {
-    transition: all 0.5s;
-  }
+#navbarToggler {
+  display: none;
+  color: #faf3f3;
 }
 
+
+@media screen and (max-width: 430px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  
+  .navbar .user-dropdown .dropbtn img {
+    position: fixed;
+    left: 40px;
+    top: 15px;
+  }
+
+  .navbar .logo,
+  .navbar .user-dropdown {
+    order: -1;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar .user-dropdown{
+    margin: 0;
+  }
+
+  .navbar{
+    order: 0;
+    width: 100%;
+  }
+
+  .navbar .logo{
+    padding: 0px;
+    margin-bottom: 4px;
+  }
+
+  .navbar .navbar-links {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .navbar .navbar-links a {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  #navbarToggler {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  #navbarToggler img{
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar .login-button {
+    position: fixed;
+    left: 15px;
+    top: 5px;
+  }
+
+  .navbar-links{
+    display: none;
+    margin-top: 20px;
+  }
+}
