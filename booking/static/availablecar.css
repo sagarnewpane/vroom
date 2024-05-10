@@ -29,7 +29,6 @@ h3{
     
 }
 
-/* Add styles for the title container */
 .title-container {
     display: flex;
     justify-content: center; 
@@ -37,22 +36,59 @@ h3{
     padding: 0 20px; 
 }
 
-.title-container button {
-    margin-left: auto; /* Push the button to the right */
-}
-.title-container h1 {
-    text-align: center;
+.filter {
+    float: right;
+    padding: 0 10px;
 }
 
-.title-container h1 {
-    text-align: center;
-}
 
 .car-container {
-    margin-top: 50px;
+    margin-top: 55px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.car {
+    width: calc(23.33% - 20px); 
+    margin: 15px; 
+    padding: 20px; 
+    background:  #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.5s ease; 
+}
+
+.car:hover {
+    transform: translateY(-8px); 
+}
+
+.car img {
+    display: block;
+    margin: 0 auto 10px; 
+}
+
+.car h2, .car h3, .car p {
+    margin: 0; 
+}
+
+.car button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.car button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.car .availability {
+    padding: 8px;
+    border-radius: 8px;
 }
 
 .car p{
@@ -81,7 +117,7 @@ h3{
 .filter-menu {
     display: none;
     min-width: 300px;
-    background-color: #f1f1f1; /* Adjust color to match theme */
+    background-color: #ffffff; /* Adjust color to match theme */
     padding: 15px;
     border: 1px solid #ddd; /* Adjust color to match theme */
     transition: all 0.8s ease; /* Add transition */
@@ -108,7 +144,6 @@ h3{
     justify-content: space-between;
 }
 
-/* Add styles for the car container */
 .car-container {
     flex-grow: 1;
     flex-shrink: 1;

@@ -14,86 +14,117 @@
 {% endblock %}
 
 {% block content %}
-<div class="user-profile-container">
-    <div class="user-info-container">
-        <div class="user-info">
-            <h2>User Profile</h2>
-            <div class="info">
-                <p><strong>Username:</strong> {{user.username}}</p>
-                <p><strong>Email:</strong> {{user.email}}</p>
-                {% if not id_verification_status %}
-                <h2 style="color: red;">Please verify yourself!</h2>
-                <h3><a href="{% url 'verify' %}">Verify</a></h3>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="booking-history-container">
-        <div class="booking-history">
-            <h2>Your Bookings</h2>
-            {% for booking in bookings %}
-            <div class="booking">
-                <a href="{% url 'bookings' booking.car.id %}" class="booking-link"></a>
-                <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100" />
-                <div class="details">
-                    <p><strong>Model:</strong> {{ booking.car.model }}</p>
-                    <p><strong>Type:</strong> {{ booking.car.type }}</p>
-                    <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
-                    <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
-                    </a>
-                    {% if booking.status == 'pending' %}
-                    <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
-                    {% endif %}
-                    {% if booking.status == 'cancelled' %}
-                    <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
-                    {% endif %}
 
-                    {% if booking.status == 'rejected' %}
-                    <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
-                    {% endif %}
+<div class="container-profilepg">
 
-                    {% if booking.status == 'accepted' %}
-                    <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
-                    {% endif %}
-
-                    {% if booking.status == 'returned' %}
-                    <a href="{% url 'submit_review' booking.car.id %}">
-                        <button>Leave a Review</button>
-                    </a>
-                    {% endif %}
-
+    <div class="user-profile-container">
+        <div class="user-info-container">
+            <div class="user-info-box">
+                <div class="user-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
                 </div>
-                <p class="status"><strong>Status:</strong> {{ booking.status }}</p>
+                <div class="user-details">
+                    <h2>Profile</h2>
+                    <div class="info">
+                        <p><strong>Username:</strong> {{user.username}}</p>
+                        <p><strong>Email:</strong> {{user.email}}</p>
+                        {% if not id_verification_status %}
+                        <h2 style="color: red;">Please verify yourself!</h2>
+                        <h3><a href="{% url 'verify' %}">Verify</a></h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab tab-left active" onclick="changeTab(0)">Favourite Cars</div>
+                <div class="tab tab-right" onclick="changeTab(1)">Bookings</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="tab-content active" id="tab1">
+                <div class="favourite-cars-container">
+                    <div class="content-box">
+                        <div class="favourite-cars">
+                            <h2 style="margin-left: 80px;">Your Favourite Cars</h2>
+                            {% for favourite in favourites %}
+                            <div class="car">
+                                <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" />
+                                <h3>{{ favourite.car.model }}</h3>
+                                <p>{{ favourite.car.type }}</p>
+                                <p>Cost per hour: <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
+                                {% if favourite.car.total_price %}
+                                <p>Estimated: <strong>Rs {{ favourite.car.total_price }}</strong></p>
+                                {% endif %}
+                                <p>Location: <strong>{{ favourite.car.car_location }}</strong></p>
+                                <div class="button-container">
+                                    <a href="{% url 'bookings' favourite.car.id %}">
+                                        <button type="button">Book Now</button>
+                                    </a>
+                                    <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p>You have no favourite cars.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            {% endfor %}
+            <div class="tab-content" id="tab2">
+                <div class="booking-history-container">
+                    <div class="content-box">
+                        <div class="booking-history">
+                            <h2>Your Bookings</h2>
+                            {% for booking in bookings %}
+                            {% if not booking.status == '' %}
+                            <div class="booking">
+                                <a href="{% url 'bookings' booking.car.id %}" class="booking-link"></a>
+                                <img src="{{ booking.car.image.url }}" alt="{{ booking.car.model }}" width="100" />
+                                <div class="details">
+                                    <p><strong>Model:</strong> {{ booking.car.model }}</p>
+                                    <p><strong>Type:</strong> {{ booking.car.type }}</p>
+                                    <p><strong>Estimated Price:</strong> {{ booking.estimated_price }}</p>
+                                    <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+                                    </a>
+                                    {% if booking.status == 'pending' %}
+                                    <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                                    {% endif %}
+                                    {% if booking.status == 'cancelled' %}
+                                    <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                                    {% endif %}
+
+                                    {% if booking.status == 'rejected' %}
+                                    <!-- <p><strong>Reason:</strong> {{ booking.cancel_reason }}</p> -->
+                                    {% endif %}
+
+                                    {% if booking.status == 'accepted' %}
+                                    <button class="cancel-btn" data-booking-id="{{ booking.id }}">Cancel</button>
+                                    {% endif %}
+
+                                    {% if booking.status == 'returned' %}
+                                    <a href="{% url 'submit_review' booking.car.id %}">
+                                        <button>Leave a Review</button>
+                                    </a>
+                                    {% endif %}
+
+                                </div>
+                                <p class="status"><strong>Status:</strong> {{ booking.status }}</p>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="favourite-cars-container">
-    <h2>Your Favourite Cars</h2>
-    {% for favourite in favourites %}
-    <div class="car">
-        <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" width="100" />
-        <h2>{{ favourite.car.model }}</h2>
-        <h3>{{ favourite.car.type }}</h3>
-        <p style="color: rgb(27, 27, 27);">Cost per hour : <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
-        {% if favourite.car.total_price %}
-        <p>Estimated : <strong>Rs {{ favourite.car.total_price }}</strong></p>
-        {% endif %}
-        <p style="color: rgb(27, 27, 27);">Location : <strong>{{ favourite.car.car_location }}</strong></p>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
-            <a href="{% url 'bookings' favourite.car.id %}"><button type="button"
-                    style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book
-                    Now</button></a>
-            <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
-        </div>
-    </div>
-    {% empty %}
-    <p>You have no favourite cars.</p>
-    {% endfor %}
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -125,6 +156,53 @@
             }
         });
     });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".cancel-btn").click(function () {
+            var bookingId = $(this).data('booking-id');
+            var button = $(this);  // store $(this) in a variable
+
+            // display a confirmation dialog
+            var confirmDelete = confirm("Are you sure you want to cancel this booking?");
+            if (confirmDelete) {
+                $.ajax({
+                    url: '{% url "cancel_booking" %}',
+                    data: {
+                        'booking_id': bookingId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    type: 'post',
+                    success: function (response) {
+                        if (response.status == 'ok') {
+                            // Find the status element and change its text
+                            button.closest('.booking').find('.status').html('<strong>Status:</strong> cancelled');
+                            // Hide the cancel button
+                            button.hide();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<script>
+    function changeTab(tabIndex) {
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach((tab, index) => {
+            if (index === tabIndex) {
+                tab.classList.add('active');
+                tabContents[index].classList.add('active');
+            } else {
+                tab.classList.remove('active');
+                tabContents[index].classList.remove('active');
+            }
+        });
+    }
 </script>
 
 {% endblock %}
