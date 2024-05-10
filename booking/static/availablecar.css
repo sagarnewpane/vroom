@@ -154,6 +154,7 @@ h3{
 @media screen and (max-width: 430px) {
     .content-container {
        flex-direction: column;
+       width: 100%;
     }
     /* Adjustments for smaller screens */
     .car h1 {
@@ -169,7 +170,7 @@ h3{
         margin: 5px;
     }
     .car {
-        width: 40%; 
+        width: 30%; 
     }
     .car-slider {
         height: 300px;
@@ -177,6 +178,10 @@ h3{
     
     .car-slider img {
         height: 300px;
+    }
+    .car-book-button{
+        flex-direction: column-reverse;
+        padding-top: 15px;
     }
     .car-container {
         display: flex;
@@ -188,7 +193,6 @@ h3{
         transition: none;
     }
     .filter-menu {
-        min-width: 150px;
         background-color: #f1f1f1;
         padding: 30px;
         border: 1px solid #ddd;
@@ -198,7 +202,9 @@ h3{
         border: 2px solid #0367d1;
         border-radius: 10px;
         height: 45%;
-        margin-left: 15px;
+        margin-left: 30px;
     }
-    
+    button {
+        margin-right: 10px;
+    }
 }

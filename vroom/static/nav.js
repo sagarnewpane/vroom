@@ -18,3 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+  // JavaScript for responsive navbar
+  let navbarLinks = document.getElementById("navbar-links");
+  navbarLinks.style.maxHeight = "0px";
+  
+  function toggleMenu() {
+    if (navbarLinks.style.maxHeight === "0px") {
+      navbarLinks.style.maxHeight = "300px";
+    } else {
+      navbarLinks.style.maxHeight = "0px";
+    }
+  }
+  
