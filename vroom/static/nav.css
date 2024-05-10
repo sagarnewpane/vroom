@@ -112,21 +112,31 @@
   display: none;
 }
 
-@media screen and (min-width: 430px) {
-  .navbar {
-    padding: 8px 50px;
-  }
 
-  .navbar .logo,
+@media (max-width: 430px) {
   .navbar .navbar-links {
-    padding: 0;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    text-align: center;
+    background: #004274;
+    gap: 0;
+    overflow: hidden;
   }
 
-  .navbar .search {
-    display: flex; /* Show search on larger screens */
-    margin-right: auto; /* Align search to the left */
+  .navbar .navbar-links {
+    padding: 20px;
+    padding-top: 0;
+  }
+
+  .navbar .menu-icon {
+    display: block;
+  }
+
+  #navbar-links {
+    transition: all 0.5s;
   }
 }
-
-
 

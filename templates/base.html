@@ -16,38 +16,58 @@
 <body>
 
   <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="logo"><a href="{% url 'home' %}" class="logo"
-        style="text-decoration: none; display: inline-block;">Vroom</a>
+<nav class="navbar">
+  <div class="logo"><a href="{% url 'home' %}" class="logo" style="text-decoration: none; display: inline-block;">Vroom</a></div>
+  <div class="menu-icon">
+    <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+</div>
+  <div class="navbar-links">
+    <a href="{% url 'home'%}">Home</a>
+    <a href="{%url 'available_cars'%}">Cars</a>
+    <a href="{%url 'about'%}">About</a>
+    <a href="{% url 'contact' %}">Contact</a>
+  </div>
+  <div class="search">
+    <form method="GET" action="{% url 'search' %}">
+      <input type="text" placeholder="Search.." name="q" value="{{ query }}">
+      <input type="submit" value="Search">
+    </form>
+  </div>
+  {% if user.is_authenticated %}
+  <div class="user-dropdown">
+    <button class="dropbtn" id="dropdownButton">
+      <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
+    </button>
+    <div class="dropdown-content" id="dropdownContent">
+      <a href="{% url 'view_bookings' %}">Profile</a>
+      <a href="{%url 'faq'%}">Help</a>
+      <a href="{% url 'logout' %}">Logout</a>
     </div>
-    <div class="navbar-links">
-      <a href="{%url 'home'%}">Home</a>
-      <a href="{%url 'available_cars'%}">Cars</a>
-      <a href="{%url 'about'%}">About</a>
-      <a href="{% url 'contact' %}">Contact</a>
+  </div>
+  {% else %}
+  <a href="{% url 'login' %}" class="login-button">Login</a>
+  {% endif %}
+</nav>
 
-    </div>
-    <div class="search">
-      <form method="GET" action="{% url 'search' %}">
-        <input type="text" placeholder="Search.." name="q" value="{{ query }}">
-        <input type="submit" value="Search">
-      </form>
-    </div>
-    {% if user.is_authenticated %}
-    <div class="user-dropdown">
-      <button class="dropbtn" id="dropdownButton">
-        <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User">
-      </button>
-      <div class="dropdown-content" id="dropdownContent">
-        <a href="{% url 'view_bookings' %}">Profile</a>
-        <a href="{%url 'faq'%}">Help</a>
-        <a href="{% url 'logout' %}">Logout</a>
-      </div>
-    </div>
-    {% else %}
-    <a href="{% url 'login' %}" class="login-button">Login</a>
-    {% endif %}
-  </nav>
+<!-- JavaScript code -->
+<script>
+  // JavaScript for responsive navbar
+let navbarLinks = document.getElementById("navbar-links");
+navbarLinks.style.maxHeight = "0px";
+
+function toggleMenu() {
+  if (navbarLinks.style.maxHeight === "0px") {
+    navbarLinks.style.maxHeight = "300px";
+  } else {
+    navbarLinks.style.maxHeight = "0px";
+  }
+}
+
+  
+</script>
+<script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous">
+</script>
+
 
 
 
