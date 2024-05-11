@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'payment.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+  
+  <title>Vroom Car Rental</title>
+{% endblock %}
+
+{% block content %}
+    <div class="payment-page">
+        <h1>Payment</h1>
+
+        <p>Car: {{ car.model }}</p>
+        <p>Pickup Time: {{ pickup_datetime }}</p>
+        <p>Dropoff Time: {{ dropoff_datetime }}</p>
+        <p>Total price: {{ total_price }}</p>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        {% if not booking_confirmed %}
+        <form method="POST" action="{% url 'payment' car.id pickup_datetime dropoff_datetime total_price %}">
+            {% csrf_token %}
+            <!-- Your form fields here -->
+            <p class="payment-amount">You are Paying : Rs {{ total_price }}</p>
+            <button type="submit">Confirm Booking</button>
+        </form>
+        {% else %}
+            <p class="booking-status">Booking Pending.</p>
+        {% endif %}
+
+        <a href="{% url 'view_bookings' %}">Go to User Page</a>
+
+    </div>
+
+{% endblock %}
