@@ -291,6 +291,7 @@ z-index: 2; /*  section appears above other content */
     align-items: center;
     flex-wrap: nowrap;
     gap: 0px; 
+    margin: 20px;
   }
 
   .car-list .car{
@@ -334,5 +335,9 @@ z-index: 2; /*  section appears above other content */
   
   .Responsive-section {
     display: block;
+  }
+
+.featured-cars h2:nth-child(1) {
+  margin-top: 20px;
   }
 }
