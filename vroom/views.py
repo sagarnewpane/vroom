@@ -80,3 +80,4 @@ def about(request):
 # FAQ Page
 def faq(request):
     return render(request,'faq.html')
+

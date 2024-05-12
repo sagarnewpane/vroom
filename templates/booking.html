@@ -18,7 +18,6 @@
 {% endblock %}
 
 {% block content %}
-<h1>Booking</h1>
 {% if message %}
 <div class="errorMessage" style="color: red;">
     <p>{{ message }}</p>
@@ -30,80 +29,22 @@
     <div class="car-img">
         <div class="image-container">
             <img src="{{ car.image.url }}" alt="Car Image">
+        </div>
+    </div>
+    <div class="car-details">
+        <div class="car-info">
             <div class="car-name">
-                <div class="about-car">
-                    <p class="model">{{ car.model }}</p>
-                    <p class="type">Category : <strong>{{ car.type }}</strong></p>
-                </div>
-                <button class="favourite-button" data-car-id="{{ car.id }}"></button>
+                <p class="model">{{ car.model }}</p>
+                <p class="type">Category: <strong>{{ car.type }}</strong></p>
             </div>
             <p class="cost">Cost: {{ car.hourly_rate }} /hr</p>
         </div>
-    </div>
-
-    <div class="specification-box">
-        <div class="specifications-container">
-            <h2>Specifications</h2>
-            {% comment %} <div class="specifications-info-container">
-                <p><img src="{% static 'icon/speed.png' %}" alt="milage of the image"> Mileage: {{ car.mileage }}
-                    kilometers per liter</p>
-                <p><img src="{% static 'icon/transmission.png' %}" alt="transmission of the image"> Transmission: {{
-                    car.transmission }}</p>
-                <p><img src="{% static 'icon/seat.png' %}" alt="seat of the image"> Seats: {{ car.seats }}</p>
-                <p><img src="{% static 'icon/luggage.png' %}" alt="luggagee of the image"> Luggage: {{ car.luggage }}
-                </p>
-                <p><img src="{% static 'icon/fuel.png' %}" alt="fuel of the image"> Fuel: {{ car.fuel }}</p>
-            </div> {% endcomment %}
-
-            <div class="specifications-info-container">
-                <div class="row">
-                    <div class="specify">
-                        <img src="{% static 'icon/speed.png' %}" alt="milage of the image">
-                        <div>
-                            <p style="font-weight:bold;">Mileage</p>
-                            <p>{{ car.mileage }} Km</p>
-                        </div>
-                    </div>
-                    <div class="specify">
-                        <img src="{% static 'icon/transmission.png' %}" alt="transmission of the image">
-                        <div>
-                            <p style="font-weight:bold;">Transmission</p>
-                            <p>{{ car.transmission }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="specify">
-                        <img src="{% static 'icon/seat.png' %}" alt="seat of the image">
-                        <div>
-                            <p style="font-weight:bold;">Seats</p>
-                            <p>{{car.seats }} </p>
-                        </div>
-                    </div>
-                    <div class="specify">
-                        <img src="{% static 'icon/luggage.png' %}" alt="luggagee of the image">
-                        <div>
-                            <p style="font-weight:bold;">Luggage</p>
-                            <p>{{ car.luggage }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class=" specify">
-                        <img src="{% static 'icon/fuel.png' %}" alt="fuel of the image">
-                        <div>
-                            <p style="font-weight:bold;">Fuel</p>
-                            <p>{{car.fuel }} </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="favourite-button" data-car-id="{{ car.id }}"></button>
     </div>
 
     <div class="booking-container">
         <h2>Booking Info</h2>
-        <!-- Add this div for the error message -->
+        
         <div class="errorMessage" style="color: red;"></div>
         <form method="post" id="carForm">
             {% csrf_token %}
@@ -138,8 +79,85 @@
         <input type="hidden" id="hourly-rate" value="{{ car.hourly_rate }}">
 
     </div>
+</div>    
 
+        <div class="specifications-container">
+          {% comment %} <div class="specifications-info-container">
+              <p><img src="{% static 'icon/speed.png' %}" alt="milage of the image"> Mileage: {{ car.mileage }} kilometers per liter</p>
+              <p><img src="{% static 'icon/transmission.png' %}" alt="transmission of the image"> Transmission: {{ car.transmission }}</p>
+              <p><img src="{% static 'icon/seat.png' %}" alt="seat of the image"> Seats: {{ car.seats }}</p>
+              <p><img src="{% static 'icon/luggage.png' %}" alt="luggagee of the image"> Luggage: {{ car.luggage }}</p>
+              <p><img src="{% static 'icon/fuel.png' %}" alt="fuel of the image"> Fuel: {{ car.fuel }}</p>
+            </div> {% endcomment %}
+
+    <div class="specifications-info-container">
+        <div class="row">
+            <div class="specify">
+                <img src="{% static 'icon/speed.png' %}" alt="milage of the image">
+                <div>
+                    <p style="font-weight:bold;">Mileage</p>
+                    <p>{{ car.mileage }} Km</p>
+                </div>
+            </div>
+            <div class="specify">
+                <img src="{% static 'icon/transmission.png' %}" alt="transmission of the image">
+                <div>
+                    <p style="font-weight:bold;">Transmission</p>
+                    <p>{{ car.transmission }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="specify">
+                <img src="{% static 'icon/seat.png' %}" alt="seat of the image">
+                <div>
+                    <p style="font-weight:bold;">Seats</p>
+                    <p>{{car.seats }} </p>
+                </div>
+            </div>
+            <div class="specify">
+                <img src="{% static 'icon/luggage.png' %}" alt="luggagee of the image">
+                <div>
+                    <p style="font-weight:bold;">Luggage</p>
+                    <p>{{ car.luggage }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" specify">
+                <img src="{% static 'icon/fuel.png' %}" alt="fuel of the image">
+                <div>
+                    <p style="font-weight:bold;">Fuel</p>
+                    <p>{{car.fuel }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="review">
+    <h2>Customer Reviews</h2>
+    {% for review in reviews %}
+    {% if review.approved %}
+    <div class="review-card">
+        <p class="review-content">{{ review.content }}</p>
+        <div class="review-stars">
+            {% for i in "12345"|make_list %}
+            {% if i|add:0 <= review.rating %} <span class="fa fa-star checked"></span>
+                {% else %}
+                <span class="fa fa-star"></span>
+                {% endif %}
+                {% endfor %}
+        </div>
+        <p class="review-user">Written by: {{ review.user }}</p>
+        <p class="review-date">Date: {{ review.updated_at|date:"F j, Y" }}</p>
+    </div>
+    {% endif %}
+    {% empty %}
+    <p>No reviews available.</p>
+    {% endfor %}
+    </div>    
+
 {% endif %}
 
 <!-- Terms and Conditions -->
@@ -153,28 +171,6 @@
         <button id="disagreeButton">I Disagree</button>
     </div>
 </div>
-
-<h2>Customer Reviews</h2>
-{% for review in reviews %}
-{% if review.approved %}
-<div class="review-card">
-    <p class="review-content">{{ review.content }}</p>
-    <div class="review-stars">
-        {% for i in "12345"|make_list %}
-        {% if i|add:0 <= review.rating %} <span class="fa fa-star checked"></span>
-            {% else %}
-            <span class="fa fa-star"></span>
-            {% endif %}
-            {% endfor %}
-    </div>
-    <p class="review-user">Written by: {{ review.user }}</p>
-    <p class="review-date">Date: {{ review.updated_at|date:"F j, Y" }}</p>
-</div>
-{% endif %}
-{% empty %}
-<p>No reviews available.</p>
-{% endfor %}
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
