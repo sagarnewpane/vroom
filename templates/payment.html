@@ -74,6 +74,9 @@
                 {% if error_message %}
                     <p class="error-message">{{ error_message }}</p>
                 {% endif %}
+                {% if error_message %}
+                    <p class="error-message">{{ error_message }}</p>
+                {% endif %}
 
                 {% if not booking_confirmed %}
                 <form method="POST" action="{% url 'payment' car.id pickup_datetime dropoff_datetime total_price %}">

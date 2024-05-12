@@ -89,7 +89,7 @@
       {% endif %}
       <p style="color: rgb(27, 27, 27);">Location : <strong>{{ car.car_location }}</strong></p>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+      <div class="car-book-button" style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
         <a href="{% url 'bookings' car.id %}"><button type="button"
             style="background-color: #007bff; border-radius: 8px; padding: 8px; color: white;">Book Now</button></a>
         <p class="availability {{ car.availability|lower }}">{{ car.availability }}</p>

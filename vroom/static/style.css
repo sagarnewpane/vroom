@@ -282,15 +282,15 @@ z-index: 2; /*  section appears above other content */
   }
 
   .car h2{
-    font-size: 1em;
+    font-size: 0.99em;
   }
 
   .car h3{
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
 
   .car p{
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
 
   .footer {
