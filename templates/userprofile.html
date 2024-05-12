@@ -40,43 +40,12 @@
     <div class="content-container">
         <div class="tabs-container">
             <div class="tabs">
-                <div class="tab tab-left active" onclick="changeTab(0)">Favourite Cars</div>
-                <div class="tab tab-right" onclick="changeTab(1)">Bookings</div>
+                <div class="tab tab-left active" onclick="changeTab(0)">Bookings</div>
+                <div class="tab tab-right" onclick="changeTab(1)">Favourite Cars</div>
             </div>
         </div>
 
-        <div class="content">
-            <div class="tab-content active" id="tab1">
-                <div class="favourite-cars-container">
-                    <div class="content-box">
-                        <div class="favourite-cars">
-                            <h2 style="margin-left: 80px;">Your Favourite Cars</h2>
-                            {% for favourite in favourites %}
-                            <div class="car">
-                                <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" />
-                                <h3>{{ favourite.car.model }}</h3>
-                                <p>{{ favourite.car.type }}</p>
-                                <p>Cost per hour: <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
-                                {% if favourite.car.total_price %}
-                                <p>Estimated: <strong>Rs {{ favourite.car.total_price }}</strong></p>
-                                {% endif %}
-                                <p>Location: <strong>{{ favourite.car.car_location }}</strong></p>
-                                <div class="button-container">
-                                    <a href="{% url 'bookings' favourite.car.id %}">
-                                        <button type="button">Book Now</button>
-                                    </a>
-                                    <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
-                                </div>
-                            </div>
-                            {% empty %}
-                            <p>You have no favourite cars.</p>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="tab2">
+            <div class="tab-content" id="tab1">
                 <div class="booking-history-container">
                     <div class="content-box">
                         <div class="booking-history">
@@ -122,41 +91,41 @@
                     </div>
                 </div>
             </div>
+            <div class="content">
+                <div class="tab-content active" id="tab2">
+                    <div class="favourite-cars-container">
+                        <div class="content-box">
+                            <div class="favourite-cars">
+                                <h2 style="margin-left: 80px;">Your Favourite Cars</h2>
+                                {% for favourite in favourites %}
+                                <div class="car">
+                                    <img src="{{ favourite.car.image.url }}" alt="{{ favourite.car.model }}" />
+                                    <h3>{{ favourite.car.model }}</h3>
+                                    <p>{{ favourite.car.type }}</p>
+                                    <p>Cost per hour: <strong>Rs {{ favourite.car.hourly_rate }}</strong></p>
+                                    {% if favourite.car.total_price %}
+                                    <p>Estimated: <strong>Rs {{ favourite.car.total_price }}</strong></p>
+                                    {% endif %}
+                                    <p>Location: <strong>{{ favourite.car.car_location }}</strong></p>
+                                    <div class="button-container">
+                                        <a href="{% url 'bookings' favourite.car.id %}">
+                                            <button type="button">Book Now</button>
+                                        </a>
+                                        <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <p>You have no favourite cars.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(".cancel-btn").click(function () {
-            var bookingId = $(this).data('booking-id');
-            var button = $(this);  // store $(this) in a variable
-
-            // display a confirmation dialog
-            var confirmDelete = confirm("Are you sure you want to cancel this booking?");
-            if (confirmDelete) {
-                $.ajax({
-                    url: '{% url "cancel_booking" %}',
-                    data: {
-                        'booking_id': bookingId,
-                        'csrfmiddlewaretoken': '{{ csrf_token }}'
-                    },
-                    type: 'post',
-                    success: function (response) {
-                        if (response.status == 'ok') {
-                            // Find the status element and change its text
-                            button.closest('.booking').find('.status').html('<strong>Status:</strong> cancelled');
-                            // Hide the cancel button
-                            button.hide();
-                        }
-                    }
-                });
-            }
-        });
-    });
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -203,6 +172,11 @@
             }
         });
     }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        changeTab(0);
+    });
 </script>
 
 {% endblock %}

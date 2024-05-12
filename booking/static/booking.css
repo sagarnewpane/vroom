@@ -44,20 +44,10 @@ main{
     margin-left: 10px; 
 }
 
-/* .specification-box {
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
-    width: 550px;
-    max-height: 400px;
-    margin-left: 450px;
-} */
-
 .specifications-container {
-    flex: 1 ; 
-    margin-top: 20px; 
+    flex: 1 ;  
+    transform: translate(80%, -85%);
+    width: 600px;
 }
 
 .specifications-info-container img {
