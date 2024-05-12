@@ -1,0 +1,111 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+
+<style>
+    .content{
+        width: 100%;
+    }
+    .editable{
+        display: flex;
+    }
+    .table, .chart{
+        flex: 1; /* Optional: Makes the divs take up equal width */
+        height: 750px; /* Set a specific height */
+        overflow-y: auto; /* Enable vertical scrollbars when content overflows */
+    }
+
+    .table a{
+        margin-right: 40px;
+        margin-bottom: 20px;
+    }
+
+    .chart{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chart canvas{
+        margin-bottom: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<div class="editable">
+
+    <div class="table">
+    <h1>User Report</h1>
+    <a href="{% url 'admin:user_report_order' 'asc' %}">Sort by ascending order</a>
+    <a href="{% url 'admin:user_report_order' 'desc' %}">Sort by descending order</a>
+    <a href="{% url 'admin:export_user_report' %}">Export as CSV</a>
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Number of Bookings</th>
+            <th>Total Spend</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.rank }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.num_bookings }}</td>
+            <td>{{ user.total_spend }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <div class="chart">
+        <canvas id="userChart"></canvas> 
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var usernames = [{% for user in users %}"{{ user.username }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+    var totalSpends = [{% for user in users %}{{ user.total_spend }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Bar Chart
+    var ctx = document.getElementById('userChart').getContext('2d');
+    var userChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: usernames,
+            datasets: [{
+                label: 'Total Spend by User',
+                data: totalSpends,
+                backgroundColor: 'rgba(75, 192, 192, 0.5)', // Change color here
+                borderColor: 'rgba(75, 192, 192, 1)', // Change color here
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Total Spend'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Username'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Total Spend by User'
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

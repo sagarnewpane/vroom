@@ -55,8 +55,10 @@ class Booking(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('accepted', 'Accepted'),
+        ('returned', 'Returned'),
         ('rejected', 'Rejected'),
         ('cancelled', 'Cancelled'),
+        
     ]
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -69,3 +71,13 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'Booking car {self.car.model} by {self.user.email}'
+    
+
+class Review(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, related_name='reviews', on_delete=models.CASCADE)
+    content = models.TextField()
+    rating = models.IntegerField(default=0)  # New rating field
+    approved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

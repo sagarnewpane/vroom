@@ -1,25 +1,23 @@
-/* General styles */
+
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  /* background-image: url('car_reservation_background.jpg'); Background image for car reservation */
-  background-size: cover;
-  background-position: center;
+  background-color: #f0f6fc; 
 }
 
 .container {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 100px auto;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow for container */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: #fff; 
 }
 
 .form {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .form-control {
@@ -28,42 +26,55 @@ body {
 
 .form-control label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
 }
 
 .form-control input {
-  width: 95%;
-  padding: 10px;
-  border-radius: 5px;
+  width: calc(100% - 30px); 
+  padding: 15px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+  font-size: 16px;
+}
+
+.form-control input:focus {
+  outline: none;
+  border-color: #007bff; 
 }
 
 button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: none;
-  border-radius: 5px;
-  background-color: #007bff; /* Blue button color */
+  border-radius: 8px;
+  background-color: #007bff; 
   color: #fff;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker blue color on hover */
+  background-color: #0056b3; 
 }
 
 p {
-  margin-top: 15px;
+  margin-top: 20px;
   text-align: center;
+  font-size: 14px;
+  color: #666;
 }
 
 a {
-  color: #007bff; /* Blue link color */
+  color: #007bff; 
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline; /* Underline link on hover */
+  text-decoration: underline; 
 }
 
 /* Logo styles */
@@ -73,10 +84,13 @@ a:hover {
   margin: 0 auto;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /* Responsive styles */
 @media (max-width: 600px) {
   .container {
-    margin: 50px auto;
-    padding: 10px;
+    padding: 20px;
   }
 }

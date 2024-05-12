@@ -1,43 +1,288 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block head %}
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="stylesheet" href="{% static 'payment.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-  
-  <title>Vroom Car Rental</title>
-{% endblock %}
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'payment.css' %}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    {% endblock %}
 
 {% block content %}
-    <div class="payment-page">
-        <h1>Payment</h1>
+    <div class="container">
+        <div class="title">
+            <h4>Select a <span style="color: #6064b6">Payment</span> method</h4>
+        </div>
+            <div class="sub-Container">
+                    <div class="choosepayment">
+                    <form action="#">
+                    <input type="radio" name="payment" id="visa" unchecked>
+                    <input type="radio" name="payment" id="esewa" disabled>
+                    <input type="radio" name="payment" id="connectips" disabled>
+                    <input type="radio" name="payment" id="khalti" disabled>
 
-        <p>Car: {{ car.model }}</p>
-        <p>Pickup Time: {{ pickup_datetime }}</p>
-        <p>Dropoff Time: {{ dropoff_datetime }}</p>
-        <p>Total price: {{ total_price }}</p>
+                    <div class="category">
+                        <label for="visa" class="visaMethod ">
+                            <div class="imgName">
+                                <div class="imgContainer visa">
+                                    <img src="https://i.ibb.co/vjQCN4y/Visa-Card.png" alt="">
+                                </div>
+                                <span class="name">VISA</span>
+                            </div>
+                            <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                        </label>
 
-        {% if error_message %}
-            <p class="error-message">{{ error_message }}</p>
-        {% endif %}
+                        <label for="esewa" class="esewaMethod disabled">
+                            <div class="imgName">
+                                <div class="imgContainer esewa">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Esewa_logo.webp" alt="">
+                                </div>
+                                <span class="name">E-Sewa</span>
+                            </div>
+                            <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                        </label>
 
-        {% if not booking_confirmed %}
-        <form method="POST" action="{% url 'payment' car.id pickup_datetime dropoff_datetime total_price %}">
-            {% csrf_token %}
-            <!-- Your form fields here -->
-            <p class="payment-amount">You are Paying : Rs {{ total_price }}</p>
-            <button type="submit">Confirm Booking</button>
-        </form>
-        {% else %}
-            <p class="booking-status">Booking Pending.</p>
-        {% endif %}
+                        <label for="connectips" class="connectipsMethod disabled">
+                            <div class="imgName">
+                                <div class="imgContainer connectips">
+                                    <img src="https://connectips.com/knowmore/image/cips_logo.png" alt="">
+                                </div>
+                                <span class="name">Connect IPS</span>
+                            </div>
+                            <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                        </label>
 
-        <a href="{% url 'view_bookings' %}">Go to User Page</a>
+                        <label for="khalti" class="khaltiMethod disabled">
+                            <div class="imgName">
+                                <div class="imgContainer khalti">
+                                    <img src="https://blog.khalti.com/wp-content/uploads/2021/01/khalti-icon.png" alt="">
+                                </div>
+                                <span class="name">Khalti</span>
+                            </div>
+                            <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                        </label>
+                    </div>
+                </form>
+                </div>
+            
+            <div class="bookingspec">
+                <p>Car: {{ car.model }}</p>
+                <p>Pickup Time: {{ pickup_datetime }}</p>
+                <p>Dropoff Time: {{ dropoff_datetime }}</p>
+                <p>Total price: {{ total_price }}</p>
 
+                {% if error_message %}
+                    <p class="error-message">{{ error_message }}</p>
+                {% endif %}
+
+                {% if not booking_confirmed %}
+                <form method="POST" action="{% url 'payment' car.id pickup_datetime dropoff_datetime total_price %}">
+                    {% csrf_token %}
+                    <p class="payment-amount">You are Paying : Rs {{ total_price }}</p>
+                    <button type="submit">Confirm Booking</button>
+                {% else %}
+                    <p class="booking-status">Booking Pending.</p>
+                {% endif %}
+
+                <a href="{% url 'view_bookings' %}">Go to User Page</a>
+            </div>
+
+            <div class="visapayment">
+                <div class="form-container">
+                    <div class="payment-container" id="visaPayment1">
+                        <div class="wrapper">
+                            <div class="payment">
+                                <div class="payment-logo">
+                                    <img src="https://i.ibb.co/vjQCN4y/Visa-Card.png" alt="">
+                                </div>
+                                <h2>Visa</h2>
+                                <div class="form">
+                                    <div class="card space icon-relative">
+                                        <label class="label">Card holder:</label>
+                                        <input type="text" class="input" placeholder="Card Holder">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="card space icon-relative">
+                                        <label class="label">Card number:</label>
+                                        <input type="text" class="input" data-mask="0000 0000 0000 0000" placeholder="Card Number">
+                                        <i class="far fa-credit-card"></i>
+                                    </div>
+                                    <div class="card-grp space">
+                                        <div class="card-item icon-relative">
+                                            <label class="label">Expiry date:</label>
+                                            <input type="text" name="expiry-data" class="input" placeholder="00 / 00">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="card-item icon-relative">
+                                            <label class="label">CVC:</label>
+                                            <input type="text" class="input" data-mask="000" placeholder="000">
+                                            <i class="fas fa-lock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="btn">
+                                        Pay
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-container" id="visaPayment2">
+                    <!-- Your payment container content -->
+                </div>
+            </div>
+        </div>
     </div>
 
-{% endblock %}
+
+    <script>
+        document.getElementById('visa').addEventListener('click', function() {
+            var visaPaymentContainer = document.querySelector('.visapayment');
+            visaPaymentContainer.style.display = 'block'; // Show the visapayment container when Visa is checked
+        });
+    </script>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Ubuntu');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    background: #2196F3;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.payment {
+    background: #f8f8f8;
+    max-width: 360px;
+    margin: 80px auto;
+    height: auto;
+    padding: 35px;
+    padding-top: 70px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.payment h2 {
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    color: #0d3c61;
+}
+
+.form .label {
+    display: block;
+    color: #555555;
+    margin-bottom: 6px;
+}
+
+.input {
+    padding: 13px 0px 13px 25px;
+    width: 100%;
+    text-align: center;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    outline: none;
+    font-size: 16px;
+    color: #555555;
+}
+
+.card-grp {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-item {
+    width: 48%;
+}
+
+.space {
+    margin-bottom: 20px;
+}
+
+.icon-relative {
+    position: relative;
+}
+
+.icon-relative .fas,
+.icon-relative .far {
+    position: absolute;
+    bottom: 12px;
+    left: 15px;
+    font-size: 20px;
+    color: #555555;
+}
+
+.btn {
+    margin-top: 40px;
+    background: #2196F3;
+    padding: 12px;
+    text-align: center;
+    color: #f8f8f8;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #0d3c61;
+}
+
+.payment-logo {
+    position: absolute;
+    top: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: #f8f8f8;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    line-height: 85px;
+}
+
+.payment-logo:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    height: 90px;
+    background: #2196F3;
+    border-radius: 50%;
+}
+
+.payment-logo p {
+    position: relative;
+    color: #f8f8f8;
+    font-family: 'Baloo Bhaijaan', cursive;
+    font-size: 58px;
+}
+
+@media screen and (max-width: 420px) {
+    .card-grp {
+        flex-direction: column;
+    }
+
+    .card-item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+}
+</style>
+
+{% endblock%}

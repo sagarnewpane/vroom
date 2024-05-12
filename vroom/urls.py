@@ -23,6 +23,7 @@ from django.contrib.auth import views as pass_view
 from django.conf.urls.static import static
 from django.conf import settings
 
+from booking.views import contact
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -31,7 +32,6 @@ urlpatterns = [
     path('logout/', auth_view.logout_view, name='logout'),
     path('about/', views.about, name='about'),
     path('faq/', views.faq, name='faq'),
-    path('contact/', views.contact, name='contact'),
     path('password-reset/', 
          pass_view.PasswordResetView.as_view(template_name = 'resetpass.html'), 
          name='password_reset'),
@@ -49,6 +49,7 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     
     path('search/', views.search, name='search'),
+    path('contact/', contact, name='contact'),
 
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

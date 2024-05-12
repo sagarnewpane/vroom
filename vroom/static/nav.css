@@ -15,28 +15,23 @@
   padding: 8px 50px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 .navbar .logo {
   font-size: 24px;
   font-weight: bold;
-  padding: 0px 55px;
+  padding: 10px 505px;
 }
 
 .navbar .navbar-links {
   flex-grow: 1;
-  /* display: flex; */
-  /* justify-content: center; */
   margin-left: 220px;
-
 }
 
 .navbar .navbar-links a {
   color: white;
   text-align: center;
-  padding: 5px 20px;
+  padding: 20px 24px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
@@ -128,3 +123,22 @@
 .dropdown-content{
   display: none;
 }
+
+@media screen and (min-width: 430px) {
+  .navbar {
+    padding: 8px 50px;
+  }
+
+  .navbar .logo,
+  .navbar .navbar-links {
+    padding: 0;
+  }
+
+  .navbar .search {
+    display: flex; /* Show search on larger screens */
+    margin-right: auto; /* Align search to the left */
+  }
+}
+
+
+

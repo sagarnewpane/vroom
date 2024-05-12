@@ -1,6 +1,7 @@
 main{
-    margin-top: 90px;
+    margin-top: 100px;
     padding-left: 30px;
+    padding-right: 30px;
 }
 
 .message{
@@ -14,45 +15,63 @@ main{
 }
 
 .car-img {
-    flex: 1;
+    flex-grow: 0; 
+    margin-right: 20px; 
+}
+
+.car-info {
+    flex-grow: 1;
+}
+
+.car-details {
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: center; 
+    margin-bottom: 20px;
 }
 
 .car-name {
-    display: flex;
-    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cost {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .favourite-button {
-    margin-left: 45px;
-    margin-bottom: 70px;
+    margin-right: 10px;
+    margin-left: 10px; 
 }
 
-.specification-box {
-    background-color: #f0f0f0; 
-    border-radius: 10px; 
-    padding: 20px; 
-    padding-top: 0px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    margin: 30px; 
-    margin-left: 70px;
-}
+/* .specification-box {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    width: 550px;
+    max-height: 400px;
+    margin-left: 450px;
+} */
 
 .specifications-container {
-    flex: 1; 
-    margin: 50px;
-    justify-content: center;
+    flex: 1 ; 
+    margin-top: 20px; 
+}
+
+.specifications-info-container img {
+    width: 30px; 
+    height: 30px; 
+    margin-top: -800px;
 }
 
 .specifications-container h2 {
-   margin-left: 120px;
-}
-
-.booking-container {
-    flex: 1; 
+    margin-left: 20px; 
 }
 
 .car-img{
-    padding-top: 70px;
+    padding-top: 30px;
 }
 
 .car-img img {
@@ -63,9 +82,11 @@ main{
 .booking-container {
     border: 2px solid #ccc; 
     padding: 20px;
-    margin-top: 60px; 
+    margin-top: 30px; 
     height: 80%;
-    margin-right: 30px;    
+    max-width: 550px;
+    flex-grow: 1;
+    margin-left: 350px;   
 }
 
 .specify{
@@ -93,10 +114,6 @@ p.type{
 .cost{
     font-size: 18px;
     font-weight: 700;
-}
-
-.booking-container{
-    margin-left: 40px;
 }
 
 .booking-container h2{
@@ -127,4 +144,28 @@ p.type{
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+/* Review Section */
+.review-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    margin-right: 0;
+}
+.review-content {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.review-user, .review-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+}
+.review-stars .fa-star {
+    color: #ccc;
+}
+.review-stars .checked {
+    color: #f4d03f;
 }

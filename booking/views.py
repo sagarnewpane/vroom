@@ -77,7 +77,10 @@ def available_cars(request):
 
 @login_required(login_url='login')
 def book_car(request, car_id):
+    # car = Car.objects.prefetch_related('reviews').get(id=car_id)
+    
     car = get_object_or_404(Car, id=car_id)
+    approved_reviews = car.reviews.filter(approved=True)
     
     # Check if the user is verified
     try:
@@ -88,7 +91,7 @@ def book_car(request, car_id):
     
     # Check if the user has already booked this car
     if Booking.objects.filter(user=request.user, car=car, status='pending').exists():
-        return render(request, 'booking.html', {'car': car, 'message': 'You have already booked this car.', 'isbooked': True})
+        return render(request, 'booking.html', {'car': car, 'message': 'You have already booked this car.', 'isbooked': True,'reviews': approved_reviews})
     
     if request.method == 'POST':
         form = CarSearchForm(request.POST)
@@ -116,11 +119,11 @@ def book_car(request, car_id):
         
     else:
         form = CarSearchForm()
-    return render(request, 'booking.html', {'car': car,'form':form, 'id_verification_status': id_verification_status})
+    return render(request, 'booking.html', {'car': car,'form':form, 'id_verification_status': id_verification_status, 'reviews': approved_reviews})
 
 @login_required(login_url='login')
 def view_bookings(request):
-    bookings = Booking.objects.filter(user=request.user)
+    bookings = Booking.objects.filter(user=request.user).order_by('-booking_date')
     favourites = Favourite.objects.filter(user=request.user)
     try:
         id_verification = IDVerification.objects.get(user=request.user)
@@ -196,3 +199,54 @@ def payment(request, car_id, pickup_datetime, dropoff_datetime, total_price):
 
     # Render the payment page
     return render(request, 'payment.html', {'car': car, 'pickup_datetime': pickup_datetime, 'dropoff_datetime': dropoff_datetime, 'total_price': total_price})
+
+
+
+from .forms import ReviewForm
+from .models import Car  # Import the Car model
+
+def submit_review(request, car_id):
+    car = Car.objects.get(id=car_id)  # Retrieve the car from the database
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.car = car  # Set the car of the review
+            review.save()
+            return redirect('view_bookings')
+    else:
+        form = ReviewForm()
+    return render(request, 'submit_review.html', {'form': form, 'car': car})  # Pass the car to the template
+
+
+from django.core.mail import send_mail
+from django.shortcuts import render
+from .forms import ContactForm
+from accounts.models import CustomUser
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            # Fetch all admin emails
+            admin_emails = CustomUser.objects.filter(is_staff=True).values_list('email', flat=True)
+
+            send_mail(
+                f'From - {email} | {title}',
+                f'From - {email} \n {message}',
+                email,
+                admin_emails,
+                fail_silently=True,
+            )
+
+            return render(request, 'contact.html', {'form': form, 'success': True})
+
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact.html', {'form': form})

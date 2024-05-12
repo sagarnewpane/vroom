@@ -3,9 +3,18 @@ from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 from .models import IDVerification
 from django.utils.html import format_html
+from booking.models import Booking
+from django.shortcuts import render
 # Register your models here.
 
+from django.urls import path
+from django.http import HttpResponse
+from django.db.models import Count, Sum
+import csv
+
+@admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
+    list_display = ('email', 'username')
     add_fieldsets = (
         (None,{
             'classes':('wide',),
@@ -13,10 +22,51 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
-    list_display = ('email', 'username')
-    # list_editable = ('is_verified',)
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('user_report/', self.admin_site.admin_view(self.user_report), name='user_report'),
+            path('user_report/<str:order>/', self.admin_site.admin_view(self.user_report), name='user_report_order'),
+            path('export_user_report/', self.admin_site.admin_view(self.export_user_report), name='export_user_report'),
+        ]
+        return custom_urls + urls
 
-admin.site.register(CustomUser,CustomUserAdmin)
+    def user_report(self, request, order='desc'):
+        users = CustomUser.objects.all()
+
+        for user in users:
+            bookings = Booking.objects.filter(user=user)
+            user.total_spend = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
+            user.num_bookings = bookings.count()
+
+        users = sorted(users, key=lambda user: user.total_spend, reverse=(order=='desc'))
+        for i, user in enumerate(users, start=1):
+            user.rank = i
+        return render(request, 'admin/user_report.html', {'users': users})
+
+    def export_user_report(self, request):
+        users = CustomUser.objects.all()
+
+        for user in users:
+            bookings = Booking.objects.filter(user=user)
+            user.total_spend = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
+            user.num_bookings = bookings.count()
+
+        users = sorted(users, key=lambda user: user.total_spend, reverse=True)
+        for i, user in enumerate(users, start=1):
+            user.rank = i
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="user_report.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['Rank', 'Email', 'Username', 'Number of Bookings', 'Total Spend'])
+        for user in users:
+            writer.writerow([user.rank, user.email, user.username, user.num_bookings, user.total_spend])
+
+        return response
+admin.site.unregister(CustomUser)
+admin.site.register(CustomUser, CustomUserAdmin)
 
 
 @admin.register(IDVerification)

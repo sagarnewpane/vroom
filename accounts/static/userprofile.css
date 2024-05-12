@@ -200,6 +200,16 @@
     background-color: #d32f2f;
 }
 
+.booking-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.booking-link:hover {
+    text-decoration: none;
+}
+
+
 .box {
     background-color: #f0f0f0;
     border-radius: 10px;

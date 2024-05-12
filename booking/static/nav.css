@@ -20,13 +20,13 @@
   }
   
   .navbar .navbar-links {
-    flex-grow: 1; /* This will push the search bar and user dropdown to the right */
+    flex-grow: 1; 
   }
   
   .navbar .navbar-links a {
     color: white;
     text-align: center;
-    padding: 10px 24px;
+    padding: 20px 24px;
     text-decoration: none;
     transition: background-color 0.3s ease;
   }

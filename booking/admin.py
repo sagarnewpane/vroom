@@ -39,7 +39,7 @@ class CarAdmin(admin.ModelAdmin):
     def export_revenue_report(self, request):
         cars = Car.objects.all()
         for car in cars:
-            bookings = Booking.objects.filter(car=car, status='accepted')
+            bookings = Booking.objects.filter(car=car, status__in=['accepted', 'returned'])
             car.revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
             car.num_bookings = bookings.count()
             total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
@@ -64,7 +64,7 @@ class CarAdmin(admin.ModelAdmin):
         cars = Car.objects.all()
 
         for car in cars:
-            bookings = Booking.objects.filter(car=car, status='accepted')
+            bookings = Booking.objects.filter(car=car, status__in=['accepted', 'returned'])
             car.revenue = bookings.aggregate(Sum('estimated_price'))['estimated_price__sum'] or 0
             car.num_bookings = bookings.count()
             car.total_duration = sum((booking.drop_off_date - booking.pick_up_date).total_seconds() / 3600 for booking in bookings)
@@ -93,6 +93,7 @@ class BookingStatusFilter(admin.SimpleListFilter):
             ('pending', 'Pending'),
             ('accepted', 'Accepted'),
             ('rejected', 'Rejected'),
+            ('returned','Returned')
         ]
 
     def queryset(self, request, queryset):
@@ -121,3 +122,11 @@ class BookingAdmin(admin.ModelAdmin):
             obj.car.availability = 'unavailable'
             obj.car.save()
         super().save_model(request, obj, form, change)
+
+from django.contrib import admin
+from .models import Review
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['user', 'car', 'content','rating', 'approved', 'created_at', 'updated_at']
+    list_editable = ['approved']

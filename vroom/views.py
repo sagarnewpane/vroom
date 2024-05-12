@@ -5,6 +5,7 @@ from booking.models import Booking, Car
 from booking.forms import CarSearchForm
 from decimal import Decimal
 from booking.models import Car
+from django.db.models import Count
 
 # Home Page
 def home(request):
@@ -32,15 +33,18 @@ def home(request):
     else:
         form = CarSearchForm()
     
-    # Sort 3 featured cars
+    # Sort 3 featured cars (most expensive)
     featured_cars = Car.objects.filter(
         availability='available'
-    ).order_by('hourly_rate')[:3]
+    ).order_by('-hourly_rate')[:3]
 
-    # Sort 3 popular cars
+    # Sort 3 popular cars (most booked)
     popular_cars = Car.objects.filter(
         availability='available'
-    )[:3]
+    ).annotate(
+        num_bookings=Count('booking')  # Use 'booking' to count the number of Booking instances for each Car
+    ).order_by('-num_bookings')[:3]
+
 
     return render(request, 'Vroom.html', {'form': form,'featured_cars': featured_cars,'popular_cars': popular_cars})
 
@@ -76,8 +80,4 @@ def about(request):
 # FAQ Page
 def faq(request):
     return render(request,'faq.html')
-
-#Contact Page
-def contact(request):
-    return render(request, 'contact.html')
 
