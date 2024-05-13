@@ -81,3 +81,24 @@ def about(request):
 def faq(request):
     return render(request,'faq.html')
 
+
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'resetpass.html'  # replace with your template path
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email')
+        if not User.objects.filter(email=email).exists():
+            form.add_error('email', ValidationError('Email not found in database.', code='email'))
+            return self.form_invalid(form)
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return render(self.request, self.template_name, {'form': form})
