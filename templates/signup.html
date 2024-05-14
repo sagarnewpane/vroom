@@ -20,7 +20,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* height: 100vh; */
+      height: 100vh;
     }
 
     .container {
@@ -31,7 +31,6 @@
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      text-align: center;
     }
 
     .form-control {
@@ -74,9 +73,25 @@
     /* Responsive design */
     @media screen and (max-width: 768px) {
       .container {
-        max-width: 90%;
+        width: 100%;
+        margin: 20px;
+        margin-top: 10px;
+      }
+      
+    
+      .form-control input[type="text"],
+      .form-control input[type="email"],
+      .form-control input[type="password"] {
+        width: 80%;
+      }
+    
+      button[type="submit"] {
+        width: 50%;
+        padding: 15px;
+        font-size: 14px;
       }
     }
+    
   </style>
 </head>
 

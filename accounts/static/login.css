@@ -88,9 +88,16 @@ ul {
 }
 
 /* Responsive styles */
-@media (max-width: 600px) {
+@media (max-width: 430px) {
   .container {
     padding: 20px;
+    width: fit-content;
+  }
+  .h2 {
+    margin-left: 100px;
+  }
+  button[type="submit"] {
+    width: 50%;
   }
 }
 
