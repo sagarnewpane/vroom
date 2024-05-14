@@ -284,4 +284,10 @@
     .favourite-cars-container {
         margin-left: 300px;
     }
+    .booking {
+        flex-direction: column;
+    }
+    .user-details h3 a {
+        margin-left: 20px;
+    }
 }

@@ -58,3 +58,9 @@ label {
 button:hover {
     background-color: #003d80;
 }
+@media (max-width: 430px) {
+    main {
+        margin-top: 140px;
+        margin-left: 10px;
+    }
+}

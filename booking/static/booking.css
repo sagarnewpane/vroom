@@ -176,8 +176,14 @@ p.type{
         margin-top: 20px; 
     }
     .specifications-container {
+        flex: 1;
         transform: translate(0, -0);
          width: auto; 
          margin-top: 50px;
+    }
+    .modal-content {
+        margin: 5% !important;
+        width: 82% !important;
+        margin-top: 190px !important;
     }
 }

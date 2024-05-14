@@ -382,7 +382,7 @@ body{
 
 }
 
-@media screen and (max-width: 420px){
+@media screen and (max-width: 430px){
   .card-grp{
     flex-direction: column;
   }
@@ -393,4 +393,16 @@ body{
   .btn{
     margin-top: 20px;
   }
+  .sub-Container {
+    flex-direction: column;
+    margin-left: 15px;
+    width: 400px;
+    flex-wrap: wrap;
+  }
+
+  .visapayment{
+    padding: 15px;
+    height: 100%;
+  }
+  
 }
