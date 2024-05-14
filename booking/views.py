@@ -146,7 +146,7 @@ def cancel_booking(request):
         # Check if the current time is more than 3 hours from the booking time
         if timezone.now() > booking.booking_date + timedelta(hours=3):
             # Deduct 20% from the payment
-            booking.estimated_price *=  Decimal('0.8')
+            booking.estimated_price *=  Decimal('0.2')
 
         else:
             booking.estimated_price = 0
