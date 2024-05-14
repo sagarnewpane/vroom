@@ -22,6 +22,7 @@ from . import views
 from django.contrib.auth import views as pass_view
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import CustomPasswordResetView
 
 from booking.views import contact
 urlpatterns = [
@@ -32,9 +33,10 @@ urlpatterns = [
     path('logout/', auth_view.logout_view, name='logout'),
     path('about/', views.about, name='about'),
     path('faq/', views.faq, name='faq'),
-    path('password-reset/', 
-         pass_view.PasswordResetView.as_view(template_name = 'resetpass.html'), 
-         name='password_reset'),
+    # path('password-reset/', 
+    #      pass_view.PasswordResetView.as_view(template_name = 'resetpass.html'), 
+    #      name='password_reset'),
+    path('password-reset/', CustomPasswordResetView.as_view(), name='password_reset'),
     path('password-reset/done/', 
          pass_view.PasswordResetDoneView.as_view(template_name = 'resetpass_done.html'), 
          name='password_reset_done'),
