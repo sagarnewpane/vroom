@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
 from datetime import datetime
+from django.db.models import Sum
 
 class Car(models.Model):
     AVAILABILITY_CHOICES = [
@@ -14,7 +15,7 @@ class Car(models.Model):
 
     car_location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, default='available')
-    image = models.ImageField(upload_to='car_images/', blank=True, null=True)
+    image = models.ImageField(upload_to='car_images/', blank=False, null=True)
     hourly_rate = models.DecimalField(max_digits=10, decimal_places=2)
 
     type = models.CharField(max_length=20, choices=TYPES, default='Unknown')
