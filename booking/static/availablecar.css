@@ -39,6 +39,7 @@ h3{
 .filter {
     float: right;
     padding: 0 10px;
+    display: none;
 }
 
 
@@ -115,7 +116,7 @@ h3{
 
 /* Add styles for the filter menu */
 .filter-menu {
-    display: none;
+    /* display: none; */
     min-width: 300px;
     background-color: #ffffff; /* Adjust color to match theme */
     padding: 15px;
@@ -131,6 +132,11 @@ h3{
     border-radius: 10px;
     height: 50%;
 }
+
+#filter-menu {
+    display: block; /* Show the filter menu by default */
+}
+
 
 /* Add styles for the filter options */
 .filter-menu label {
@@ -192,6 +198,12 @@ h3{
         flex-shrink: unset;
         transition: none;
     }
+
+
+    .filter{
+        display: block;
+    }
+
     .filter-menu {
         background-color: #f1f1f1;
         padding: 30px;
@@ -204,6 +216,11 @@ h3{
         height: 45%;
         margin-left: 30px;
     }
+
+    #filter-menu {
+        display: none; /* Hide the filter menu on screens less than 768px wide */
+    }
+
     button {
         margin-right: 10px;
     }

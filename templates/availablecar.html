@@ -19,10 +19,8 @@
 {% block content %}
 
 {% if query %}
-<div class="title-container">
-  
-  <h2 style="margin-top: 100px;">Showing results for "{{ query }}"</h2>
-  <button onclick="toggleFilterMenu()" style="margin-top: 100px; margin-left: 10px;">Filter</button>
+<div class="title-container" style="margin-top: 100px;">
+  <h2>Showing results for "{{ query }}"</h2>
 </div>
 {% else %}
 <div class="car-slider">
@@ -32,10 +30,11 @@
 <div class="title-container available">
   <h1>Available Cars</h1>
 </div>
+{% endif %}
+
 <div class="filter">
   <button onclick="toggleFilterMenu()">Filter</button>
 </div>
-{% endif %}
 
 
 <div class="content-container">
