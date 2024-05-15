@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="stylesheet" href="{% static 'payment.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k79vwqGsfqMVcSurYfZu6J362uvF0owHoaVAUkE/DunR0lCjxZKDtdRn2U6U6JUkyD/rEaUB8JpB5wDtmSgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+  <link rel="stylesheet" href="{% static 'payment.css' %}">
   
   <title>Vroom Car Rental</title>
 {% endblock %}
@@ -26,6 +26,7 @@
                     <input type="radio" name="payment" id="khalti" disabled>
 
                     <div class="category">
+                        {% if not booking_confirmed %}
                         <label for="visa" class="visaMethod ">
                             <div class="imgName">
                                 <div class="imgContainer visa">
@@ -65,10 +66,64 @@
                             </div>
                             <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
                         </label>
+                        {%else%}
+                            <p class="success-message">Payment Successful. <br> Booking is pending. <br>Thank you for choosing our service!</p>
+                        {% endif %}
                     </div>
                 </form>
                 </div>
             
+
+            <div class="visapayment">
+                <div class="form-container">
+                    <div class="payment-container" id="visaPayment1">
+                        <div class="wrapper">
+                            <div class="payment">
+                                <div class="payment-logo">
+                                    <img src="https://i.ibb.co/vjQCN4y/Visa-Card.png" alt="">
+                                </div>
+                                <h2>Visa</h2>
+                                {% if not booking_confirmed %}
+                                <form method="POST" action="{% url 'payment' car.id pickup_datetime dropoff_datetime total_price %}">
+                                    {% csrf_token %}
+                                    <div class="form">
+                                        <div class="card space icon-relative">
+                                            <label class="label">Card holder:</label>
+                                            <input type="text" class="input" placeholder="Card Holder" required>
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="card space icon-relative">
+                                            <label class="label">Card number:</label>
+                                            <input type="number" class="input" data-mask="0000 0000 0000 0000" placeholder="Card Number" required>
+                                            <i class="far fa-credit-card"></i>
+                                        </div>
+                                        <div class="card-grp space">
+                                            <div class="card-item icon-relative">
+                                                <label class="label">Expiry date:</label>
+                                                <input type="text" name="expiry-data" class="input" placeholder="00 / 00" required>
+                                                <i class="far fa-calendar-alt"></i>
+                                            </div>
+                                            <div class="card-item icon-relative">
+                                                <label class="label">CVC:</label>
+                                                <input type="number" class="input" data-mask="000" placeholder="000" required>
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="pay-btn">Confirm Booking</button>
+                                    </div>
+                                </form>
+                                {% else %}
+                                    <p class="booking-status">Booking Pending.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-container" id="visaPayment2">
+                    <!-- Your payment container content -->
+                </div>
+            </div>
+
             <div class="bookingspec">
                 <p>Car: <br>{{ car.model }}</p>
                 <p>Pickup Time: <br>{{ pickup_datetime }}</p>
@@ -83,56 +138,6 @@
                 
 
                 <a href="{% url 'view_bookings' %}">Go to User Page</a>
-            </div>
-
-            <div class="visapayment">
-                <div class="form-container">
-                    <div class="payment-container" id="visaPayment1">
-                        <div class="wrapper">
-                            <div class="payment">
-                                <div class="payment-logo">
-                                    <img src="https://i.ibb.co/vjQCN4y/Visa-Card.png" alt="">
-                                </div>
-                                <h2>Visa</h2>
-                                <div class="form">
-                                    <div class="card space icon-relative">
-                                        <label class="label">Card holder:</label>
-                                        <input type="text" class="input" placeholder="Card Holder" required>
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="card space icon-relative">
-                                        <label class="label">Card number:</label>
-                                        <input type="text" class="input" data-mask="0000 0000 0000 0000" placeholder="Card Number" required>
-                                        <i class="far fa-credit-card"></i>
-                                    </div>
-                                    <div class="card-grp space">
-                                        <div class="card-item icon-relative">
-                                            <label class="label">Expiry date:</label>
-                                            <input type="text" name="expiry-data" class="input" placeholder="00 / 00" required>
-                                            <i class="far fa-calendar-alt"></i>
-                                        </div>
-                                        <div class="card-item icon-relative">
-                                            <label class="label">CVC:</label>
-                                            <input type="text" class="input" data-mask="000" placeholder="000" required>
-                                            <i class="fas fa-lock"></i>
-                                        </div>
-                                    </div>
-                                    {% if not booking_confirmed %}
-                                    <form method="POST" action="{% url 'payment' car.id pickup_datetime dropoff_datetime total_price %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="pay-btn">Confirm Booking</button>
-                                    {% else %}
-                                        <p class="booking-status">Booking Pending.</p>
-                                    {% endif %}
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="payment-container" id="visaPayment2">
-                    <!-- Your payment container content -->
-                </div>
             </div>
         </div>
     </div>

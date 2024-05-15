@@ -1,7 +1,6 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 main{
@@ -77,6 +76,16 @@ main{
     grid-gap: 15px;
 }
 
+.success-message {
+  color: green;
+  font-size: 1.5em;
+  text-align: center;
+  padding: 20px;
+  border: 2px solid green;
+  border-radius: 10px;
+  margin: 20px;
+  width: 120%;
+}
 
 .category label{
     height: 145px;
