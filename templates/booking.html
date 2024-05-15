@@ -149,7 +149,7 @@
                 {% endif %}
                 {% endfor %}
         </div>
-        <p class="review-user">Written by: {{ review.user }}</p>
+        <p class="review-user">Written by: {{ review.user.username }}</p>
         <p class="review-date">Date: {{ review.updated_at|date:"F j, Y" }}</p>
     </div>
     {% endif %}
