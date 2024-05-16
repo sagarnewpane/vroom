@@ -33,11 +33,11 @@
       <h2 style="margin-left: 250px; color: white;"> Login</h2>
 
       {% if messages %}
-      {% for message in messages %}
-      <div class="errorMessage" style="color: red;">
-        {{ message }}
-      </div>
-      {% endfor %}
+          {% for message in messages %}
+              <div class="{{ message.tags }}Message">
+                  {{ message }}
+              </div>
+          {% endfor %}
       {% endif %}
 
       <div class="form-control">
