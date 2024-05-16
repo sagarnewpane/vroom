@@ -12,14 +12,12 @@ main{
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    /* min-height: 100vh; */
 }
 
 .title{
     font-size: 25px;
     padding: 0px;
     margin-bottom: 20px;
-
 }
 
 .choosepayment{
@@ -203,7 +201,7 @@ img{
 
 body{
   background:white;
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 
 .payment{
