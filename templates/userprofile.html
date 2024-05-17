@@ -83,7 +83,7 @@
                                     {% endif %}
 
                                 </div>
-                                <p class="status"><strong>Status:</strong> {{ booking.status }}</p>
+                                <p class="status" style="text-transform: capitalize;"><strong>Status:</strong> {{ booking.status }}</p>
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -111,7 +111,7 @@
                                         <a href="{% url 'bookings' favourite.car.id %}">
                                             <button type="button">Book Now</button>
                                         </a>
-                                        <p class="availability {{ favourite.car.availability|lower }}">{{ favourite.car.availability }}</p>
+                                        <p class="availability {{ favourite.car.availability|lower }}" style="text-transform: capitalize;">{{ favourite.car.availability }}</p>
                                     </div>
                                 </div>
                                 {% empty %}

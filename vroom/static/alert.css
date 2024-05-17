@@ -13,3 +13,19 @@
 .errorMessage:not(:empty) {
     display: block;
 }
+
+/* Styles for error message */
+.successMessage {
+    color: rgb(114, 201, 0);
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid rgb(114, 201, 0);
+    border-radius: 5px;
+    background-color: hsl(0, 0%, 100%);
+    display: none; /* Initially hidden */
+}
+
+/* Show the error message when it has content */
+.successMessage:not(:empty) {
+    display: block;
+}
