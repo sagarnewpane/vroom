@@ -27,11 +27,17 @@ window.onload = function () {
       var diff = Math.abs(dropoffTime - pickupTime); // difference in milliseconds
       var hours = diff / 1000 / 60 / 60; // convert to hours
 
+        // Repalce NaN with 0 in the estimated price field
       var totalCost = hours * hourlyRate;
+      if (isNaN(totalCost)) {
+        totalCost = 0;
+      }
 
       document.getElementById("estimated_price").value = totalCost.toFixed(2);
     }
   };
+
+
 
   // Add event listeners to the pickup and dropoff datetime fields
   document
@@ -65,13 +71,24 @@ document.getElementById("carForm").addEventListener("submit", function (event) {
   );
   var duration = (dropoff_datetime - pickup_datetime) / (1000 * 60 * 60); // convert milliseconds to hours
 
+
+  var current_datetime = new Date(); // get current date and time
+
   var errorMessage = "";
-  if (dropoff_datetime <= pickup_datetime) {
+  // if (dropoff_datetime <= pickup_datetime) {
+  //   errorMessage = "Dropoff time must be greater than pickup time.";
+  // } else if (duration < 5) {
+  //   errorMessage = "Minimum booking duration is 5 hours.";
+  // }
+
+  if (pickup_datetime < current_datetime) {
+    errorMessage = "Pickup date cannot be in the past.";
+  } else if (dropoff_datetime <= pickup_datetime) {
     errorMessage = "Dropoff time must be greater than pickup time.";
   } else if (duration < 5) {
     errorMessage = "Minimum booking duration is 5 hours.";
   }
-
+  
   console.log(errorMessage);
 
   if (errorMessage) {
