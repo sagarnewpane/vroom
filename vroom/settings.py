@@ -141,7 +141,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'np03cs4a220493@heraldcollege.edu.np'
-EMAIL_HOST_PASSWORD = 'sgyxacatjogfpnts'
+EMAIL_HOST_PASSWORD = 'tigrqrbxbkrbmwkc'
 
 
 MEDIA_URL = '/media/'
